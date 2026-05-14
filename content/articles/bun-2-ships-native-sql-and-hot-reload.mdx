@@ -1,0 +1,92 @@
+---
+title: "Bun 2.0 Ships Native SQL, Hot Module Reload, and a Challenge to Node's Dominance"
+slug: "bun-2-ships-native-sql-and-hot-reload"
+date: "2025-05-05"
+author: "Luca Romano"
+authorSlug: "luca-romano"
+category: "Dev Tools"
+tags: ["bun", "javascript", "runtime", "node", "performance", "developer-tools"]
+description: "The Zig-built JavaScript runtime hits version 2.0 with a built-in SQL client, HMR support, and performance numbers that make Node.js engineers uncomfortable."
+coverImage: "/images/articles/bun-2.jpg"
+featured: false
+draft: false
+readTime: 8
+---
+
+Bun 2.0 landed last week, and the changelog reads like a provocation.
+
+The Zig-built JavaScript runtime — already known for its aggressive benchmarks against Node.js and Deno — has added a native SQL client, hot module replacement (HMR) for server-side code, an overhauled build system, and a new package manager that the team claims installs dependencies faster than any alternative by a significant margin.
+
+For a runtime that only hit 1.0 in September 2023, the velocity is startling.
+
+## What's Actually New in 2.0
+
+The headline feature is **`Bun.sql`** — a first-party SQL client built directly into the runtime, with zero dependencies. It supports PostgreSQL and SQLite (via the existing `bun:sqlite` API), with MySQL support flagged as coming in a subsequent minor release.
+
+```typescript
+import { sql } from "bun";
+
+const db = sql("postgres://localhost/mydb");
+
+const users = await db`
+  SELECT id, name, email 
+  FROM users 
+  WHERE created_at > ${new Date("2025-01-01")}
+  LIMIT 10
+`;
+
+console.log(users); // typed as { id: number; name: string; email: string }[]
+```
+
+The API uses tagged template literals, which prevent SQL injection at the API level — the runtime never constructs a raw SQL string, passing parameters directly to the Postgres protocol instead. Type inference works out of the box with TypeScript.
+
+Early benchmarks from the Bun team show throughput of roughly 850,000 simple queries per second on a local Postgres instance — significantly higher than `pg`, `postgres.js`, or `drizzle-orm` over TCP, though the gap narrows under realistic network conditions.
+
+## Hot Module Replacement for Servers
+
+Perhaps more interesting to practicing engineers is **server-side HMR** — the ability to reload changed modules in a running server process without restarting, maintaining in-memory state across reloads.
+
+This is a feature that frontend developers take for granted (Vite and webpack have had it for years) but that backend Node.js developers have had to approximate with blunt instruments like `nodemon` or `ts-node-dev`. Those tools work by restarting the process entirely — fast, but not instant, and stateful connections (WebSockets, database connection pools) are lost on every restart.
+
+Bun's HMR implementation hooks into the module graph at a lower level, allowing individual modules to be replaced while preserving process-level state. In practice, this means a change to a route handler reloads in under 20ms on a moderately complex application.
+
+```bash
+# Enable HMR in development
+bun --hot server.ts
+```
+
+The tradeoff is complexity: the behavior of HMR with modules that have side effects (setting up global state, opening connections at import time) is nuanced, and Bun's documentation is admirably honest about the edge cases where you'll want to restart the process entirely.
+
+## The Package Manager Overhaul
+
+`bun install` has been rewritten for 2.0, with a new lockfile format (`bun.lock` in YAML, replacing the binary `bun.lockb`) designed for human readability and better git diff behavior.
+
+The team's install benchmarks continue to be striking:
+
+| Scenario | bun install | npm install | pnpm install | yarn install |
+|---|---|---|---|---|
+| Fresh install (react app) | 0.8s | 12.1s | 6.3s | 8.7s |
+| With lockfile, node_modules cached | 0.1s | 2.4s | 1.1s | 1.8s |
+| CI (clean node_modules) | 1.2s | 14.3s | 7.8s | 10.1s |
+
+Independent reproduction of these numbers by the community has generally confirmed the order of magnitude, though the exact figures vary by machine and network conditions.
+
+## Is This a Real Node.js Challenger?
+
+The honest answer: for greenfield projects, yes, increasingly. For existing large-scale Node.js applications, not yet — and possibly not soon.
+
+Bun's Node.js compatibility has improved dramatically since 1.0, and the team maintains a public compatibility table that tracks support for Node.js built-in APIs. As of 2.0, the compatibility rate for the most commonly used APIs is above 98%. But that remaining 2% includes some edge cases that matter to specific use cases — native addons (`.node` files), certain `vm` module behaviors, and some Worker Thread APIs.
+
+For teams starting new projects — particularly backend-for-frontend (BFF) layers, API servers, and serverless functions — Bun 2.0 offers a compelling combination of speed, built-in tooling, and developer experience that Node.js simply cannot match without an ecosystem of additional packages.
+
+The more interesting question is whether the runtime ecosystem follows. If `bun:sql`, `bun:sqlite`, and the new build tooling reduce the need for external packages in common use cases, Bun could achieve the kind of end-to-end performance advantage that makes migration from Node.js feel worthwhile even for established teams.
+
+## The Deno Factor
+
+It would be remiss not to mention Deno 2, which shipped last year and has significantly improved its Node.js compatibility story. The competition between Bun and Deno for the role of "the JavaScript runtime for the next decade" is genuine, and the presence of two well-funded, technically credible alternatives to Node.js is good for the ecosystem.
+
+Bun and Deno are making different bets: Bun is competing on raw performance and built-in tooling; Deno is competing on security, standards compliance, and a native TypeScript-first approach.
+
+For now, Bun 2.0 is the most ambitious release the team has shipped. Whether the market rewards that ambition will become clearer over the next twelve months — as enterprise engineering teams finish their evaluations and the early adopters write up their production experiences.
+
+The repository is at `oven-sh/bun` on GitHub. `bun upgrade` will get you to 2.0 if you're already running Bun.
