@@ -1,0 +1,69 @@
+---
+title: "Emojar: A Complete Emoji Platform Built With Zero Lines of Code"
+slug: "emojar-emoji-tool-built-with-zero-lines-of-code"
+date: "2026-05-15"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "Startups"
+tags: ["side-project", "ai-tools", "no-code", "indie-hacker", "build-in-public"]
+description: "A Berlin-based developer shipped a fully-featured emoji search platform — 3,790 emojis, 10 mini-games, a blog, and SEO infrastructure — without writing a single line of code himself."
+coverImage: "/startups/emojar.png"
+featured: false
+draft: false
+readTime: 5
+---
+
+There is a particular kind of founder story that Silicon Valley loves: the engineer who builds a company in a weekend. Siavash Ghanbari's version of that story has a twist. He built an entire web platform over a weekend — and wrote zero lines of code to do it.
+
+The result is [Emojar](https://emojar.com), a free emoji search and copy tool that launched earlier this year and has quietly grown into something more substantial than its humble origin suggests.
+
+## What Emojar Actually Is
+
+At its surface, Emojar is exactly what the name implies: all the emojis in one jar. The site hosts a searchable database of 3,790 Unicode-standard emojis, each with its own dedicated page covering the official Unicode name, codepoints, shortcode aliases for Slack and Discord, and a cross-linked grid of related emojis.
+
+The search is powered by Fuse.js with fuzzy matching — type "crying laugh" and it finds 😂 immediately, even if the official Unicode name is something altogether different. Every emoji has a one-click copy button with a toast confirmation.
+
+That much would make a perfectly serviceable utility. But Ghanbari didn't stop there.
+
+## Scope Creep, Intentionally
+
+Emojar ships with ten browser-based mini-games: a Tic-Tac-Toe variant with custom emoji pieces, a Snake game where the snake eats randomized fruit emojis, Minesweeper, Hangman (where the words are emoji Unicode names), Bubble Shooter, a flag-guessing quiz covering all 270+ flag emojis, an emoji memory-match puzzle, an "Older or Newer" Unicode history quiz, Guess the Animal, and an Odd One Out logic game with 50+ curated rounds.
+
+None of it requires an account. All scores are stored locally.
+
+There are also 15 themed emoji collections tied to holidays and events — from Diwali to Black Friday — with auto-highlighting of upcoming events based on the current date.
+
+The blog covers game guides, platform updates, and the occasional SEO post-mortem. Fourteen articles are live. The robots, as Ghanbari puts it, write those too.
+
+## The AI-Native Development Story
+
+What makes Emojar interesting as a technology story is not the product itself but the process behind it.
+
+"I wrote zero lines of code," Ghanbari said in a post announcing the launch. "Not 'almost zero.' Literally zero. The entire thing — frontend, backend, SEO, content, deployment — was orchestrated through AI tools."
+
+The stack is conventionally modern: Next.js 15, React 19, TypeScript, Tailwind CSS, deployed on a Node.js host. There is nothing exotic about any of it. What is unusual is that a non-coder — or at least a developer who chose not to code — used AI tooling to specify, generate, and ship a complete production application.
+
+Ghanbari describes his role as product manager to a team of robots. The framing is a bit tongue-in-cheek, but it reflects something real about where AI-assisted development stands in mid-2026. The gap between "idea" and "shipped product" has compressed in ways that are now practically demonstrable, not just theoretically possible.
+
+## Why This Is Worth Paying Attention To
+
+Emojar is not a startup in the conventional sense. There is no funding round, no growth target, no team. It makes money through Google AdSense. Ghanbari is clear-eyed about this: "Is it going to make me rich? No."
+
+But that is somewhat beside the point.
+
+What Emojar represents is a proof of concept for a mode of software development that is becoming increasingly accessible. The site has real SEO infrastructure — dynamic sitemaps covering all 3,790+ emoji pages, JSON-LD structured data on every detail page, canonical URLs, and OpenGraph metadata. It has a PWA manifest and is installable. It handles dead-route redirects and www-to-non-www canonicalization.
+
+These are not the details a weekend hacker typically gets right. They are the details that take a professional team time to implement carefully. That they exist in a zero-code side project says something about the current capabilities of AI tooling in a practical engineering context.
+
+> "This was a weekend experiment in how far the AI ecosystem has come — and the answer is: pretty far."
+> — Siavash Ghanbari
+
+## The Indie Benchmark
+
+The indie hacker and build-in-public communities have been tracking AI-assisted development for years, but most of the celebrated examples have been narrow: a landing page here, a simple CRUD app there. Emojar is a more complete test case — a multi-section site with hundreds of data-driven pages, interactive games with local state, SEO plumbing, and ongoing content.
+
+It is not a large application by enterprise standards. But as a benchmark for what one person can specify and ship in a weekend using AI tools, it is a meaningful data point.
+
+Ghanbari is based in Berlin and has previously been involved in other web projects. He has not announced any plans to build on Emojar commercially, though the site's Terms of Service do mention potential affiliate links as a future monetization avenue.
+
+For now, Emojar is what it is: a free, functional, and quietly impressive side project. It lives at [emojar.com](https://emojar.com) — go find your favorite emoji.
