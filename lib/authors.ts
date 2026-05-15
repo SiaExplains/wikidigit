@@ -11,6 +11,15 @@ export const authors: Author[] = [
     articleCount: 12,
   },
   {
+    name: "Siavash Ghanbari",
+    slug: "siavash-ghanbari",
+    bio: "Software developer and indie maker based in Berlin. Builds web products with AI tools and writes about the intersection of code, creativity, and the modern development stack.",
+    avatar: "/images/authors/siavash.jpg",
+    twitter: "siaexplains",
+    linkedin: "siavashghanbari",
+    articleCount: 1,
+  },
+  {
     name: "Maya Chen",
     slug: "maya-chen",
     bio: "Security researcher and journalist. Covers cybersecurity, privacy, and digital rights. Based in San Francisco.",
