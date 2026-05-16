@@ -12,6 +12,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(article.date),
     changeFrequency: "monthly",
     priority: 0.8,
+    ...(article.coverImage && {
+      images: [`${siteUrl}${article.coverImage}`],
+    }),
   }));
 
   const categoryUrls: MetadataRoute.Sitemap = categories.map((cat) => ({

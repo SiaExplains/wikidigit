@@ -20,10 +20,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = getCategoryBySlug(slug);
   if (!category) return {};
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
+  const articles = getArticlesByCategory(slug);
+  const ogImage = articles[0]?.coverImage ?? "/images/og-default.png";
+
   return {
     title: `${category.name} News`,
     description: category.description,
+    alternates: { canonical: `${siteUrl}/category/${slug}` },
     openGraph: {
+      title: `${category.name} News | WikiDigit`,
+      description: category.description,
+      url: `${siteUrl}/category/${slug}`,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${category.name} — WikiDigit` }],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${category.name} News | WikiDigit`,
       description: category.description,
     },
