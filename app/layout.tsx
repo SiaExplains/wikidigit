@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,16 @@ export const metadata: Metadata = {
   },
   description:
     "Sharp, independent coverage of AI, startups, developer tools, and everything shaping the digital world.",
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
