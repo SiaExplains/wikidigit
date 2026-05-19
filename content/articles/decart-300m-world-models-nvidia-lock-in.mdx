@@ -1,0 +1,42 @@
+---
+title: "Decart Raises $300M to Break NVIDIA's CUDA Lock-In — And NVIDIA Invested Anyway"
+slug: "decart-300m-world-models-nvidia-lock-in"
+date: "2026-05-19"
+author: "WikiDigit"
+authorSlug: "wikidigit"
+category: "AI"
+tags: ["ai", "nvidia", "startups", "infrastructure", "funding"]
+description: "Israeli AI startup Decart just raised $300M to let developers run models on any chip. NVIDIA joined the round — because sometimes you have to bet on your own disruption."
+coverImage: "/images/articles/decart-300m-world-models-nvidia-lock-in.png"
+featured: false
+draft: false
+readTime: 5
+---
+
+Decart, a one-year-old AI lab out of Tel Aviv, announced yesterday it had closed a $300 million Series B led by Radical Ventures, with NVIDIA, Sequoia Capital, Benchmark, and a handful of strategic investors joining. The round values the company at nearly $4 billion — an extraordinary number for a company that did not exist two years ago. What makes the raise noteworthy isn't just the size. It's who wrote the check. NVIDIA, the company Decart is explicitly designed to displace from its software perch, invested.
+
+The product at the center of this is called the Decart Optimization Stack, or DOS. The name is almost certainly a deliberate provocation. DOS is a hardware-agnostic inference and training platform that lets developers run their AI models across NVIDIA GPUs, Google TPUs, and Amazon Trainium chips without rewriting any code. It claims to deliver 1,600 tokens per second for agentic inference workloads — against an industry average Decart pegs at around 200 — and full-HD video inference at up to 100 frames per second. The pitch is simple: stop optimizing for one chip vendor and start treating compute as a commodity.
+
+## The CUDA Problem
+
+NVIDIA's dominance in AI compute is not just about building faster chips. It is about CUDA, the proprietary programming environment that every AI developer learns first and never quite leaves. CUDA has been the defining moat of the AI era — not because developers love it, but because rewriting workloads for other architectures is genuinely painful. AMD has faster chips on paper in several categories. Amazon's Trainium is meaningfully cheaper than H100s. Google's TPUs are world-class for specific workloads. None of that matters if the engineers who actually ship production AI systems have CUDA-trained muscle memory and cannot afford the months it takes to port.
+
+DOS is a direct attack on that friction. By abstracting the hardware layer, Decart compresses a months-long optimization workflow into weeks and lets teams move their models between chip vendors with minimal effort. It is the kind of software that makes NVIDIA's hardware competitors suddenly viable at scale. Every company that adopts DOS is one fewer company entirely dependent on H100 allocation and CUDA familiarity.
+
+## Why NVIDIA Invested
+
+The counterintuitive move in this round is NVIDIA writing the check. It looks, at first pass, like a company funding its own obsolescence. The actual logic is more interesting. NVIDIA's leadership has watched what happened to Intel — a hardware company that believed its architecture was the product, right up until software abstraction made the underlying silicon irrelevant. By investing in Decart, NVIDIA buys visibility into the shift it knows is coming. It gains intelligence on the precise mechanics of how developers are routing around CUDA lock-in. And if DOS becomes the standard inference abstraction layer, NVIDIA's chips will still run on it — they just won't be the only option.
+
+It is the same calculation that Intel made too late with x86 alternatives and that cloud providers made correctly when they invested in Kubernetes: when abstraction is inevitable, you want equity in the abstraction layer, not just in the hardware it runs on top of.
+
+## World Models Beyond Optimization
+
+DOS is the revenue product, but Decart's research direction is arguably more ambitious. The company is building what it calls world models — AI systems that simulate physical and virtual environments in real time. Lucy, its world model for immersive experiences, responds to user input in under 30 milliseconds and is already deployed in virtual try-on tools and live-streaming applications. Oasis is its counterpart for physical AI, targeting the simulation infrastructure that autonomous vehicles, industrial robots, and spatial computing applications depend on. At 30ms latency with photo-realistic output, these are not demos — they are production workloads running on real customers.
+
+The angel list is a signal of how seriously the research community takes this trajectory. Andrej Karpathy — co-founder of OpenAI and former head of Tesla AI — invested personally, alongside Michael Eisner and the Nintendo family. Karpathy in particular does not back companies for the logo; he has been vocal about world models being one of the fundamental unsolved problems in getting AI into physical environments. His presence is a vote on the technical thesis, not just the business model.
+
+## What Comes Next
+
+At $4 billion and 12 months old, Decart has the capital to move fast. The company is clearly positioning itself as the software layer that makes the next phase of AI infrastructure wars irrelevant to developers — a kind of CUDA replacement that does not care which chip company wins. If it succeeds, the economics of AI compute shift dramatically: NVIDIA keeps selling hardware but loses the premium that CUDA dependency allows; Amazon and Google finally get serious volume on their custom silicon; and AI teams stop having their deployment architecture determined by which vendor they happened to hire from.
+
+The more immediate read is simpler: the AI chip industry is about to get much more competitive, and Decart just raised enough money to accelerate that outcome. NVIDIA knows it. That's why they're in the round.
