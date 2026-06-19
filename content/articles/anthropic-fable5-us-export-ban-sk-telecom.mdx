@@ -1,0 +1,42 @@
+---
+title: "The White House Pulled the Plug on Anthropic's Two Best Models. A Korean Telecom and a Three-Word Prompt Did It."
+slug: "anthropic-fable5-us-export-ban-sk-telecom"
+date: "2026-06-19"
+author: "WikiDigit"
+authorSlug: "wikidigit"
+category: "AI"
+tags: ["anthropic", "ai-safety", "export-controls", "geopolitics", "fable-5"]
+description: "On June 12, the US Commerce Department ordered Anthropic to kill foreign access to Fable 5 and Mythos. Seven days later, the models are still offline."
+coverImage: "/images/articles/anthropic-fable5-us-export-ban-sk-telecom.png"
+featured: false
+draft: false
+readTime: 6
+---
+
+On June 9, 2026, Anthropic shipped Claude Fable 5 — its first public Mythos-class model — to the API, to AWS, and to Microsoft Foundry. Three days later, US Commerce Secretary Howard Lutnick issued an export-control directive ordering Anthropic to suspend access to Fable 5 and its companion research model Mythos 5 for any foreign national, anywhere in the world. Because Anthropic has no technical mechanism to filter foreign nationals from US users in real time, it did the only thing it could: it shut both models down for everyone. Seven days later, they are still offline.
+
+## How a Korean Telecom Triggered a Federal Shutdown
+
+The proximate cause is Project Glasswing, Anthropic's invite-only cybersecurity consortium. Launched in April 2026 with roughly 50 US-based partner organizations, Glasswing expanded in early June to approximately 150 organizations across more than 15 countries — a scale-up that introduced a critical oversight. Among the newly admitted international participants was SK Telecom, South Korea's largest mobile carrier and a $100 million Anthropic investor. The White House subsequently flagged SK Telecom as a company suspected of having ties to China. That designation, combined with Glasswing's access to Mythos 5, was enough for the administration to treat the situation as a potential export-control violation under the Commerce Department's AI-related restrictions.
+
+The escalation was not gradual. Anthropic received 90 minutes to restrict access before Lutnick's directive became effective. When news of a separate issue landed simultaneously — that Fable 5 could be jailbroken using a remarkably simple prompt, reportedly just the instruction "fix this code" — the White House expanded the shutdown from Glasswing-specific access to both models globally. The rationale: a jailbroken frontier model in the hands of a foreign adversary is not an AI product. It is a national security problem.
+
+## The Standoff Inside Anthropic
+
+David Sacks, the President's AI council co-chair, reportedly offered Dario Amodei two options before the ban took effect: fix the jailbreak, or de-deploy the model. Amodei refused both. His position, according to sources familiar with the discussions, was that the jailbreak demonstration provided was technically insufficient evidence — that what the government showed was not meaningfully different from prompt-sensitivity behaviors observable in any frontier model. Security researchers tend to agree. Multiple experts have characterized the White House's demand that Anthropic achieve zero jailbreaks before relaunch as technically impossible, describing AI safety as "a defense-in-depth problem, not a binary solved/unsolved problem."
+
+The impasse is consequential. Anthropic is now the world's most valuable private AI company — $965 billion after its $65 billion Series H close in late May — with its two flagship models suspended and no confirmed timeline for restoration. The company opened its Seoul office on June 18 anyway, with its international managing director telling attendees he was "very confident" both models would return "in the coming days." Prediction market Kalshi priced the probability of restoration before July 1 at roughly 57% as of June 18.
+
+## The Collateral Damage Is Already Running
+
+While the policy dispute plays out in Washington, the downstream effects are accumulating fast. June 20 is the refund cutoff for unused Fable 5 API credits. June 22 is when the free trial window closes for paid subscribers who cannot access the model they paid for. Korean enterprise customers who had just announced major deployments — NAVER deploying Claude Code across its entire engineering organization, Samsung SDS, LG CNS, Nexon, Hanwha Solutions — find themselves cut off not because of anything they did, but because a telecom conglomerate in the same country made the government nervous. The irony is complete: Anthropic's biggest single-day enterprise wave in Asia-Pacific, announced simultaneously with the Seoul office opening, landed the same week the models driving those deployments were suspended.
+
+MiniMax, the Chinese AI company, was quick to notice. The company publicly highlighted its open-weights frontier model as immune to government export controls — a dig at exactly the structural dependency that makes Anthropic's situation so precarious. When a foreign government can switch off your product with a 90-minute notice, "model-as-a-service" starts to look like a liability.
+
+## What This Signals About the New AI Export Regime
+
+The Fable 5 shutdown is not an isolated incident. It is a preview of how the US government intends to regulate frontier AI as a strategic technology. The Commerce Department's ability to issue a directive that effectively pulls two of the world's most capable AI models from global circulation — without a court order, without a congressional process, with a 90-minute window for compliance — is a demonstration of administrative power that no one in the AI industry had fully priced in before last week. Anthropic's legal structure, its San Francisco headquarters, its federal funding relationships: all of these give the US government levers that no Chinese AI company's customer has to worry about when working with a domestically hosted model. That asymmetry is now explicit, and every non-US Anthropic customer is recalculating their vendor risk accordingly.
+
+## The Relaunch Question
+
+The models will almost certainly come back. The commercial and diplomatic costs of leaving them offline are too high for either side to absorb indefinitely — Anthropic loses revenue, the administration loses a relationship with its most strategically important AI company, and Korea's tech sector starts treating US AI vendors as unreliable. But the terms of the relaunch will matter more than the relaunch itself. If Anthropic is required to implement nationality filtering before restoration, it sets a precedent for every frontier AI company operating internationally. If the jailbreak issue is resolved without policy change, the White House looks like it blinked. And if the models return exactly as they were, the question becomes what the last seven days were actually about — and whether it will happen again.
