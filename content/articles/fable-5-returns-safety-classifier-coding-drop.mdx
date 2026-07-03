@@ -1,0 +1,32 @@
+---
+title: "Claude Fable 5 Is Back Online. It Also Can't Reliably Debug Code Anymore."
+slug: "fable-5-returns-safety-classifier-coding-drop"
+date: "2026-07-03"
+author: "WikiDigit"
+authorSlug: "wikidigit"
+category: "AI"
+tags: ["anthropic", "fable-5", "ai-safety", "export-controls", "coding-tools"]
+description: "Anthropic's Fable 5 returned globally on July 1 after the export ban lifted, but a new jailbreak classifier tanked its debugging scores by 70% almost overnight."
+coverImage: null
+featured: false
+draft: false
+readTime: 5
+---
+
+Claude Fable 5 came back online on July 1, three weeks after the US Commerce Department ordered Anthropic to pull it from global circulation. That much is a clean win: the export-control order that had frozen Anthropic's flagship model since June 12 was lifted, and Fable 5 is once again available across the Claude Platform, Claude.ai, Claude Code, and Claude Cowork. What did not make it into the celebratory headlines is what Anthropic had to bolt onto the model to get regulators comfortable with the relaunch — a safety classifier so aggressive that it collapsed Fable 5's own debugging benchmark scores by roughly 70% within a day of shipping.
+
+## How We Got Here
+
+The original shutdown traced back to a jailbreak Amazon researchers discovered: a prompt-framing technique that got Fable 5 to identify software vulnerabilities and, in one documented case, hand over a working exploit. That finding, combined with a separate export-compliance dispute involving SK Telecom's admission into Anthropic's Glasswing security consortium, gave the White House the pretext to shut down both Fable 5 and its research sibling Mythos 5 worldwide with 90 minutes' notice. Anthropic spent three weeks in a standoff over whether the jailbreak was even a real vulnerability or ordinary prompt sensitivity. The relaunch ended that argument by making the classifier stricter rather than settling who was right.
+
+## A 99% Fix With a 70% Cost
+
+The new classifier blocks the specific jailbreak technique in more than 99% of attempts, which is the number Anthropic is leading with. The number it isn't leading with: benchmark testing after the July 1 redeploy found only 3 of 12 routine TypeScript debugging tasks actually reaching Fable 5 — the other 9 got flagged as suspicious, rerouted to the weaker fallback model Opus 4.8, and scored zero. That's not a marginal tax on a few edge cases. That's the majority of an ordinary coding session getting silently downgraded to a worse model because the request pattern-matches against the same framing the Amazon researchers used to extract an exploit. Anthropic's own explanation is candid about the tradeoff: the classifier's trigger zone is deliberately wider than necessary, catching probably-benign requests along with genuinely harmful ones, because a defense-in-depth posture is safer than a precise one that might miss the next jailbreak.
+
+## The Meter Starts July 7
+
+The commercial mechanics compound the problem. Anthropic is running a promotional window through July 7 in which Fable 5 usage counts against normal weekly limits for Pro, Max, Team, and select Enterprise plans at no extra cost — a clear attempt to get developers back into the habit of reaching for the model before the credit meter starts running. After July 7, Fable 5 moves to paid usage credits for those same tiers. Developers who spend the next four days testing whether the model is back to normal are, in a meaningful number of cases, going to find that their debugging request silently became an Opus 4.8 request — and then start paying credits for a model that no longer reliably does the coding work it was known for.
+
+## What "Restored" Actually Means
+
+This is the part of the export-control saga that the "models are restored" headlines miss: the ban didn't just pause Fable 5, it permanently changed what the model is. The previous article on this fight ended with an open question — whether the models would return "exactly as they were," and what it would mean if they did. The answer is that they didn't. Anthropic absorbed the government's pressure by making the model measurably less useful for its most common professional use case, and shipped that as the cost of coming back online. Every other frontier lab now has a precedent to point to: when a government forces your hand on jailbreak resistance, the fastest fix is a blunter classifier, and the users footing the bill for that fix are the ones running ordinary debugging sessions, not the ones trying to extract exploits.
