@@ -40,15 +40,21 @@ const MDXComponents: MDXComponentsType = {
     return <Link href={href}>{children}</Link>;
   },
 
-  img: ({ src = "", alt = "" }) => (
-    <span className="block my-8 relative aspect-video rounded-sm overflow-hidden">
+  // Inline images keep their own aspect ratio (screenshots must not be cropped).
+  // A markdown title, ![alt](src "caption"), becomes the caption. Spans, not
+  // <figure>, because MDX wraps a standalone image in a <p>.
+  img: ({ src = "", alt = "", title }) => (
+    <span className="block my-8">
       <Image
         src={src}
         alt={alt}
-        fill
-        className="object-cover"
+        width={0}
+        height={0}
         sizes="(max-width: 768px) 100vw, 720px"
+        className="rounded-sm"
+        style={{ width: "100%", height: "auto" }}
       />
+      {title && <span className="block mt-2 text-sm text-muted">{title}</span>}
     </span>
   ),
 
