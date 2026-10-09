@@ -11,10 +11,22 @@ npm ci
 npm run dev      # http://localhost:3000
 npm run lint
 npm run build
-npm test         # SEO checks against the build output; run after a build
+npm test         # email unit tests + SEO checks against the build output; run after a build
 ```
 
 `NEXT_PUBLIC_SITE_URL` sets the canonical site URL (`lib/site.ts`). It defaults to `https://www.wikidigit.com`, the host production serves; the apex domain redirects there.
+
+## Newsletter and contact form (Resend)
+
+Both forms are off until Resend is configured; until then the site shows a "newsletter coming soon" strip with RSS, and the contact page shows the email address only. To turn them on:
+
+1. Create a [Resend](https://resend.com) account and add the domain `wikidigit.com`. Add the DNS records Resend shows (SPF and DKIM), plus a DMARC record such as `_dmarc  TXT  "v=DMARC1; p=none; rua=mailto:siaexplains@gmail.com"`. Wait until the domain shows as Verified.
+2. In Resend, create a segment called "Newsletter" (and optionally a topic for per-topic unsubscribe) and copy the IDs.
+3. Create an API key with sending and contacts access.
+4. In Vercel → Settings → Environment Variables (Production), set the variables in [`.env.example`](.env.example). Generate `NEWSLETTER_TOKEN_SECRET` with `openssl rand -base64 32`. Redeploy.
+5. Recommended: add a Vercel Firewall rate-limit rule for `/api/newsletter/subscribe` and `/api/contact`. The built-in limiter is per server instance only.
+
+How it works: signup sends a confirmation email with a signed link valid for 48 hours (`lib/newsletter-token.ts`). Nothing is stored until the reader clicks **Confirm subscription** on `/newsletter/confirm`, which adds them to the segment in Resend. Newsletters are sent as Resend Broadcasts to that segment; include `{{{RESEND_UNSUBSCRIBE_URL}}}` in every broadcast. Contact messages are emailed to `CONTACT_TO` with Reply-To set to the sender and aren't stored.
 
 ## Content
 
