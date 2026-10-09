@@ -12,6 +12,7 @@
 - Author article counts are now computed from the posts instead of being hardcoded.
 - Avatars fall back to initials (the referenced avatar images never existed, so they showed as broken images). The avatar no longer nests a link inside another link on the Authors and About pages.
 - The daily post playbook now picks a random author from `lib/authors.ts`.
+- README replaced the create-next-app boilerplate with a description of the project, content and publishing workflow. The bootstrap spec covers the 9 categories, the two authors, FAQ, sidebar, archive and the content pipeline.
 
 ## 0.2.0 — 2026-10-09
 
