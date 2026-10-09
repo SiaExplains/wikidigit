@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.1 — 2026-10-09
+
+### Fixed
+- Source backfill: 21 articles from May–July 2026 that had no source links were checked claim by claim against primary sources and major outlets. Each now links its sources inline and in a closing **Sources** line. Every one of them also had wrong or unverifiable details: invented figures, misdated events, quotes that were paraphrases, and claims no source supports. These were corrected or removed, and each article carries a dated correction note and an "Updated" date. Two headlines changed because they stated something untrue (Oracle, Qualcomm/Tenstorrent), and several others were reworded.
+- The South Korea chip article reported a pre-announcement estimate ($1.3 trillion) as the plan. It is rewritten from the June 29 announcement (about 4,755 trillion won, $3.11 trillion) and moves to `/article/south-korea-samsung-sk-4755-trillion-won-chip-ai-plan`; the old URL permanently redirects there.
+- Seven covers that contained garbled AI-generated text were redrawn as code (Decart, Google I/O, Stainless, Nvidia H200, Fable 5 export ban, Qualcomm/Tenstorrent, Together AI).
+
 ## 0.4.0 — 2026-10-09
 
 ### Added
