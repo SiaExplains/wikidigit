@@ -155,7 +155,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Sidebar */}
           <aside className="hidden lg:block">
-            <div className="sticky top-20 space-y-8">
+            <div className="sticky top-20 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
               {headings.length > 0 && <TableOfContents headings={headings} />}
               <Sidebar recentArticles={recentArticles} showAd />
             </div>

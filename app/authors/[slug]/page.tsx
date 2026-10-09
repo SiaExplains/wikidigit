@@ -49,7 +49,7 @@ export default async function AuthorPage({ params }: Props) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Author header */}
       <div className="flex flex-col sm:flex-row items-start gap-6 pb-10 border-b border-ink/10 mb-10">
-        <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={80} />
+        <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={80} linked={false} />
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-ink">{author.name}</h1>
           <p className="mt-2 text-muted leading-relaxed max-w-xl">{author.bio}</p>

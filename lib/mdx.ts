@@ -68,3 +68,34 @@ export function getRelatedArticles(article: Article, limit = 3): Article[] {
     )
     .slice(0, limit);
 }
+
+export interface ArchiveMonth {
+  key: string; // "2026-10"
+  label: string; // "October 2026"
+  count: number;
+}
+
+// Months that have published posts, newest first.
+export function getArchiveMonths(): ArchiveMonth[] {
+  const counts = new Map<string, number>();
+  for (const article of getAllArticles()) {
+    const key = article.date.slice(0, 7);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort(([a], [b]) => (a < b ? 1 : -1))
+    .map(([key, count]) => ({ key, label: formatArchiveMonth(key), count }));
+}
+
+export function getArticlesByMonth(key: string): Article[] {
+  return getAllArticles().filter((a) => a.date.startsWith(`${key}-`));
+}
+
+export function formatArchiveMonth(key: string): string {
+  const [year, month] = key.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, 1)).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}

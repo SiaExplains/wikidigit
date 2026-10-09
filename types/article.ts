@@ -2,10 +2,10 @@ export interface Author {
   name: string;
   slug: string;
   bio: string;
-  avatar: string;
+  // Path under /public; when absent the avatar shows the author's initials.
+  avatar?: string;
   twitter?: string;
   linkedin?: string;
-  articleCount?: number;
 }
 
 export interface Article {

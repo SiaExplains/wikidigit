@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { authors } from "@/lib/authors";
+import { getArticlesByAuthor } from "@/lib/mdx";
 import AuthorAvatar from "@/components/ui/AuthorAvatar";
 
 export const metadata: Metadata = {
@@ -19,26 +20,29 @@ export default function AuthorsPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {authors.map((author) => (
-          <Link
-            key={author.slug}
-            href={`/authors/${author.slug}`}
-            className="group block p-6 rounded-sm border border-ink/10 hover:border-primary/30 hover:shadow-sm transition-all bg-cream"
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={56} />
-              <div>
-                <h2 className="font-bold text-ink group-hover:text-rust transition-colors">
-                  {author.name}
-                </h2>
-                {author.articleCount && (
-                  <p className="text-xs text-muted mt-0.5">{author.articleCount} articles</p>
-                )}
+        {authors.map((author) => {
+          const count = getArticlesByAuthor(author.slug).length;
+          return (
+            <Link
+              key={author.slug}
+              href={`/authors/${author.slug}`}
+              className="group block p-6 rounded-sm border border-ink/10 hover:border-primary/30 hover:shadow-sm transition-all bg-cream"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={56} linked={false} />
+                <div>
+                  <h2 className="font-bold text-ink group-hover:text-rust transition-colors">
+                    {author.name}
+                  </h2>
+                  <p className="text-xs text-muted mt-0.5">
+                    {count} article{count !== 1 ? "s" : ""}
+                  </p>
+                </div>
               </div>
-            </div>
-            <p className="text-sm text-muted leading-relaxed line-clamp-3">{author.bio}</p>
-          </Link>
-        ))}
+              <p className="text-sm text-muted leading-relaxed line-clamp-3">{author.bio}</p>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
