@@ -30,6 +30,7 @@ export function getArticleBySlug(slug: string): Article | null {
     tags: frontmatter.tags || [],
     featured: frontmatter.featured ?? false,
     draft: frontmatter.draft ?? false,
+    type: frontmatter.type ?? "news",
     readTime: Math.max(1, Math.round(readingTime(content).minutes)),
   };
 }
@@ -70,15 +71,36 @@ export function getFeaturedArticle(): Article | null {
   return getAllArticles().find((a) => a.featured) ?? getAllArticles()[0] ?? null;
 }
 
+// Scores by topical overlap rather than recency, so a busy category (AI) doesn't
+// turn "related" into "latest". Falls back to the same category when nothing overlaps.
 export function getRelatedArticles(article: Article, limit = 3): Article[] {
-  return getAllArticles()
-    .filter(
-      (a) =>
-        a.slug !== article.slug &&
-        (a.category === article.category ||
-          a.tags.some((t) => article.tags.includes(t)))
-    )
-    .slice(0, limit);
+  const all = getAllArticles().filter((a) => a.slug !== article.slug);
+  const tags = new Set(article.tags.map((t) => t.toLowerCase()));
+  const category = categorySlug(article.category);
+
+  const scored = all
+    .map((candidate, index) => {
+      const sharedTags = candidate.tags.filter((t) => tags.has(t.toLowerCase())).length;
+      const sameCategory = categorySlug(candidate.category) === category;
+      const score =
+        sharedTags * 3 + (sameCategory ? 2 : 0) + (sharedTags > 0 && candidate.type === article.type ? 1 : 0);
+      // `all` is newest first, so a lower index breaks ties toward recent posts.
+      return { candidate, score, index };
+    })
+    .filter((s) => s.score >= 3)
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .map((s) => s.candidate);
+
+  if (scored.length < limit) {
+    for (const candidate of all) {
+      if (scored.length >= limit) break;
+      if (!scored.includes(candidate) && categorySlug(candidate.category) === category) {
+        scored.push(candidate);
+      }
+    }
+  }
+
+  return scored.slice(0, limit);
 }
 
 export interface ArchiveMonth {

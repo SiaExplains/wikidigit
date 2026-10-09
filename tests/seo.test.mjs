@@ -51,12 +51,13 @@ test("sitemap only lists www URLs and no tag or search pages", () => {
   assert.ok(locs.includes(`${HOST}/editorial-standards`));
 });
 
-test("every article has a www self-canonical and valid NewsArticle + BreadcrumbList JSON-LD", () => {
+test("every article has a www self-canonical and valid article + BreadcrumbList JSON-LD", () => {
   for (const slug of articleSlugs()) {
     const html = read(`article/${slug}.html`);
     assert.equal(canonicalOf(html), `${HOST}/article/${slug}`, slug);
     const types = jsonLdBlocks(html).map((block) => block["@type"]);
-    assert.ok(types.includes("NewsArticle"), `${slug}: no NewsArticle JSON-LD`);
+    const articleTypes = ["NewsArticle", "AnalysisNewsArticle", "OpinionNewsArticle", "Article"];
+    assert.ok(types.some((t) => articleTypes.includes(t)), `${slug}: no article JSON-LD`);
     assert.ok(types.includes("BreadcrumbList"), `${slug}: no BreadcrumbList JSON-LD`);
   }
 });
@@ -98,4 +99,26 @@ test("production pages render no ad placeholders", () => {
   for (const rel of ["index.html", "category/ai.html", `article/${articleSlugs()[0]}.html`]) {
     assert.doesNotMatch(read(rel), /AD · |ad-slot-dev/, rel);
   }
+});
+
+test("article type drives the JSON-LD subtype and the visible label", () => {
+  const analysis = read("article/openai-ipo-trillion-dollar-filing.html");
+  assert.ok(jsonLdBlocks(analysis).some((b) => b["@type"] === "AnalysisNewsArticle"));
+  assert.match(analysis, />Analysis</);
+  const news = read("article/runway-ai-raises-308m-series-d.html");
+  assert.ok(jsonLdBlocks(news).some((b) => b["@type"] === "NewsArticle"));
+});
+
+test("posts about Emojar disclose the connection", () => {
+  for (const slug of ["emojar-emoji-tool-built-with-zero-lines-of-code", "emojar-pivot-264-free-browser-tools"]) {
+    assert.match(read(`article/${slug}.html`), /Disclosure:/, slug);
+  }
+});
+
+test("inline images are not cropped to a fixed aspect ratio", () => {
+  const html = read("article/emojar-pivot-264-free-browser-tools.html");
+  const img = html.match(/<img[^>]*emojar-pivot-264-free-browser-tools-site[^>]*>/)?.[0];
+  assert.ok(img, "inline screenshot not found");
+  assert.match(img, /height:auto/);
+  assert.doesNotMatch(html, /aspect-video[^"]*"[^>]*>\s*<img[^>]*emojar-pivot-264-free-browser-tools-site/);
 });

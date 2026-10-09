@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Article } from "@/types/article";
 import { formatDateShort } from "@/lib/utils";
 import CategoryBadge from "@/components/ui/CategoryBadge";
+import ArticleTypeLabel from "@/components/article/ArticleTypeLabel";
 
 interface ArticleCardProps {
   article: Article;
@@ -77,7 +78,10 @@ export default function ArticleCard({ article, variant = "default" }: ArticleCar
         )}
       </Link>
       <div className="flex-1 flex flex-col">
-        <CategoryBadge category={article.category} />
+        <div className="flex flex-wrap items-center gap-2">
+          <CategoryBadge category={article.category} />
+          <ArticleTypeLabel type={article.type} />
+        </div>
         <Link href={`/article/${article.slug}`}>
           <h2 className="mt-2 font-bold text-ink text-lg leading-snug group-hover:text-rust transition-colors line-clamp-2">
             {article.title}

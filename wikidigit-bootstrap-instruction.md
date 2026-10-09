@@ -242,6 +242,8 @@ export interface Article {
   author: string;
   authorSlug: string;
   category: string;      // display name, e.g. "AI"
+  type: "news" | "analysis" | "explainer" | "guide" | "opinion"; // default "news"; labelled + JSON-LD subtype
+  disclosure?: string;   // shown above the body when we cover something we're connected to
   tags: string[];
   description: string;   // ~150 chars, used for SEO + cards
   coverImage: string;    // /images/articles/…

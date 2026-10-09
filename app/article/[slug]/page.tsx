@@ -15,11 +15,23 @@ import RelatedArticles from "@/components/article/RelatedArticles";
 import TableOfContents from "@/components/article/TableOfContents";
 import ShareButtons from "@/components/article/ShareButtons";
 import ArticleFaq from "@/components/article/ArticleFaq";
+import Disclosure from "@/components/article/Disclosure";
+import MobileToc from "@/components/article/MobileToc";
 import { extractHeadings } from "@/lib/utils";
 import AdSlot from "@/components/ads/AdSlot";
 import Sidebar from "@/components/layout/Sidebar";
 import JsonLd from "@/components/seo/JsonLd";
+import type { ArticleType } from "@/types/article";
 import { SITE_LOGO, SITE_NAME, SITE_URL } from "@/lib/site";
+
+// schema.org subtypes so machines can tell reporting from analysis and opinion.
+const schemaType: Record<ArticleType, string> = {
+  news: "NewsArticle",
+  analysis: "AnalysisNewsArticle",
+  opinion: "OpinionNewsArticle",
+  explainer: "Article",
+  guide: "Article",
+};
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -78,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "NewsArticle",
+    "@type": schemaType[article.type],
     headline: article.title,
     description: article.description,
     datePublished: article.date,
@@ -167,11 +179,16 @@ export default async function ArticlePage({ params }: Props) {
               date={article.date}
               updated={article.updated}
               category={article.category}
+              type={article.type}
               tags={article.tags}
               readTime={article.readTime}
             />
 
             <ShareButtons url={articleUrl} title={article.title} />
+
+            {article.disclosure && <Disclosure text={article.disclosure} />}
+
+            <MobileToc headings={headings} />
 
             {article.content && <ArticleBody content={article.content} />}
 

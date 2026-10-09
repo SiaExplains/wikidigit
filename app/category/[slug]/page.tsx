@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${category.name} News`,
-    description: category.description,
+    description: category.intro,
     alternates: { canonical: `${SITE_URL}/category/${slug}` },
     // An empty category is a thin page; keep it out of the index until it has posts.
     ...(articles.length === 0 && { robots: { index: false, follow: true } }),
     openGraph: {
       title: `${category.name} News | WikiDigit`,
-      description: category.description,
+      description: category.intro,
       url: `${SITE_URL}/category/${slug}`,
       type: "website",
       images: [{ url: ogImage, alt: `${category.name} — WikiDigit` }],
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: `${category.name} News | WikiDigit`,
-      description: category.description,
+      description: category.intro,
     },
   };
 }
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: Props) {
         {/* Header */}
         <div className="border-b border-ink/10 pb-6 mb-8">
           <h1 className="text-3xl font-bold text-ink">{category.name}</h1>
-          <p className="mt-2 text-muted">{category.description}</p>
+          <p className="mt-3 text-muted leading-relaxed max-w-3xl">{category.intro}</p>
         </div>
 
         <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12">

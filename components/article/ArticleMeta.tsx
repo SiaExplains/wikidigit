@@ -2,6 +2,8 @@ import { formatDate } from "@/lib/utils";
 import AuthorAvatar from "@/components/ui/AuthorAvatar";
 import CategoryBadge from "@/components/ui/CategoryBadge";
 import TagChip from "@/components/ui/TagChip";
+import ArticleTypeLabel from "@/components/article/ArticleTypeLabel";
+import type { ArticleType } from "@/types/article";
 import { Clock, Calendar } from "lucide-react";
 
 interface ArticleMetaProps {
@@ -12,6 +14,7 @@ interface ArticleMetaProps {
   date: string;
   updated?: string;
   category: string;
+  type: ArticleType;
   tags: string[];
   readTime: number;
 }
@@ -24,12 +27,16 @@ export default function ArticleMeta({
   date,
   updated,
   category,
+  type,
   tags,
   readTime,
 }: ArticleMetaProps) {
   return (
     <header className="mb-8">
-      <CategoryBadge category={category} />
+      <div className="flex flex-wrap items-center gap-2">
+        <CategoryBadge category={category} />
+        <ArticleTypeLabel type={type} />
+      </div>
       <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-ink leading-tight max-w-3xl">
         {title}
       </h1>

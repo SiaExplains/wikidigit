@@ -45,6 +45,25 @@ export default function EditorialStandardsPage() {
           </li>
         </ul>
 
+        <h2 id="article-types">Article types</h2>
+        <p>Articles that aren&apos;t straight news carry a label next to their category:</p>
+        <ul>
+          <li>
+            <strong>News</strong> (no label) reports what happened, with sources.
+          </li>
+          <li>
+            <strong>Analysis</strong> interprets news: what it means, what drives it, what could
+            happen next. The facts are still sourced; the conclusions are ours.
+          </li>
+          <li>
+            <strong>Explainer</strong> and <strong>Guide</strong> explain how something works or
+            how to do something.
+          </li>
+          <li>
+            <strong>Opinion</strong> argues for a point of view and is clearly marked as such.
+          </li>
+        </ul>
+
         <h2 id="ai">How we use AI</h2>
         <p>
           We use AI tools to help with research and first drafts. AI output is treated as a draft,
@@ -77,7 +96,9 @@ export default function EditorialStandardsPage() {
 
         <h2 id="independence">Independence and advertising</h2>
         <p>
-          Advertisers and sponsors have no influence over what we cover or what we say. Ads are
+          When we cover a company or product we are connected to, we say so in a disclosure at the
+          top of the article. Advertisers and sponsors have no influence over what we cover or what
+          we say. Ads are
           labelled and kept visually separate from articles. If we ever publish sponsored content
           or use affiliate links, they will be clearly disclosed on the page where they appear.
         </p>

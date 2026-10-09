@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 — 2026-10-09
+
+### Added
+- Article types: an optional `type` field (news, analysis, explainer, guide, opinion). Anything other than news gets a label next to its category on the article, cards and hero, and a matching schema.org type (`AnalysisNewsArticle`, `OpinionNewsArticle`, `Article`). Nine analysis pieces and two explainers are labelled. The Editorial Standards page explains each label.
+- Disclosures: an optional `disclosure` field shown above the article body. Both Emojar articles now disclose that Emojar is owned by WikiDigit's publisher; the first one had no disclosure at all.
+- Category pages open with a short intro about what we cover, which also becomes their meta description.
+- A collapsible "On this page" menu on phones and tablets, where the sidebar table of contents is hidden.
+- Markdown image titles render as captions.
+
+### Changed
+- Related articles are ranked by shared tags and category instead of "newest post in the same category", so they are actually related.
+- Inline images keep their own shape instead of being cropped to 16:9.
+- The daily-post playbook and site spec describe the article types and when to add a disclosure.
+
 ## 0.4.1 — 2026-10-09
 
 ### Fixed

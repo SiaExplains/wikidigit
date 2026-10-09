@@ -62,6 +62,7 @@ date: "<YYYY-MM-DD, today>"
 author: "<Siavash Ghanbari | Sheida Mohassesy>"
 authorSlug: "<siavash-ghanbari | sheida-mohassesy>"
 category: "<picked topic, exactly as in topic-weights.json>"
+type: "<news | analysis | explainer | guide | opinion>"   # omit for news
 tags: ["<5-7 lowercase, hyphenated tags: entities first, then themes>"]
 description: "<150-160 chars: the hook plus the key fact, ending on the tension>"
 coverImage: "/images/articles/<slug>.png"
@@ -72,6 +73,8 @@ faq:
     answer: "<a direct 1-3 sentence answer>"
 ---
 ```
+
+Pick the type on purpose. **News** reports what happened: lede with the core fact, what happened, why it matters. **Analysis** interprets: the claim, the evidence for it, the strongest counterpoint. **Explainer** answers "what is it and how does it work": what it is, how it works, what changed. If the post covers a company or product WikiDigit's people are connected to (for example Emojar), add `disclosure: "<one sentence>"`.
 
 Read time is computed from the body at build time, so don't add `readTime`. Add `updated: "<YYYY-MM-DD>"` only when a published post is changed in substance, and put a dated correction note at the top of the body when a fact was wrong.
 
