@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 — 2026-10-09
+
+### Fixed
+- The sidebar on article, category, tag and archive pages had its own scrollbar next to the page's. It now scrolls with the page; on articles only the "On this page" menu stays pinned.
+
 ## 0.5.0 — 2026-10-09
 
 ### Added

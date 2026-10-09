@@ -201,11 +201,16 @@ export default async function ArticlePage({ params }: Props) {
           </article>
 
           {/* Sidebar */}
-          <aside className="hidden lg:block">
-            <div className="sticky top-20 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
-              {headings.length > 0 && <TableOfContents headings={headings} />}
-              <Sidebar recentArticles={recentArticles} showAd />
-            </div>
+          {/* Only the TOC stays pinned; a sticky, height-capped sidebar needed its own
+              scrollbar next to the page's. The aside spans the full grid row, so the TOC
+              stays stuck for the whole article. */}
+          <aside className="hidden lg:block space-y-8">
+            {headings.length > 0 && (
+              <div className="sticky top-20 z-10 bg-cream pb-4">
+                <TableOfContents headings={headings} />
+              </div>
+            )}
+            <Sidebar recentArticles={recentArticles} showAd />
           </aside>
         </div>
       </div>
