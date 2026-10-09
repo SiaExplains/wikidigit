@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAllArticles, getFeaturedArticle } from "@/lib/mdx";
+import { getAllArticles, getArticlesByCategory, getFeaturedArticle } from "@/lib/mdx";
 import ArticleHero from "@/components/article/ArticleHero";
 import ArticleCard from "@/components/article/ArticleCard";
 import NewsletterStrip from "@/components/ui/NewsletterStrip";
@@ -7,11 +7,14 @@ import AdSlot from "@/components/ads/AdSlot";
 import { categories } from "@/lib/categories";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import JsonLd from "@/components/seo/JsonLd";
+import { CONTACT_EMAIL, RSS_ALTERNATE, SITE_DESCRIPTION, SITE_LOGO, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "WikiDigit — Tech News for the Curious",
   description:
     "Sharp, independent coverage of AI, startups, business, tech, science, robotics, finance, security, and developer tools.",
+  alternates: { canonical: "/", types: RSS_ALTERNATE },
   openGraph: {
     title: "WikiDigit — Tech News for the Curious",
     description:
@@ -24,8 +27,30 @@ export default function HomePage() {
   const allArticles = getAllArticles();
   const topStories = allArticles.slice(0, 6);
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: { "@type": "ImageObject", url: SITE_LOGO, width: 512, height: 512 },
+    email: CONTACT_EMAIL,
+    publishingPrinciples: `${SITE_URL}/editorial-standards`,
+    correctionsPolicy: `${SITE_URL}/editorial-standards#corrections`,
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    publisher: { "@type": "NewsMediaOrganization", name: SITE_NAME, url: SITE_URL },
+  };
+
   return (
     <>
+      <JsonLd data={organizationJsonLd} />
+      <JsonLd data={websiteJsonLd} />
       {/* AD: leaderboard-top */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AdSlot size="leaderboard" position="leaderboard-top" />
@@ -56,9 +81,7 @@ export default function HomePage() {
 
         {/* Category Sections */}
         {categories.slice(0, 4).map((category) => {
-          const catArticles = allArticles
-            .filter((a) => a.category.toLowerCase() === category.slug)
-            .slice(0, 4);
+          const catArticles = getArticlesByCategory(category.slug).slice(0, 4);
 
           if (catArticles.length === 0) return null;
 

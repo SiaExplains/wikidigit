@@ -28,7 +28,7 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
           <div className="max-w-3xl">
-            <CategoryBadge category={article.category} />
+            <CategoryBadge category={article.category} linked={false} />
             <h1 className="mt-3 text-2xl sm:text-4xl font-bold text-cream leading-tight group-hover:text-amber transition-colors">
               {article.title}
             </h1>

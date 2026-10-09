@@ -59,6 +59,11 @@ export const categories: Category[] = [
   },
 ];
 
+// Frontmatter stores the display name ("Dev Tools"); URLs use the slug ("dev-tools").
+export function categorySlug(name: string): string {
+  return name.toLowerCase().trim().replace(/\s+/g, "-");
+}
+
 export function getCategoryBySlug(slug: string): Category | undefined {
   return categories.find((c) => c.slug === slug);
 }

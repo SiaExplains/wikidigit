@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "WikiDigit Privacy Policy — how we collect, use, and protect your personal data in compliance with GDPR.",
   robots: { index: true, follow: false },
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

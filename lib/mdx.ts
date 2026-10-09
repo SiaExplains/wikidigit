@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import readingTime from "reading-time";
 import { Article, ArticleFrontmatter } from "@/types/article";
+import { categorySlug } from "@/lib/categories";
 
 const articlesDir = path.join(process.cwd(), "content/articles");
 
@@ -28,7 +30,17 @@ export function getArticleBySlug(slug: string): Article | null {
     tags: frontmatter.tags || [],
     featured: frontmatter.featured ?? false,
     draft: frontmatter.draft ?? false,
+    readTime: Math.max(1, Math.round(readingTime(content).minutes)),
   };
+}
+
+export function getAllTags(): string[] {
+  return [...new Set(getAllArticles().flatMap((a) => a.tags.map((t) => t.toLowerCase())))].sort();
+}
+
+// The newest date an article was published or substantively updated.
+export function lastModifiedOf(article: Article): string {
+  return article.updated && article.updated > article.date ? article.updated : article.date;
 }
 
 export function getAllArticles(): Article[] {
@@ -38,10 +50,10 @@ export function getAllArticles(): Article[] {
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+// Accepts a slug or a display name; both sides are normalized to the slug.
 export function getArticlesByCategory(category: string): Article[] {
-  return getAllArticles().filter(
-    (a) => a.category.toLowerCase() === category.toLowerCase()
-  );
+  const slug = categorySlug(category);
+  return getAllArticles().filter((a) => categorySlug(a.category) === slug);
 }
 
 export function getArticlesByTag(tag: string): Article[] {

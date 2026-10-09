@@ -1,8 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Children, isValidElement, type ReactNode } from "react";
 import type { MDXComponents as MDXComponentsType } from "mdx/types";
+import { headingId } from "@/lib/utils";
+
+// Visible text of a heading, so its id matches the one extractHeadings builds for the TOC.
+function textOf(node: ReactNode): string {
+  return Children.toArray(node)
+    .map((child) => {
+      if (typeof child === "string" || typeof child === "number") return String(child);
+      if (isValidElement<{ children?: ReactNode }>(child)) return textOf(child.props.children);
+      return "";
+    })
+    .join("");
+}
 
 const MDXComponents: MDXComponentsType = {
+  h2: ({ children, ...props }) => (
+    <h2 id={headingId(textOf(children))} className="scroll-mt-24" {...props}>
+      {children}
+    </h2>
+  ),
+
+  h3: ({ children, ...props }) => (
+    <h3 id={headingId(textOf(children))} className="scroll-mt-24" {...props}>
+      {children}
+    </h3>
+  ),
+
   a: ({ href = "", children, ...props }) => {
     const isExternal = href.startsWith("http");
     if (isExternal) {

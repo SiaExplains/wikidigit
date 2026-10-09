@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/ui/CookieConsent";
+import { RSS_ALTERNATE, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,16 +18,14 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "WikiDigit — Tech News for the Curious",
     template: "%s | WikiDigit",
   },
-  description:
-    "Sharp, independent coverage of AI, startups, developer tools, and everything shaping the digital world.",
+  description: SITE_DESCRIPTION,
+  alternates: { types: RSS_ALTERNATE },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
+    url: SITE_URL,
     siteName: "WikiDigit",
     images: [
       {
@@ -53,8 +52,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@wikidigit",
-    creator: "@wikidigit",
   },
   robots: {
     index: true,

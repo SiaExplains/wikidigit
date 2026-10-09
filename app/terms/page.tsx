@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "WikiDigit Terms of Service — the rules governing your use of wikidigit.com and related services operated by Siavash Ghanbari.",
   robots: { index: true, follow: false },
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

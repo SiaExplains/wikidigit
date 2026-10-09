@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.4.0 — 2026-10-09
+
+### Added
+- RSS feed at `/rss.xml` (the footer already linked to it, but it returned a 404).
+- Editorial Standards page (`/editorial-standards`): sourcing, AI use, review, corrections and independence from advertisers. Linked from the footer, About, Contact and Advertise.
+- Structured data: NewsMediaOrganization and WebSite on the home page, a ProfilePage for each author, and a breadcrumb trail (visible and in JSON-LD) on articles.
+- Optional `updated` frontmatter field. It sets `dateModified`, the sitemap date and an "Updated" line on the article.
+- `npm test`: SEO checks against the production build, and a GitHub Actions workflow that runs lint, typecheck, build and tests.
+
+### Changed
+- Canonical URLs, the sitemap, robots.txt and RSS now use `https://www.wikidigit.com`, the host the site is actually served from. Before, every canonical pointed at the apex domain, which redirects to www.
+- robots.txt no longer blocks `/_next/`, which Google needs to load CSS, scripts and images.
+- Search and tag pages are `noindex`. Unknown tags return a 404 instead of an empty page. Empty categories are `noindex` and left out of the sitemap until they have posts.
+- Every page now has a canonical URL.
+- Read time is computed from the article text instead of being typed by hand.
+- Three early articles were rewritten from primary sources, each with a correction note: Runway's Series D, the Claude Opus 4 launch, and Bun 1.2. The Bun article was published as "Bun 2.0", a release that doesn't exist; it moves to `/article/bun-1-2-built-in-postgres-s3-text-lockfile`, and the old URL permanently redirects there. All three get new covers.
+- About now describes how AI is actually used: AI-assisted drafts, a human reviews and approves every post. The claim that no AI-generated content is published is gone.
+- Advertise no longer shows made-up audience numbers or CPM prices.
+- Contact shows the email address instead of a form that only pretended to send. The newsletter strip says the newsletter is coming soon and links to RSS instead of pretending to subscribe people.
+
+### Fixed
+- The Dev Tools category page and its home-page row were empty: "Dev Tools" in frontmatter never matched the `dev-tools` slug.
+- Table-of-contents links now jump to their headings (headings had no ids).
+- Placeholder ad boxes ("AD · Leaderboard 728×90") no longer show in production.
+
+### Removed
+- Footer X and LinkedIn icons that linked to `#`, and the unverified `@wikidigit` Twitter handle in the page metadata.
+- The open `images.remotePatterns` rule that let the image optimizer fetch any host on the internet; all images are local.
+
 ## 0.3.0 — 2026-10-09
 
 ### Added

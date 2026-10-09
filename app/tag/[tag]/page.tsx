@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getArticlesByTag, getAllArticles } from "@/lib/mdx";
+import { notFound } from "next/navigation";
+import { getAllArticles, getAllTags, getArticlesByTag } from "@/lib/mdx";
 import ArticleCard from "@/components/article/ArticleCard";
 import Sidebar from "@/components/layout/Sidebar";
 
@@ -7,17 +8,28 @@ interface Props {
   params: Promise<{ tag: string }>;
 }
 
+// Only tags that exist; anything else is a real 404 instead of an empty 200 page.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllTags().map((tag) => ({ tag }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
   return {
     title: `#${tag}`,
     description: `Articles tagged with #${tag} on WikiDigit`,
+    alternates: { canonical: `/tag/${tag}` },
+    // Tag pages overlap heavily with categories; let crawlers follow them, not index them.
+    robots: { index: false, follow: true },
   };
 }
 
 export default async function TagPage({ params }: Props) {
   const { tag } = await params;
   const articles = getArticlesByTag(tag);
+  if (articles.length === 0) notFound();
   const recentArticles = getAllArticles().slice(0, 5);
 
   return (

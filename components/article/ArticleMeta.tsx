@@ -10,6 +10,7 @@ interface ArticleMetaProps {
   author: string;
   authorSlug: string;
   date: string;
+  updated?: string;
   category: string;
   tags: string[];
   readTime: number;
@@ -21,6 +22,7 @@ export default function ArticleMeta({
   author,
   authorSlug,
   date,
+  updated,
   category,
   tags,
   readTime,
@@ -38,6 +40,11 @@ export default function ArticleMeta({
           <Calendar className="w-3.5 h-3.5" />
           <time dateTime={date}>{formatDate(date)}</time>
         </div>
+        {updated && updated > date && (
+          <div>
+            Updated <time dateTime={updated}>{formatDate(updated)}</time>
+          </div>
+        )}
         <div className="flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5" />
           <span>{readTime} min read</span>

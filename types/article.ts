@@ -12,6 +12,8 @@ export interface Article {
   title: string;
   slug: string;
   date: string;
+  // Set only when the article was substantively changed after publication.
+  updated?: string;
   author: string;
   authorSlug: string;
   category: string;
@@ -20,6 +22,7 @@ export interface Article {
   coverImage: string;
   featured: boolean;
   draft: boolean;
+  // Computed from the body in lib/mdx.ts; any frontmatter value is ignored.
   readTime: number;
   // Optional Q&A pairs: rendered under the article and emitted as FAQPage JSON-LD.
   faq?: ArticleFaq[];
