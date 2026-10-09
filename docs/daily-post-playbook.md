@@ -59,8 +59,8 @@ Create `content/articles/<slug>.mdx`:
 title: "<title>"
 slug: "<slug>"
 date: "<YYYY-MM-DD, today>"
-author: "WikiDigit"
-authorSlug: "wikidigit"
+author: "<Siavash Ghanbari | Sheida Mohassesy>"
+authorSlug: "<siavash-ghanbari | sheida-mohassesy>"
 category: "<picked topic, exactly as in topic-weights.json>"
 tags: ["<5-7 lowercase, hyphenated tags: entities first, then themes>"]
 description: "<150-160 chars: the hook plus the key fact, ending on the tension>"
@@ -73,6 +73,8 @@ faq:
     answer: "<a direct 1-3 sentence answer>"
 ---
 ```
+
+Author: pick one of the authors in `lib/authors.ts` at random (currently Siavash Ghanbari or Sheida Mohassesy). Never use a "WikiDigit" byline or invent an author.
 
 Body (700–1,000 words):
 - **Lede:** one dense paragraph that answers who, what, when and why it matters in the first two sentences. Answer engines quote this, so state the core fact plainly.

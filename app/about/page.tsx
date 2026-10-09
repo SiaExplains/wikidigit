@@ -35,9 +35,9 @@ export default function AboutPage() {
 
         <h2>Who We Are</h2>
         <p>
-          WikiDigit was founded in 2025 by Siavash Khalili, a former software engineer and
-          technology journalist with a decade of experience covering the intersection of technology
-          and business.
+          WikiDigit was founded in 2025 by Siavash Ghanbari, a software developer and indie maker
+          based in Berlin who writes about the intersection of code, creativity, and the modern
+          development stack.
         </p>
       </div>
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
               href={`/authors/${author.slug}`}
               className="flex items-center gap-4 p-4 rounded-sm border border-ink/10 hover:border-primary/30 transition-all group"
             >
-              <AuthorAvatar name={author.name} slug={author.slug} size={48} />
+              <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={48} linked={false} />
               <div>
                 <p className="font-semibold text-ink group-hover:text-rust transition-colors text-sm">
                   {author.name}

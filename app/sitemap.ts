@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
-import { getAllArticles } from "@/lib/mdx";
+import { getAllArticles, getArchiveMonths } from "@/lib/mdx";
+import { authors } from "@/lib/authors";
 import { categories } from "@/lib/categories";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
@@ -24,6 +25,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const authorUrls: MetadataRoute.Sitemap = authors.map((author) => ({
+    url: `${siteUrl}/authors/${author.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.4,
+  }));
+
+  const archiveUrls: MetadataRoute.Sitemap = getArchiveMonths().map((month) => ({
+    url: `${siteUrl}/archive/${month.key}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.3,
+  }));
+
   const staticUrls: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
     { url: `${siteUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
@@ -35,5 +50,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/impressum`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  return [...staticUrls, ...categoryUrls, ...articleUrls];
+  return [...staticUrls, ...categoryUrls, ...authorUrls, ...archiveUrls, ...articleUrls];
 }

@@ -7,6 +7,8 @@ interface AuthorAvatarProps {
   avatar?: string;
   size?: number;
   showName?: boolean;
+  // Set false when the avatar already sits inside a link.
+  linked?: boolean;
 }
 
 function getInitials(name: string): string {
@@ -24,11 +26,12 @@ export default function AuthorAvatar({
   avatar,
   size = 32,
   showName = false,
+  linked = true,
 }: AuthorAvatarProps) {
   const initials = getInitials(name);
 
-  return (
-    <Link href={`/authors/${slug}`} className="flex items-center gap-2 group">
+  const content = (
+    <>
       <div
         className="rounded-full overflow-hidden bg-primary flex items-center justify-center text-cream font-semibold flex-shrink-0"
         style={{ width: size, height: size, fontSize: size * 0.38 }}
@@ -50,6 +53,14 @@ export default function AuthorAvatar({
           {name}
         </span>
       )}
+    </>
+  );
+
+  if (!linked) return <span className="flex items-center gap-2 group">{content}</span>;
+
+  return (
+    <Link href={`/authors/${slug}`} className="flex items-center gap-2 group">
+      {content}
     </Link>
   );
 }

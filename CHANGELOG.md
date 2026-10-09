@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 — 2026-10-09
+
+### Added
+- Author **Sheida Mohassesy**.
+- Sidebar widgets for **Authors** (with post counts) and **Archive** (posts per month), on article, category, tag and archive pages.
+- Monthly archive pages at `/archive/YYYY-MM`. Author and archive pages are added to the sitemap.
+
+### Changed
+- Authors reduced to Siavash Ghanbari and Sheida Mohassesy; Siavash Khalili, Maya Chen and Luca Romano are removed. Every post's byline was reassigned at random between the two (13 each), replacing the "WikiDigit" byline.
+- Author article counts are now computed from the posts instead of being hardcoded.
+- Avatars fall back to initials (the referenced avatar images never existed, so they showed as broken images). The avatar no longer nests a link inside another link on the Authors and About pages.
+- The daily post playbook now picks a random author from `lib/authors.ts`.
+
 ## 0.2.0 — 2026-10-09
 
 ### Added
