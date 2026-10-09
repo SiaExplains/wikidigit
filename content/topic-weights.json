@@ -1,0 +1,14 @@
+{
+  "$comment": "Target share of published posts per category. Order = priority (ties go to the earlier topic). Must sum to 100.",
+  "weights": [
+    { "category": "AI", "percent": 25 },
+    { "category": "Startups", "percent": 20 },
+    { "category": "Business", "percent": 15 },
+    { "category": "Tech", "percent": 10 },
+    { "category": "Science", "percent": 10 },
+    { "category": "Robotics", "percent": 5 },
+    { "category": "Finance", "percent": 5 },
+    { "category": "Security", "percent": 5 },
+    { "category": "Dev Tools", "percent": 5 }
+  ]
+}

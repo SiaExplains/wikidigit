@@ -12,6 +12,9 @@ const categoryColors: Record<string, string> = {
   security: "bg-purple-700 text-white",
   science: "bg-cyan-700 text-white",
   business: "bg-emerald-700 text-white",
+  tech: "bg-blue-600 text-white",
+  robotics: "bg-pink-600 text-white",
+  finance: "bg-indigo-600 text-white",
 };
 
 export default function CategoryBadge({ category, size = "md" }: CategoryBadgeProps) {
