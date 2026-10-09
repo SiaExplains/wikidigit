@@ -17,7 +17,7 @@ export default function AboutPage() {
       <div className="prose-article">
         <p>
           WikiDigit is an independent technology news publication. We cover artificial intelligence,
-          startups, developer tools, security, and science — with an editorial focus on depth,
+          startups, business, tech, science, robotics, finance, security, and developer tools — with an editorial focus on depth,
           accuracy, and writing that respects the reader&apos;s intelligence.
         </p>
 

@@ -1,0 +1,87 @@
+<!doctype html>
+<!--
+  WikiDigit cover template (1216x521, 21:9). Copy, then replace the #scene SVG with a
+  subject-specific illustration. Rules:
+  - No text, letters, numbers or logos (the card/hero already shows the title).
+  - Keep the main subject inside the centre safe zone (x 236-980): cards crop to 16:9.
+  - Keep the bottom ~35% darker: the hero overlays the title there.
+  - Palette: navy #050b18 -> #0b1f3a, electric blue #3aa0ff / #7cc4ff, amber #E4A030,
+    rust #A85527, cream #FFF9EC for highlights, plus the category colour as an accent.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1216px; height: 521px; overflow: hidden; background: #050b18; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg id="scene" width="1216" height="521" viewBox="0 0 1216 521" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#12305a"/>
+      <stop offset="0.55" stop-color="#0a1a33"/>
+      <stop offset="1" stop-color="#03070f"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3aa0ff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#3aa0ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#1d5fae"/>
+      <stop offset="1" stop-color="#7cc4ff"/>
+    </linearGradient>
+    <linearGradient id="barHot" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#A85527"/>
+      <stop offset="1" stop-color="#E4A030"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="40"/></filter>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0.55" stop-color="#03070f" stop-opacity="0"/>
+      <stop offset="1" stop-color="#03070f" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1216" height="521" fill="url(#bg)"/>
+  <ellipse cx="608" cy="200" rx="360" ry="160" fill="#3aa0ff" opacity="0.18" filter="url(#soft)"/>
+
+  <!-- perspective floor grid -->
+  <g stroke="url(#floor)" stroke-width="1.2">
+    <line x1="608" y1="330" x2="-400" y2="521"/><line x1="608" y1="330" x2="0" y2="521"/>
+    <line x1="608" y1="330" x2="300" y2="521"/><line x1="608" y1="330" x2="608" y2="521"/>
+    <line x1="608" y1="330" x2="916" y2="521"/><line x1="608" y1="330" x2="1216" y2="521"/>
+    <line x1="608" y1="330" x2="1616" y2="521"/>
+  </g>
+  <g stroke="#3aa0ff" stroke-width="1">
+    <line x1="0" y1="350" x2="1216" y2="350" opacity="0.22"/><line x1="0" y1="380" x2="1216" y2="380" opacity="0.15"/>
+    <line x1="0" y1="425" x2="1216" y2="425" opacity="0.1"/><line x1="0" y1="490" x2="1216" y2="490" opacity="0.06"/>
+  </g>
+
+  <!-- example subject: rising bars with one breakout (replace per post) -->
+  <g filter="url(#glow)">
+    <rect x="420" y="250" width="44" height="80" rx="3" fill="url(#bar)" opacity="0.8"/>
+    <rect x="484" y="215" width="44" height="115" rx="3" fill="url(#bar)" opacity="0.85"/>
+    <rect x="548" y="230" width="44" height="100" rx="3" fill="url(#bar)" opacity="0.85"/>
+    <rect x="612" y="180" width="44" height="150" rx="3" fill="url(#bar)" opacity="0.9"/>
+    <rect x="676" y="95" width="44" height="235" rx="3" fill="url(#barHot)"/>
+    <rect x="740" y="140" width="44" height="190" rx="3" fill="url(#bar)" opacity="0.6"/>
+    <polyline points="442,240 506,205 570,220 634,170 698,80 762,130" fill="none" stroke="#FFF9EC" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="698" cy="80" r="7" fill="#E4A030"/>
+  </g>
+
+  <!-- floating particles -->
+  <g fill="#7cc4ff">
+    <circle cx="180" cy="90" r="2" opacity="0.6"/><circle cx="260" cy="160" r="1.5" opacity="0.5"/>
+    <circle cx="1010" cy="70" r="2" opacity="0.6"/><circle cx="1080" cy="180" r="1.5" opacity="0.4"/>
+    <circle cx="930" cy="120" r="1.2" opacity="0.5"/><circle cx="330" cy="60" r="1.2" opacity="0.4"/>
+  </g>
+
+  <rect width="1216" height="521" fill="url(#shade)"/>
+</svg>
+</body>
+</html>

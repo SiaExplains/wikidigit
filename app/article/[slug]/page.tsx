@@ -11,6 +11,7 @@ import ArticleBody from "@/components/article/ArticleBody";
 import RelatedArticles from "@/components/article/RelatedArticles";
 import TableOfContents from "@/components/article/TableOfContents";
 import ShareButtons from "@/components/article/ShareButtons";
+import ArticleFaq from "@/components/article/ArticleFaq";
 import { extractHeadings } from "@/lib/utils";
 import AdSlot from "@/components/ads/AdSlot";
 import Sidebar from "@/components/layout/Sidebar";
@@ -30,9 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
 
+  const image = article.coverImage ? `${siteUrl}${article.coverImage}` : undefined;
+
   return {
     title: article.title,
     description: article.description,
+    keywords: article.tags,
     openGraph: {
       title: article.title,
       description: article.description,
@@ -40,14 +44,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: article.date,
       authors: [article.author],
-      images: article.coverImage
-        ? [{ url: article.coverImage, width: 1200, height: 630, alt: article.title }]
-        : [],
+      section: article.category,
+      tags: article.tags,
+      images: image ? [{ url: image, alt: article.title }] : [],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.description,
+      ...(image && { images: [image] }),
     },
     alternates: {
       canonical: `${siteUrl}/article/${slug}`,
@@ -73,15 +78,35 @@ export default async function ArticlePage({ params }: Props) {
     headline: article.title,
     description: article.description,
     datePublished: article.date,
-    author: { "@type": "Person", name: article.author },
+    dateModified: article.date,
+    author:
+      article.authorSlug === "wikidigit"
+        ? { "@type": "Organization", name: article.author, url: siteUrl }
+        : { "@type": "Person", name: article.author, url: `${siteUrl}/authors/${article.authorSlug}` },
     publisher: {
       "@type": "Organization",
       name: "WikiDigit",
       url: siteUrl,
     },
-    ...(article.coverImage && { image: article.coverImage }),
+    ...(article.coverImage && { image: `${siteUrl}${article.coverImage}` }),
+    articleSection: article.category,
+    keywords: article.tags.join(", "),
+    mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
     url: articleUrl,
   };
+
+  const faq = article.faq ?? [];
+  const faqJsonLd = faq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }
+    : null;
 
   return (
     <>
@@ -89,6 +114,12 @@ export default async function ArticlePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* AD: leaderboard-top */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,6 +144,8 @@ export default async function ArticlePage({ params }: Props) {
             <ShareButtons url={articleUrl} title={article.title} />
 
             {article.content && <ArticleBody content={article.content} />}
+
+            <ArticleFaq items={faq} />
 
             {/* AD: end-of-article */}
             <AdSlot size="end-of-article" position="end-of-article" />

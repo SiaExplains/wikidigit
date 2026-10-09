@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArticlesByCategory } from "@/lib/mdx";
@@ -72,15 +73,15 @@ export default async function CategoryPage({ params }: Props) {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 {articles.map((article, i) => (
-                  <>
-                    <ArticleCard key={article.slug} article={article} />
+                  <Fragment key={article.slug}>
+                    <ArticleCard article={article} />
                     {/* AD: in-feed every 6 articles */}
                     {(i + 1) % 6 === 0 && (
-                      <div key={`ad-${i}`} className="col-span-full">
+                      <div className="col-span-full">
                         <AdSlot size="in-feed" position={`in-feed-${i}`} />
                       </div>
                     )}
-                  </>
+                  </Fragment>
                 ))}
               </div>
             )}

@@ -21,7 +21,14 @@ export interface Article {
   featured: boolean;
   draft: boolean;
   readTime: number;
+  // Optional Q&A pairs: rendered under the article and emitted as FAQPage JSON-LD.
+  faq?: ArticleFaq[];
   content?: string;
+}
+
+export interface ArticleFaq {
+  question: string;
+  answer: string;
 }
 
 export interface Category {

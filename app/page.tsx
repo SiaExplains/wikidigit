@@ -11,11 +11,11 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "WikiDigit — Tech News for the Curious",
   description:
-    "Sharp, independent coverage of AI, startups, developer tools, security, and everything shaping the digital world.",
+    "Sharp, independent coverage of AI, startups, business, tech, science, robotics, finance, security, and developer tools.",
   openGraph: {
     title: "WikiDigit — Tech News for the Curious",
     description:
-      "Sharp, independent coverage of AI, startups, developer tools, security, and everything shaping the digital world.",
+      "Sharp, independent coverage of AI, startups, business, tech, science, robotics, finance, security, and developer tools.",
   },
 };
 
