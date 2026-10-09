@@ -73,6 +73,7 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
   /tag/[tag]/page.tsx        ← Tag listing
   /authors/page.tsx          ← Author index
   /authors/[slug]/page.tsx   ← Author profile + their articles
+  /archive/[month]/page.tsx  ← Monthly archive (/archive/YYYY-MM)
   /search/page.tsx           ← Search UI (client, debounced, hits /api/search)
   /about/page.tsx
   /contact/page.tsx          ← Contact form (UI only)
@@ -85,7 +86,7 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
   /layout
     Navbar.tsx               ← "use client": sticky, scroll blur, mobile menu, search toggle
     Footer.tsx               ← Brand, coverage, company, legal columns + social SVGs
-    Sidebar.tsx              ← Recent posts + optional sidebar ad
+    Sidebar.tsx              ← Sidebar ad + recent posts + Authors + monthly Archive
   /article
     ArticleCard.tsx          ← variants: "default" | "compact" | "horizontal"
     ArticleHero.tsx          ← Featured story hero
@@ -93,6 +94,7 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
     ArticleMeta.tsx          ← Title, description, author, date, category, tags, read time
     TableOfContents.tsx      ← "use client": IntersectionObserver active-heading
     RelatedArticles.tsx
+    ArticleFaq.tsx           ← "Frequently asked questions" section from `faq` frontmatter
     ShareButtons.tsx         ← UI-only social share
   /ads
     AdSlot.tsx               ← Reusable ad placeholder (size + position props)
@@ -108,6 +110,15 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
 
 /content
   /articles/*.mdx            ← All articles (see frontmatter schema §6)
+  topic-weights.json         ← Target share of posts per category (drives the daily post)
+
+/scripts
+  pick-topic.mjs             ← Picks the most under-covered category for the next post
+  render-cover.mjs           ← Renders an HTML/SVG cover design to a 1216×521 PNG (headless Chrome)
+  /cover-template/template.html ← House-style cover template
+
+/docs
+  daily-post-playbook.md     ← Steps for the scheduled daily post (and the on-demand post skill)
 
 /lib
   mdx.ts                     ← Read/parse MDX, query helpers
@@ -119,8 +130,8 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
   article.ts                ← Article, Author, Category interfaces
 
 /public
-  /images/articles/*.png     ← Cover images (16:9)
-  /images/authors/*.jpg      ← Author avatars
+  /images/articles/*.png     ← Cover images (new covers 1216×521, 21:9; older ones 1216×640)
+                             (no author photos yet: avatars fall back to initials)
   og-default.png             ← 1200×630 default OG image
   favicon-16x16.png favicon-32x32.png favicon-96x96.png
   apple-touch-icon.png icon-192.png icon-512.png
@@ -218,10 +229,9 @@ export interface Author {
   name: string;
   slug: string;
   bio: string;
-  avatar: string;
+  avatar?: string;       // optional; initials are shown when absent
   twitter?: string;
   linkedin?: string;
-  articleCount?: number;
 }
 
 export interface Article {
@@ -237,6 +247,7 @@ export interface Article {
   featured: boolean;
   draft: boolean;
   readTime: number;      // minutes
+  faq?: { question: string; answer: string }[]; // rendered + FAQPage JSON-LD
   content?: string;      // MDX body (populated when read from disk)
 }
 
@@ -251,19 +262,24 @@ export type ArticleFrontmatter = Omit<Article, "content">;
 ```
 
 ### Categories (`/lib/categories.ts`)
-Six categories, in nav order. Export `categories: Category[]`, `getCategoryBySlug(slug)`, and `navCategories = categories.map(c => ({ name, href: /category/${slug} }))`.
+Nine categories, in nav order (= editorial priority). Export `categories: Category[]`, `getCategoryBySlug(slug)`, and `navCategories = categories.map(c => ({ name, href: /category/${slug} }))`.
 
 | Name | slug | color |
 |---|---|---|
 | AI | `ai` | `#1D402D` |
 | Startups | `startups` | `#A85527` |
-| Dev Tools | `dev-tools` | `#E4A030` |
-| Security | `security` | `#7c3aed` |
-| Science | `science` | `#0891b2` |
 | Business | `business` | `#059669` |
+| Tech | `tech` | `#2563eb` |
+| Science | `science` | `#0891b2` |
+| Robotics | `robotics` | `#db2777` |
+| Finance | `finance` | `#4f46e5` |
+| Security | `security` | `#7c3aed` |
+| Dev Tools | `dev-tools` | `#E4A030` |
+
+Target share of posts per category lives in `content/topic-weights.json`: AI 25, Startups 20, Business 15, Tech 10, Science 10, Robotics 5, Finance 5, Security 5, Dev Tools 5.
 
 ### Authors (`/lib/authors.ts`)
-Export `authors: Author[]` and `getAuthorBySlug(slug)`. Seed with a small editorial team (name, slug, bio, avatar path under `/images/authors/`, optional twitter/linkedin, articleCount). Example roster used: `siavash` (Siavash Khalili), `siavash-ghanbari`, `maya-chen`, `luca-romano`.
+Export `authors: Author[]` and `getAuthorBySlug(slug)`. The roster is two real writers: `siavash-ghanbari` (Siavash Ghanbari) and `sheida-mohassesy` (Sheida Mohassesy). Optional avatar path and twitter/linkedin. Article counts are computed from the posts (`getArticlesByAuthor`), never stored.
 
 ### MDX access layer (`/lib/mdx.ts`)
 Reads from `content/articles`. Provide these exact functions:
@@ -273,6 +289,7 @@ Reads from `content/articles`. Provide these exact functions:
 - `getArticlesByCategory(category)`, `getArticlesByTag(tag)`, `getArticlesByAuthor(authorSlug)` — case-insensitive filters over `getAllArticles()`.
 - `getFeaturedArticle(): Article | null` — first `featured`, else newest, else null.
 - `getRelatedArticles(article, limit = 3)` — same category or shared tag, excluding self.
+- `getArchiveMonths()` — `{ key: "YYYY-MM", label, count }[]`, newest first; `getArticlesByMonth(key)`; `formatArchiveMonth(key)`.
 
 ### Utilities (`/lib/utils.ts`)
 - `slugify(text)`, `formatDate(iso)` → `"MMMM d, yyyy"` (via `date-fns`), `formatDateShort` → `"MMM d, yyyy"`.
@@ -290,8 +307,8 @@ Each article is `content/articles/<slug>.mdx`. Frontmatter schema (YAML):
 title: "Article Title Here"
 slug: "article-slug"                # must match filename
 date: "2025-05-14"                  # ISO, controls sort order
-author: "Siavash Khalili"
-authorSlug: "siavash"               # must match a lib/authors.ts slug
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"      # must match a lib/authors.ts slug
 category: "AI"                      # display name matching lib/categories.ts
 tags: ["llm", "openai", "industry"]
 description: "~150-char SEO + card summary."
@@ -299,6 +316,9 @@ coverImage: "/images/articles/cover.png"
 featured: true
 draft: false
 readTime: 7
+faq:                                # optional, 3-4 entries; rendered + FAQPage JSON-LD
+  - question: "A question readers search for?"
+    answer: "A direct, self-contained 1-3 sentence answer."
 ---
 ```
 Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blockquotes, tables, `code`, images. Write **realistic, current tech-news prose** — never lorem ipsum. Seed with a spread across categories (AI model releases, startup funding, dev tools, layoffs/business, security, science). Aim for a dozen-plus articles so the home grid, category rows, and related-articles all populate.
@@ -311,7 +331,7 @@ Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blo
 
 **Home (`app/page.tsx`):** leaderboard ad → featured `ArticleHero` → "Top Stories" 3-col grid (first 6) → in-feed ad → first 4 categories each rendered as a titled row (up to 4 cards, "See all →" link) with `border-t` separators → second in-feed ad → `NewsletterStrip`.
 
-**Article page (`app/article/[slug]/page.tsx`):** `generateStaticParams` from slugs; `generateMetadata` with per-article title/description, OG `type:"article"` (publishedTime, authors, cover image), Twitter card, canonical `${siteUrl}/article/${slug}`. Renders a `NewsArticle` **JSON-LD** `<script>`, a top leaderboard ad, then the two-column grid: `<article className="max-w-[720px]">` with `ArticleMeta` → `ShareButtons` → `ArticleBody` (MDX) → end-of-article ad → `RelatedArticles`; aside has sticky `TableOfContents` + `Sidebar` (recent posts + sidebar ad). `notFound()` for missing/draft.
+**Article page (`app/article/[slug]/page.tsx`):** `generateStaticParams` from slugs; `generateMetadata` with per-article title/description, OG `type:"article"` (publishedTime, authors, cover image), Twitter card, canonical `${siteUrl}/article/${slug}`. Renders a `NewsArticle` **JSON-LD** `<script>` (absolute image URL, keywords, articleSection, mainEntityOfPage; Person author with author-page URL) plus a `FAQPage` JSON-LD when `faq` is set, a top leaderboard ad, then the two-column grid: `<article className="max-w-[720px]">` with `ArticleMeta` → `ShareButtons` → `ArticleBody` (MDX) → `ArticleFaq` → end-of-article ad → `RelatedArticles`; aside has sticky `TableOfContents` + `Sidebar`; the sticky wrapper is capped at `max-h-[calc(100vh-6rem)] overflow-y-auto` so the whole sidebar stays reachable. `notFound()` for missing/draft.
 
 **ArticleBody:** renders through `MDXRemote` from `next-mdx-remote/rsc` with the custom `MDXComponents` map, wrapped in `.prose-article`, and injects a mid-article `AdSlot`.
 
@@ -329,11 +349,21 @@ Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blo
 
 **Search:** `app/api/search/route.ts` is a `GET` that reads `?q=`, lowercases, and AND-matches every query word against a haystack of title+description+author+category+tags, returning `{ articles }` (max 20). `app/search/page.tsx` is a debounced client UI that calls it.
 
-**Category / Tag / Author pages:** list `ArticleCard`s filtered by the respective `lib/mdx` helper, with `generateMetadata` and `generateStaticParams` where the route is dynamic; category page shows a sidebar. Author profile shows bio + social + their articles.
+**Sidebar:** sidebar ad → Recent Stories → Authors (avatar, name, post count, links to `/authors/[slug]`) → Archive (one link per month to `/archive/YYYY-MM` with its post count). Used on article, category, tag and archive pages.
 
-**metadata routes:** `app/sitemap.ts` enumerates static pages + all categories + all articles (with cover images) using `MetadataRoute.Sitemap`; `app/robots.ts` allows `/`, disallows `/api/` and `/_next/`, points at `${siteUrl}/sitemap.xml`; `app/manifest.ts` returns the PWA manifest (name WikiDigit, cream `background_color`, primary `theme_color`, icon set).
+**Category / Tag / Author / Archive pages:** list `ArticleCard`s filtered by the respective `lib/mdx` helper, with `generateMetadata` and `generateStaticParams` where the route is dynamic; category, tag and archive pages show the sidebar. Archive pages use `dynamicParams = false`. Author profile shows bio + social + their articles.
+
+**metadata routes:** `app/sitemap.ts` enumerates static pages + all categories + author pages + archive months + all articles (with cover images) using `MetadataRoute.Sitemap`; `app/robots.ts` allows `/`, disallows `/api/` and `/_next/`, points at `${siteUrl}/sitemap.xml`; `app/manifest.ts` returns the PWA manifest (name WikiDigit, cream `background_color`, primary `theme_color`, icon set).
 
 All `siteUrl` reads use `process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com"`.
+
+---
+
+## 7b. Content pipeline
+
+- **Daily post:** a Claude desktop scheduled task (`wikidigit-daily-post`, 10:00) follows `docs/daily-post-playbook.md`. It picks the topic with `node scripts/pick-topic.mjs --pending "<categories of open post PRs>"`, researches Reddit/X, writes the MDX (random author from `lib/authors.ts`), draws the cover, does the SEO/AEO pass, opens a `post/<slug>` PR and sends a push notification. It never merges.
+- **On-demand post:** the `/wikidigit-post-author` Claude Code skill does the same for a subject, topics, title and author that Sia gives it.
+- **Covers** are drawn as HTML/SVG from `scripts/cover-template/template.html` and rendered with `node scripts/render-cover.mjs <design.html> public/images/articles/<slug>.png` (1216×521, 21:9 to match the hero). No text or logos; keep the subject in x 236–980 because cards crop to 16:9. No image-generation models.
 
 ---
 

@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WikiDigit
 
-## Getting Started
+Source for [wikidigit.com](https://wikidigit.com), an independent tech-news site covering AI, startups, business, tech, science, robotics, finance, security and developer tools.
 
-First, run the development server:
+Next.js 16 (App Router) + React 19 + Tailwind CSS v4. Articles are MDX files on disk; there is no database or CMS. The full architecture spec is in [`wikidigit-bootstrap-instruction.md`](wikidigit-bootstrap-instruction.md).
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npm run dev      # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`NEXT_PUBLIC_SITE_URL` sets the canonical site URL. It defaults to `https://wikidigit.com`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Posts:** `content/articles/<slug>.mdx`. The frontmatter schema is in the bootstrap spec (§6). Optional `faq` entries render as a FAQ section with FAQPage JSON-LD.
+- **Covers:** `public/images/articles/<slug>.png`, drawn as HTML/SVG and rendered with
+  `node scripts/render-cover.mjs <design.html> <out.png>` (1216×521). Start from `scripts/cover-template/template.html`.
+- **Categories:** `lib/categories.ts`. The target share per category is in `content/topic-weights.json`, and `node scripts/pick-topic.mjs` shows which category is most under-covered.
+- **Authors:** `lib/authors.ts` (Siavash Ghanbari, Sheida Mohassesy). Each post's `authorSlug` must match an entry there.
+- **Archive:** `/archive/YYYY-MM` pages and the sidebar Archive widget are generated from post dates.
 
-## Learn More
+## Publishing workflow
 
-To learn more about Next.js, take a look at the following resources:
+Every post ships as its own `post/<slug>` branch and PR to `main`; merging the PR publishes it.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Daily:** a Claude scheduled task runs at 10:00 and follows [`docs/daily-post-playbook.md`](docs/daily-post-playbook.md). It picks the topic by weight, researches it, writes the post, draws the cover, does the SEO/AEO pass, opens a PR and sends a notification. A human reviews and merges.
+- **On demand:** run the `/wikidigit-post-author` skill in Claude Code to write a post about a specific subject, with the topic, title and author you choose.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [`CHANGELOG.md`](CHANGELOG.md) for site changes.
