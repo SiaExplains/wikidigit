@@ -2,30 +2,33 @@
 title: "Anthropic Buys the Company That Builds Everyone's SDKs — Including OpenAI's"
 slug: "anthropic-acquires-stainless-sdk-war"
 date: "2026-05-19"
+updated: "2026-10-09"
 author: "Siavash Ghanbari"
 authorSlug: "siavash-ghanbari"
 category: "AI"
 tags: ["anthropic", "stainless", "developer-tools", "sdk", "openai"]
-description: "Anthropic just acquired Stainless, the startup that generates official SDKs for OpenAI, Google, Meta, and Cloudflare — and is shutting down its hosted platform."
+description: "Anthropic just acquired Stainless, the startup whose SDK generator has been used by OpenAI, Google, Meta, and Cloudflare — and is shutting down its hosted products."
 coverImage: "/images/articles/anthropic-acquires-stainless-sdk-war.png"
 featured: false
 draft: false
 readTime: 5
 ---
 
-Anthropic has just completed one of the most strategically audacious acquisitions in the AI toolchain's short history. The company confirmed Monday that it is buying Stainless, a four-year-old New York startup that automates the generation of production-ready software development kits — the same kits that OpenAI, Google, Meta, Cloudflare, and Runway have all been shipping to developers. The reported price is at least $300 million, a 2x premium on Stainless's last known valuation from a December 2024 fundraise.
+*Correction (October 9, 2026): An earlier version of this article said Anthropic had just raised $122 billion; that figure was OpenAI's funding round. Anthropic's most recent round at the time was $30 billion in February 2026. We also removed an unverified claim that Stainless was valued at $150 million in December 2024 and that the price was a 2x premium on it, and clarified that the hosted-product shutdown was confirmed to TechCrunch, not in Anthropic's announcement.*
 
-The mechanics of the deal are straightforward. The implications are not. Stainless built an AI-powered compiler that takes an OpenAPI specification and outputs idiomatic, well-tested SDKs across Python, TypeScript, Go, Kotlin, Java, and other languages. It is, in practice, the invisible plumbing behind every official Anthropic SDK that developers have ever used — and, critically, it is the same plumbing behind OpenAI's SDKs, parts of Google's Gemini API surface, Meta's Llama Stack, and Cloudflare Workers AI. Anthropic has just bought its own SDK vendor. In doing so, it has also taken that vendor away from every competitor that relied on it.
+Anthropic has just completed one of the most strategically audacious acquisitions in the AI toolchain's short history. The company [announced Monday](https://www.anthropic.com/news/anthropic-acquires-stainless) that it has acquired Stainless, a New York startup founded in 2022 that automates the generation of production-ready software development kits — the same kind of kits that [OpenAI, Google, Cloudflare, and Runway](https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/) have been shipping to developers. Terms were not disclosed; The Information [reported](https://www.investing.com/news/stock-market-news/anthropic-in-talks-to-buy-dev-tools-startup-for-300-mln-the-information-4683007) the week before that the price was at least $300 million.
+
+The mechanics of the deal are straightforward. The implications are not. Stainless built a generator that takes an API specification and outputs idiomatic SDKs across Python, TypeScript, Go, Kotlin, Java, and other languages. It is, in practice, the invisible plumbing behind [every official Anthropic SDK](https://www.anthropic.com/news/anthropic-acquires-stainless) that developers have ever used — and, critically, it is the same plumbing behind OpenAI's SDKs, Google's, [Meta's Llama Stack, and Cloudflare's](https://stainless.com/blog/stainless-series-a). Anthropic has just bought its own SDK vendor. In doing so, it has also taken that vendor away from every competitor that relied on it.
 
 ## What Stainless Actually Was
 
 Stainless was not a company most developers thought about. That was the point. It solved a genuinely painful problem — SDK maintenance across multiple languages is slow, error-prone, and expensive — with an approach that was elegant enough to attract the top AI labs as customers from early on. Each time a lab updated its API, Stainless re-ran the compiler and shipped new SDK versions automatically. The quality was high enough that these were the *official* SDKs, not community wrappers. For a nascent industry that was moving fast and shipping API changes constantly, it was exactly the kind of infrastructure that disappears into the background and becomes quietly load-bearing.
 
-The company raised relatively little by AI standards and was valued at $150 million as recently as late 2024. A $300 million exit is a good outcome for a developer-tools startup. For Anthropic, it is a rounding error on its $122 billion raise — and it purchases something far more valuable than a SDK generator.
+The company raised relatively little by AI standards — it raised a [$25 million Series A in December 2024](https://stainless.com/blog/stainless-series-a), led by Andreessen Horowitz. A reported $300 million-plus exit is a good outcome for a developer-tools startup. For Anthropic, it is a rounding error next to the [$30 billion it raised in February](https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation) — and it purchases something far more valuable than an SDK generator.
 
 ## The Strategic Read
 
-Anthropic's announcement confirmed what the acquisition telegraphs: Stainless's hosted products are being shut down. Existing customers will retain full rights to their generated SDKs, but the service that made continuous, automated SDK generation easy for OpenAI, Google, and others is going offline. Competitors will have to build their own tooling, hire the engineers, absorb the maintenance burden, or find an alternative. None of those options are trivial at the pace the industry moves.
+Anthropic [confirmed to TechCrunch](https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/) what the acquisition telegraphs: all hosted Stainless products, including the SDK generator, are being wound down. Existing customers keep ownership of the SDKs they have generated and can modify and extend them freely, but the service that made continuous, automated SDK generation easy for OpenAI, Google, and others is going offline. Competitors will have to build their own tooling, hire the engineers, absorb the maintenance burden, or find an alternative. None of those options are trivial at the pace the industry moves.
 
 This is a move from the playbook of infrastructure acquisitions that defined the cloud era — buy the layer everyone depends on, internalize it, and make competitors rebuild from scratch. The difference here is the brazenness. Anthropic is not buying a neutral utility provider; it is buying the SDK factory that its direct competitors trusted because it was a neutral utility. That trust is now gone, and the market structure it enabled goes with it.
 
@@ -38,3 +41,5 @@ The short-term impact for developers using OpenAI, Google, or Cloudflare SDKs is
 For Anthropic's own developer ecosystem, the acquisition is a statement of seriousness about owning the full stack of the developer experience — from API design down to the libraries developers actually import. It is also a quiet signal about where competitive advantage is moving in the AI industry. The model benchmark arms race is real, but controlling the infrastructure developers build on top of is a different kind of moat: slower to build, harder to replicate, and far more sticky than any single capability benchmark.
 
 The era of shared neutral infrastructure in AI is ending. Anthropic just made that very clear.
+
+**Sources:** [Anthropic announcement](https://www.anthropic.com/news/anthropic-acquires-stainless) · [TechCrunch](https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/) · [Stainless Series A](https://stainless.com/blog/stainless-series-a) · [Investing.com / The Information](https://www.investing.com/news/stock-market-news/anthropic-in-talks-to-buy-dev-tools-startup-for-300-mln-the-information-4683007) · [Anthropic Series G](https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation)

@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
         destination: "/article/bun-1-2-built-in-postgres-s3-text-lockfile",
         permanent: true,
       },
+      {
+        // The original "$1.3 trillion" figure was a pre-announcement estimate; the plan was 4,755 trillion won.
+        source: "/article/south-korea-1-3-trillion-chip-ai-bet",
+        destination: "/article/south-korea-samsung-sk-4755-trillion-won-chip-ai-plan",
+        permanent: true,
+      },
     ];
   },
 };
