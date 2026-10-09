@@ -91,9 +91,7 @@ export default async function CategoryPage({ params }: Props) {
 
           {/* Sidebar */}
           <aside className="hidden lg:block">
-            <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
-              <Sidebar recentArticles={recentArticles} showAd />
-            </div>
+            <Sidebar recentArticles={recentArticles} showAd />
           </aside>
         </div>
       </div>
