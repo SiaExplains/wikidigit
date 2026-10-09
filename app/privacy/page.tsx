@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <p className="text-xs text-muted uppercase tracking-wider mb-4">Legal</p>
       <h1 className="text-3xl font-bold text-ink mb-3">Privacy Policy</h1>
-      <p className="text-sm text-muted mb-10">Last updated: May 16, 2026</p>
+      <p className="text-sm text-muted mb-10">Last updated: October 9, 2026</p>
 
       <div className="prose-article space-y-10">
 
@@ -100,6 +100,40 @@ export default function PrivacyPage() {
             </a>
             .
           </p>
+
+          <h3>2.4 Newsletter</h3>
+          <p>
+            If you sign up for our newsletter, we use a double opt-in process: we send a
+            confirmation email to the address you entered, and you are only added to the
+            newsletter list after you click the link in it. Until you confirm, your address is not
+            stored on any list; the confirmation link itself carries it, signed and valid for 48
+            hours.
+          </p>
+          <p>
+            After you confirm, we store your email address, the date of your subscription and
+            your subscription status with our email provider, Resend (Resend, Inc., USA), so we can
+            send you the newsletter. Every newsletter contains a link to unsubscribe, and you can
+            withdraw your consent at any time.
+          </p>
+          <p>
+            <strong>Legal basis:</strong> Consent (Art. 6(1)(a) GDPR).{" "}
+            <strong>Retention:</strong> until you unsubscribe. After that we keep only the record
+            that you unsubscribed, so you are not emailed again by mistake.
+          </p>
+
+          <h3>2.5 Contact form</h3>
+          <p>
+            If you use our contact form, we receive your message, your email address, the subject
+            you chose and, if you give it, your name. The form sends this to us as an email via
+            Resend; it is not stored in a database on this website. We use it only to read and
+            respond to your message.
+          </p>
+          <p>
+            <strong>Legal basis:</strong> our legitimate interest in answering enquiries (Art.
+            6(1)(f) GDPR), or steps prior to entering into a contract where your enquiry is about
+            advertising (Art. 6(1)(b) GDPR). <strong>Retention:</strong> we delete the email once
+            your enquiry is resolved, unless we have to keep it for legal reasons.
+          </p>
         </section>
 
         {/* 3 */}
@@ -154,6 +188,11 @@ export default function PrivacyPage() {
               Google operates as a data processor under a Data Processing Agreement.
             </li>
             <li>
+              <strong>Resend, Inc.</strong> — to send newsletter confirmation emails and
+              newsletters, store newsletter subscriptions, and deliver contact-form messages to us.
+              Resend acts as our data processor.
+            </li>
+            <li>
               <strong>Hosting provider</strong> — server logs may be stored by our infrastructure
               provider, subject to contractual data processing obligations.
             </li>
@@ -170,6 +209,11 @@ export default function PrivacyPage() {
             Google may process your data outside the European Economic Area (EEA), in particular in
             the United States. Google LLC participates in the EU–US Data Privacy Framework, which
             provides an adequacy decision under Art. 45 GDPR.
+          </p>
+          <p>
+            Resend, Inc. is based in the United States, so newsletter and contact-form data is
+            processed there. We rely on the safeguards Resend provides for transfers of personal
+            data from the EEA to the United States, as set out in its data processing agreement.
           </p>
         </section>
 

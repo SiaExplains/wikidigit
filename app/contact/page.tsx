@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/lib/site";
+import { emailEnabled } from "@/lib/email/config";
+import ContactForm from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -32,16 +34,24 @@ function mailto(subject: string): string {
 }
 
 export default function ContactPage() {
+  const formEnabled = emailEnabled();
+
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h1 className="text-3xl font-bold text-ink mb-3">Contact Us</h1>
       <p className="text-muted mb-8">
-        The fastest way to reach us is email:{" "}
+        {formEnabled ? "Use the form below, or email us directly:" : "The fastest way to reach us is email:"}{" "}
         <a href={`mailto:${CONTACT_EMAIL}`} className="text-rust font-medium hover:underline">
           {CONTACT_EMAIL}
         </a>
         . We read everything, but we can&apos;t reply to every message.
       </p>
+
+      {formEnabled && (
+        <div className="mb-10">
+          <ContactForm />
+        </div>
+      )}
 
       <ul className="space-y-4">
         {topics.map((topic) => (

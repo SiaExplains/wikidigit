@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 — 2026-10-09
+
+### Added
+- Real newsletter signup with double opt-in, sent through Resend. Signing up emails a confirmation link (signed, valid 48 hours); the reader is only added to the list after clicking **Confirm subscription**. Nothing is stored before that, and the form gives the same answer for any address so it can't reveal who is subscribed.
+- A working contact form. Messages are emailed to us with Reply-To set to the sender, and nothing is stored on the site. The email address stays on the page as a fallback.
+- Spam protection on both forms: a hidden honeypot field, a minimum fill time, and a per-IP rate limit.
+- Both forms appear only when Resend is configured (see README). Until then the site shows the existing "coming soon" and email-us versions.
+- `.env.example`, and unit tests for tokens, validation, rate limiting and both form handlers, with Resend stubbed out.
+
+### Changed
+- The Privacy Policy covers the newsletter, the contact form and Resend as a processor.
+- CI runs on Node 22, and tests run TypeScript through `tsx`.
+
 ## 0.5.1 — 2026-10-09
 
 ### Fixed
