@@ -11,9 +11,10 @@ npm ci
 npm run dev      # http://localhost:3000
 npm run lint
 npm run build
+npm test         # SEO checks against the build output; run after a build
 ```
 
-`NEXT_PUBLIC_SITE_URL` sets the canonical site URL. It defaults to `https://wikidigit.com`.
+`NEXT_PUBLIC_SITE_URL` sets the canonical site URL (`lib/site.ts`). It defaults to `https://www.wikidigit.com`, the host production serves; the apex domain redirects there.
 
 ## Content
 
@@ -22,6 +23,8 @@ npm run build
   `node scripts/render-cover.mjs <design.html> <out.png>` (1216×521). Start from `scripts/cover-template/template.html`.
 - **Categories:** `lib/categories.ts`. The target share per category is in `content/topic-weights.json`, and `node scripts/pick-topic.mjs` shows which category is most under-covered.
 - **Authors:** `lib/authors.ts` (Siavash Ghanbari, Sheida Mohassesy). Each post's `authorSlug` must match an entry there.
+- **Dates:** `date` is the publish date. Add `updated` only after a substantive change; it becomes `dateModified` and an "Updated" line. Read time is computed from the body.
+- **Feeds and SEO:** `/rss.xml`, `app/sitemap.ts` and `app/robots.ts`. Tag and search pages are `noindex`; empty categories are `noindex` and left out of the sitemap.
 - **Archive:** `/archive/YYYY-MM` pages and the sidebar Archive widget are generated from post dates.
 
 ## Publishing workflow

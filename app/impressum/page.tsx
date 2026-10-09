@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "Impressum (Legal Notice) for WikiDigit and Emojar — mandatory disclosure under German law (§ 5 TMG / § 18 MStV).",
   robots: { index: true, follow: false },
+  alternates: { canonical: "/impressum" },
 };
 
 export default function ImpressumPage() {

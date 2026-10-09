@@ -67,12 +67,13 @@ description: "<150-160 chars: the hook plus the key fact, ending on the tension>
 coverImage: "/images/articles/<slug>.png"
 featured: false
 draft: false
-readTime: <words / 230, rounded>
 faq:
   - question: "<a question a reader would actually search for>"
     answer: "<a direct 1-3 sentence answer>"
 ---
 ```
+
+Read time is computed from the body at build time, so don't add `readTime`. Add `updated: "<YYYY-MM-DD>"` only when a published post is changed in substance, and put a dated correction note at the top of the body when a fact was wrong.
 
 Author: pick one of the authors in `lib/authors.ts` at random (currently Siavash Ghanbari or Sheida Mohassesy). Never use a "WikiDigit" byline or invent an author.
 

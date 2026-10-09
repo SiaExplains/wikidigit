@@ -13,6 +13,10 @@ const slotDimensions: Record<AdSlotProps["size"], { w: number; h: number; label:
 };
 
 export default function AdSlot({ size, position, className = "" }: AdSlotProps) {
+  // No ad network is wired up yet, so production renders nothing rather than an
+  // empty labelled box. Dev keeps the outline so layouts still reserve the space.
+  if (process.env.NODE_ENV === "production") return null;
+
   const slot = slotDimensions[size];
 
   return (

@@ -238,6 +238,7 @@ export interface Article {
   title: string;
   slug: string;
   date: string;          // ISO "YYYY-MM-DD"
+  updated?: string;      // ISO; only after a substantive change → dateModified + "Updated" line
   author: string;
   authorSlug: string;
   category: string;      // display name, e.g. "AI"
@@ -246,7 +247,7 @@ export interface Article {
   coverImage: string;    // /images/articles/…
   featured: boolean;
   draft: boolean;
-  readTime: number;      // minutes
+  readTime: number;      // minutes, computed from the body in lib/mdx.ts (frontmatter ignored)
   faq?: { question: string; answer: string }[]; // rendered + FAQPage JSON-LD
   content?: string;      // MDX body (populated when read from disk)
 }
@@ -315,13 +316,12 @@ description: "~150-char SEO + card summary."
 coverImage: "/images/articles/cover.png"
 featured: true
 draft: false
-readTime: 7
 faq:                                # optional, 3-4 entries; rendered + FAQPage JSON-LD
   - question: "A question readers search for?"
     answer: "A direct, self-contained 1-3 sentence answer."
 ---
 ```
-Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blockquotes, tables, `code`, images. Write **realistic, current tech-news prose** — never lorem ipsum. Seed with a spread across categories (AI model releases, startup funding, dev tools, layoffs/business, security, science). Aim for a dozen-plus articles so the home grid, category rows, and related-articles all populate.
+Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blockquotes, tables, `code`, images. Every article reports real events: each factual claim links a primary source, and nothing is invented (no quotes, figures, test results or "confirmed to WikiDigit"). Never generate placeholder "realistic" articles to fill the grid; publish fewer posts instead. See `/editorial-standards`.
 
 ---
 

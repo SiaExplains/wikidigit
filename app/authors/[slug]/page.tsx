@@ -4,6 +4,8 @@ import { getAuthorBySlug, authors } from "@/lib/authors";
 import { getArticlesByAuthor } from "@/lib/mdx";
 import ArticleCard from "@/components/article/ArticleCard";
 import AuthorAvatar from "@/components/ui/AuthorAvatar";
+import JsonLd from "@/components/seo/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 function XIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -35,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: author.name,
     description: author.bio,
+    alternates: { canonical: `/authors/${author.slug}` },
   };
 }
 
@@ -45,8 +48,28 @@ export default async function AuthorPage({ params }: Props) {
 
   const articles = getArticlesByAuthor(slug);
 
+  const sameAs = [
+    author.twitter && `https://x.com/${author.twitter}`,
+    author.linkedin && `https://www.linkedin.com/in/${author.linkedin}`,
+  ].filter((url): url is string => Boolean(url));
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    url: `${SITE_URL}/authors/${author.slug}`,
+    mainEntity: {
+      "@type": "Person",
+      name: author.name,
+      description: author.bio,
+      url: `${SITE_URL}/authors/${author.slug}`,
+      worksFor: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+      ...(sameAs.length > 0 && { sameAs }),
+    },
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <JsonLd data={jsonLd} />
       {/* Author header */}
       <div className="flex flex-col sm:flex-row items-start gap-6 pb-10 border-b border-ink/10 mb-10">
         <AuthorAvatar name={author.name} slug={author.slug} avatar={author.avatar} size={80} linked={false} />

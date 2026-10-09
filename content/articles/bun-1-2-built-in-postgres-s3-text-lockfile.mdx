@@ -1,0 +1,58 @@
+---
+title: "Bun 1.2 Builds Postgres, S3 and a Text Lockfile Into the Runtime"
+slug: "bun-1-2-built-in-postgres-s3-text-lockfile"
+date: "2025-05-05"
+updated: "2026-10-09"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "Dev Tools"
+tags: ["bun", "javascript", "runtime", "node", "performance", "developer-tools"]
+description: "Bun 1.2, released January 22, 2025, added a built-in Postgres client, a native S3 API and a text-based bun.lock, and runs Node.js's own test suite to measure compatibility."
+coverImage: "/images/articles/bun-1-2-built-in-postgres-s3.png"
+featured: false
+draft: false
+---
+
+*Correction (October 9, 2026): This article was originally published as "Bun 2.0 Ships Native SQL, Hot Module Reload, and a Challenge to Node's Dominance." There was no Bun 2.0 release; the features it described shipped in Bun 1.2, and the benchmark figures and install-time table in that version were not from any source we can identify. We have rewritten the article from Bun's official release notes and moved it to a new address. The old link redirects here.*
+
+Bun 1.2, [released on January 22, 2025](https://bun.com/blog/bun-v1.2), turns several things JavaScript developers usually install as packages into features of the runtime itself: a Postgres client, an S3 client, and a text-based lockfile. It also changes how Bun measures its compatibility with Node.js.
+
+## What's new in Bun 1.2?
+
+The headline additions, as described in Bun's release notes:
+
+- **`Bun.sql`**, a built-in Postgres client. MySQL support was listed as coming later.
+- **`Bun.s3`**, a native API for S3-compatible object storage.
+- **`bun.lock`**, a text lockfile that replaces the binary `bun.lockb` as the default for new projects. Existing `bun.lockb` files still work.
+- **HTML imports**, so `Bun.serve` can bundle and serve a front end from an HTML file.
+- A built-in CSS parser and further improvements to the bundler, test runner and SQLite client.
+
+## A Postgres client with tagged templates
+
+`Bun.sql` uses tagged template literals, so values are passed as query parameters instead of being concatenated into the SQL string:
+
+```typescript
+import { sql } from "bun";
+
+const users = await sql`
+  SELECT id, name FROM users
+  WHERE created_at > ${new Date("2025-01-01")}
+  LIMIT 10
+`;
+```
+
+Bun's release post claims `Bun.sql` is "up to 50% faster at reading rows" than the most popular Postgres clients on Node.js. That is Bun's own benchmark; your results will depend on your queries and network.
+
+## Why the text lockfile matters
+
+The old binary `bun.lockb` could not be read in a pull request, which made dependency changes hard to review and merge conflicts hard to resolve. Bun [introduced `bun.lock` as an opt-in in December 2024](https://bun.com/blog/bun-lock-text-lockfile) and made it the default in 1.2. Bun also says `bun install` is 30% faster than in Bun 1.1.
+
+## Measuring Node.js compatibility with Node's own tests
+
+Instead of tracking compatibility API by API, Bun now runs Node.js's test suite against itself on every change. According to the release notes, Bun passes over 90% of the Node.js tests for a set of core modules, and the post highlights work on `node:http2` servers, `node:dgram`, `node:cluster`, `node:zlib` and C++ addons that use V8 APIs. The post also claims Express can serve requests up to three times faster on Bun than on Node.js.
+
+## What this means for teams
+
+For new projects, Bun 1.2 removes a handful of dependencies: a Postgres driver, an S3 SDK, and in some cases a separate bundler. For existing Node.js applications, the useful number is the compatibility work: running Node's own test suite gives a clearer picture of what will break than a feature checklist does. The performance figures are Bun's own measurements, so they are worth reproducing on your own workload before you switch.
+
+**Sources:** [Bun 1.2 release notes](https://bun.com/blog/bun-v1.2) · [Bun: "bun.lock" text lockfile](https://bun.com/blog/bun-lock-text-lockfile)

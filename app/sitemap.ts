@@ -1,53 +1,65 @@
 import { MetadataRoute } from "next";
-import { getAllArticles, getArchiveMonths } from "@/lib/mdx";
+import { getAllArticles, getArchiveMonths, getArticlesByCategory, lastModifiedOf } from "@/lib/mdx";
 import { authors } from "@/lib/authors";
 import { categories } from "@/lib/categories";
+import { SITE_URL } from "@/lib/site";
+import type { Article } from "@/types/article";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
+function latest(articles: Article[]): Date | undefined {
+  const dates = articles.map(lastModifiedOf).sort();
+  return dates.length ? new Date(dates[dates.length - 1]) : undefined;
+}
 
+// Only canonical, indexable URLs. Tag and search pages are noindex, and empty
+// categories stay out until they have a post.
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = getAllArticles();
 
   const articleUrls: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${siteUrl}/article/${article.slug}`,
-    lastModified: new Date(article.date),
+    url: `${SITE_URL}/article/${article.slug}`,
+    lastModified: new Date(lastModifiedOf(article)),
     changeFrequency: "monthly",
     priority: 0.8,
     ...(article.coverImage && {
-      images: [`${siteUrl}${article.coverImage}`],
+      images: [`${SITE_URL}${article.coverImage}`],
     }),
   }));
 
-  const categoryUrls: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${siteUrl}/category/${cat.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: 0.6,
-  }));
+  const categoryUrls: MetadataRoute.Sitemap = categories.flatMap((cat) => {
+    const posts = getArticlesByCategory(cat.slug);
+    if (posts.length === 0) return [];
+    return [
+      {
+        url: `${SITE_URL}/category/${cat.slug}`,
+        lastModified: latest(posts),
+        changeFrequency: "daily" as const,
+        priority: 0.6,
+      },
+    ];
+  });
 
   const authorUrls: MetadataRoute.Sitemap = authors.map((author) => ({
-    url: `${siteUrl}/authors/${author.slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/authors/${author.slug}`,
     changeFrequency: "weekly",
     priority: 0.4,
   }));
 
   const archiveUrls: MetadataRoute.Sitemap = getArchiveMonths().map((month) => ({
-    url: `${siteUrl}/archive/${month.key}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/archive/${month.key}`,
     changeFrequency: "monthly",
     priority: 0.3,
   }));
 
   const staticUrls: MetadataRoute.Sitemap = [
-    { url: siteUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
-    { url: `${siteUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
-    { url: `${siteUrl}/authors`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.5 },
-    { url: `${siteUrl}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${siteUrl}/advertise`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
-    { url: `${siteUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${siteUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${siteUrl}/impressum`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: SITE_URL, lastModified: latest(articles), changeFrequency: "daily", priority: 1.0 },
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${SITE_URL}/editorial-standards`, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${SITE_URL}/authors`, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/advertise`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/impressum`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   return [...staticUrls, ...categoryUrls, ...authorUrls, ...archiveUrls, ...articleUrls];

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import {
   getAllArticles,
   getArticleBySlug,
   getArticleSlugs,
   getRelatedArticles,
+  lastModifiedOf,
 } from "@/lib/mdx";
+import { categorySlug, getCategoryBySlug } from "@/lib/categories";
 import ArticleMeta from "@/components/article/ArticleMeta";
 import ArticleBody from "@/components/article/ArticleBody";
 import RelatedArticles from "@/components/article/RelatedArticles";
@@ -15,6 +18,8 @@ import ArticleFaq from "@/components/article/ArticleFaq";
 import { extractHeadings } from "@/lib/utils";
 import AdSlot from "@/components/ads/AdSlot";
 import Sidebar from "@/components/layout/Sidebar";
+import JsonLd from "@/components/seo/JsonLd";
+import { SITE_LOGO, SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -29,9 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug);
   if (!article) return {};
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
-
-  const image = article.coverImage ? `${siteUrl}${article.coverImage}` : undefined;
+  const image = article.coverImage ? `${SITE_URL}${article.coverImage}` : undefined;
 
   return {
     title: article.title,
@@ -40,9 +43,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: article.title,
       description: article.description,
-      url: `${siteUrl}/article/${slug}`,
+      url: `${SITE_URL}/article/${slug}`,
       type: "article",
       publishedTime: article.date,
+      modifiedTime: lastModifiedOf(article),
       authors: [article.author],
       section: article.category,
       tags: article.tags,
@@ -55,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...(image && { images: [image] }),
     },
     alternates: {
-      canonical: `${siteUrl}/article/${slug}`,
+      canonical: `${SITE_URL}/article/${slug}`,
     },
   };
 }
@@ -69,8 +73,8 @@ export default async function ArticlePage({ params }: Props) {
   const recentArticles = getAllArticles().slice(0, 5);
   const headings = extractHeadings(article.content ?? "");
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
-  const articleUrl = `${siteUrl}/article/${slug}`;
+  const articleUrl = `${SITE_URL}/article/${slug}`;
+  const category = getCategoryBySlug(categorySlug(article.category));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -78,17 +82,18 @@ export default async function ArticlePage({ params }: Props) {
     headline: article.title,
     description: article.description,
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: lastModifiedOf(article),
     author:
       article.authorSlug === "wikidigit"
-        ? { "@type": "Organization", name: article.author, url: siteUrl }
-        : { "@type": "Person", name: article.author, url: `${siteUrl}/authors/${article.authorSlug}` },
+        ? { "@type": "Organization", name: article.author, url: SITE_URL }
+        : { "@type": "Person", name: article.author, url: `${SITE_URL}/authors/${article.authorSlug}` },
     publisher: {
       "@type": "Organization",
-      name: "WikiDigit",
-      url: siteUrl,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: SITE_LOGO, width: 512, height: 512 },
     },
-    ...(article.coverImage && { image: `${siteUrl}${article.coverImage}` }),
+    ...(article.coverImage && { image: `${SITE_URL}${article.coverImage}` }),
     articleSection: article.category,
     keywords: article.tags.join(", "),
     mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
@@ -108,18 +113,23 @@ export default async function ArticlePage({ params }: Props) {
       }
     : null;
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      ...(category
+        ? [{ "@type": "ListItem", position: 2, name: category.name, item: `${SITE_URL}/category/${category.slug}` }]
+        : []),
+      { "@type": "ListItem", position: category ? 3 : 2, name: article.title, item: articleUrl },
+    ],
+  };
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
 
       {/* AD: leaderboard-top */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -130,12 +140,32 @@ export default async function ArticlePage({ params }: Props) {
         <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12 xl:gap-16">
           {/* Main content */}
           <article className="max-w-[720px]">
+            <nav aria-label="Breadcrumb" className="mb-4 text-xs text-muted">
+              <ol className="flex flex-wrap items-center gap-1.5">
+                <li>
+                  <Link href="/" className="hover:text-rust transition-colors">
+                    Home
+                  </Link>
+                </li>
+                {category && (
+                  <>
+                    <li aria-hidden="true">›</li>
+                    <li>
+                      <Link href={`/category/${category.slug}`} className="hover:text-rust transition-colors">
+                        {category.name}
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ol>
+            </nav>
             <ArticleMeta
               title={article.title}
               description={article.description}
               author={article.author}
               authorSlug={article.authorSlug}
               date={article.date}
+              updated={article.updated}
               category={article.category}
               tags={article.tags}
               readTime={article.readTime}

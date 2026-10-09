@@ -8,6 +8,7 @@ import {
 } from "@/lib/mdx";
 import ArticleCard from "@/components/article/ArticleCard";
 import Sidebar from "@/components/layout/Sidebar";
+import { SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -22,11 +23,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { month } = await params;
   const label = formatArchiveMonth(month);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
   return {
     title: `${label} Archive`,
     description: `Every WikiDigit story published in ${label}.`,
-    alternates: { canonical: `${siteUrl}/archive/${month}` },
+    alternates: { canonical: `${SITE_URL}/archive/${month}` },
   };
 }
 

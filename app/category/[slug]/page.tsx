@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArticlesByCategory } from "@/lib/mdx";
+import { SITE_URL } from "@/lib/site";
 import { getCategoryBySlug, categories } from "@/lib/categories";
 import ArticleCard from "@/components/article/ArticleCard";
 import Sidebar from "@/components/layout/Sidebar";
@@ -21,20 +22,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = getCategoryBySlug(slug);
   if (!category) return {};
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wikidigit.com";
   const articles = getArticlesByCategory(slug);
   const ogImage = articles[0]?.coverImage ?? "/images/og-default.png";
 
   return {
     title: `${category.name} News`,
     description: category.description,
-    alternates: { canonical: `${siteUrl}/category/${slug}` },
+    alternates: { canonical: `${SITE_URL}/category/${slug}` },
+    // An empty category is a thin page; keep it out of the index until it has posts.
+    ...(articles.length === 0 && { robots: { index: false, follow: true } }),
     openGraph: {
       title: `${category.name} News | WikiDigit`,
       description: category.description,
-      url: `${siteUrl}/category/${slug}`,
+      url: `${SITE_URL}/category/${slug}`,
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `${category.name} — WikiDigit` }],
+      images: [{ url: ogImage, alt: `${category.name} — WikiDigit` }],
     },
     twitter: {
       card: "summary_large_image",

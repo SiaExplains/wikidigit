@@ -6,7 +6,8 @@ import AuthorAvatar from "@/components/ui/AuthorAvatar";
 export const metadata: Metadata = {
   title: "About WikiDigit",
   description:
-    "WikiDigit is an independent tech news publication covering AI, startups, developer tools, and the forces reshaping the digital world.",
+    "WikiDigit is an independent tech news publication from Berlin covering AI, startups, developer tools, and the forces reshaping the digital world.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -27,17 +28,27 @@ export default function AboutPage() {
           structural shifts, the unexpected implications, the context that turns a funding
           announcement into something you actually need to understand.
         </p>
+
+        <h2>How We Use AI</h2>
         <p>
-          Every article is written by a human journalist with domain expertise. We do not publish
-          AI-generated content, and we are transparent when AI tools assist in research or
-          synthesis.
+          We use AI tools to help research and draft articles. A person on our team reviews and
+          approves every post before it is published; nothing goes live automatically. Our
+          standard is that factual claims are checked against primary sources (company
+          announcements, filings, documentation, research papers) and linked in the article.
+          Some of our older articles don&apos;t meet that standard yet, and we are adding sources
+          to them.
+        </p>
+        <p>
+          When we get something wrong, we correct it openly and say so at the top of the article.
+          Our full sourcing, AI and corrections rules are in our{" "}
+          <Link href="/editorial-standards">Editorial Standards</Link>.
         </p>
 
         <h2>Who We Are</h2>
         <p>
-          WikiDigit was founded in 2025 by Siavash Ghanbari, a software developer and indie maker
-          based in Berlin who writes about the intersection of code, creativity, and the modern
-          development stack.
+          WikiDigit is run from Berlin by Siavash Ghanbari, a software developer and indie maker
+          who writes about the intersection of code, creativity, and the modern development stack,
+          and Sheida Mohassesy, who covers AI, startups, and the business of technology.
         </p>
       </div>
 

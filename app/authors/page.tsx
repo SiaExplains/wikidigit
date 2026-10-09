@@ -6,7 +6,8 @@ import AuthorAvatar from "@/components/ui/AuthorAvatar";
 
 export const metadata: Metadata = {
   title: "Authors",
-  description: "Meet the journalists and contributors behind WikiDigit.",
+  description: "Meet the people who write and edit WikiDigit.",
+  alternates: { canonical: "/authors" },
 };
 
 export default function AuthorsPage() {
@@ -15,7 +16,7 @@ export default function AuthorsPage() {
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-ink">Our Authors</h1>
         <p className="mt-2 text-muted">
-          The journalists, researchers, and engineers behind WikiDigit.
+          The people who write and edit WikiDigit.
         </p>
       </div>
 
