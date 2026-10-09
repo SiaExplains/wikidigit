@@ -1,0 +1,72 @@
+---
+title: "Emojar Was an Emoji Site. Now It's 264 Free Tools That Never Upload Your Files."
+slug: "emojar-pivot-264-free-browser-tools"
+date: "2026-10-09"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "Startups"
+tags: ["emojar", "side-project", "indie-hacker", "build-in-public", "privacy", "business"]
+description: "Emojar, the Berlin-built emoji copy-paste site, pivoted in October 2026 to 264 free online tools that run in your browser. Your files never touch its servers."
+coverImage: "/images/articles/emojar-pivot-264-free-browser-tools.png"
+featured: false
+draft: false
+readTime: 4
+faq:
+  - question: "What is Emojar now?"
+    answer: "Emojar is a free collection of 264 online tools that run in the web browser, including image and PDF converters, developer utilities, text tools, calculators, unit converters and generators. It started as an emoji search and copy-paste site, and its 3,790-emoji library and games are still available alongside the tools."
+  - question: "Does Emojar upload my files?"
+    answer: "According to Emojar, no. Its tools process files and text on your own device using browser technologies such as Canvas, Web Workers, WebAssembly and the Web Crypto API. A few tools, such as OCR, download a processing engine on first use, but the file itself stays on the device."
+  - question: "Is Emojar free, and how does it make money?"
+    answer: "Every Emojar tool is free, with no sign-up, usage limits, watermarks or premium tier. The site says it is funded by advertising."
+  - question: "When did Emojar switch from emojis to online tools?"
+    answer: "Emojar announced the change on October 7, 2026 with more than 140 tools. Two days later its tools directory listed 264, spread across 13 categories."
+---
+
+_Disclosure: the author is Emojar's founder. Every number below comes from Emojar's own public pages, as of October 9, 2026._
+
+Emojar, a free site that has been about searching and copying emojis since early 2026, relaunched in October as something much bigger: a collection of 264 free online tools that run entirely in your web browser. Image converters, PDF mergers, a JSON formatter, a word counter, password and QR generators and dozens of calculators now sit at the front of the site, and none of them upload your files. The 3,790 emojis are still there, one click away. But the pitch has changed from "copy an emoji" to "do everyday file chores without handing your documents to a stranger's server."
+
+## From 3,790 Emojis to 264 Tools in a Week
+
+The pivot came fast. Emojar's [announcement post](https://emojar.com/blog/emojar-free-online-tools-that-run-in-your-browser), dated October 7, 2026, said the site had "more than 140" tools across eleven categories. By October 9, the [tools directory](https://emojar.com/online-tool) listed 264 across 13 categories: image, PDF, developer, text, color, calculators, unit converters, security and generators, date and time, audio and video, device tests, reference, and productivity.
+
+The biggest single category is developer tools, with 63 entries: JSON formatters and validators, a JWT decoder, an SQL formatter for ten dialects, a subnet calculator, a number base converter. Calculators come next with 37, followed by text tools (32) and image tools (31). The most-used everyday jobs are all there: HEIC to JPG for iPhone photos, compressing an image to an exact file size like 50 KB, a passport photo maker, merging, splitting, signing and password-protecting PDFs, and Word to PDF.
+
+It's still the same one-person project. Emojar is built and maintained by founder Siavash Ghanbari in Berlin, the site's [about page](https://emojar.com/about) says. When WikiDigit [first covered Emojar in May](/article/emojar-emoji-tool-built-with-zero-lines-of-code), it had 3,790 emoji pages and ten mini-games. The emoji side has since grown to 18 games and eight emoji utilities, and those utilities, a PNG exporter, a favicon generator and a color palette extractor, were the seed of the pivot. According to the about page, they were tools the founder "personally needed," and in October 2026 that kind of utility "became the heart of the site."
+
+## The Pitch: Your Files Never Leave Your Device
+
+Free online converters are a crowded, mature market. Smallpdf says it serves more than 40 million users a month, and Semrush estimated that iLovePDF drew about 255 million visits in August 2026. Emojar isn't trying to beat them on brand. It's betting on architecture.
+
+Most online converters upload your file to a server, process it there and send the result back. That leaves a copy of your passport scan, contract or bank statement on someone else's machine for some amount of time. Credit bureau Experian warns that there's usually no way to know whether an upload is stored or deleted, and that stored files can be exposed in a breach. Security firm Kaspersky goes further and advises never converting sensitive information online.
+
+Emojar's tools do the work locally instead. Its [FAQ](https://emojar.com/faq) says files and text are processed in the browser using the File API, Canvas, Web Workers, WebAssembly and the Web Crypto API, and that "nothing is stored." The same approach that let JavaScript runtimes like [Bun](/article/bun-2-ships-native-sql-and-hot-reload) chase native speed lets a browser tab decode images, rewrite PDFs and hash files without a backend. Once a tool page has loaded, Emojar says, the processing itself works offline.
+
+The site is upfront about the exceptions. Image to Text downloads the open-source Tesseract OCR engine and a language model the first time you use it. The Braille translator loads the liblouis engine for Grade 2 output. Text to Speech can use "online" voices from the browser vendor, which send text to that vendor's speech service. Emojar labels those voices so users can choose an on-device one. Analytics, it says, records only anonymous page views, never what you type or open.
+
+That claim is also easy to check. Open the browser's developer tools, watch the Network tab and run a conversion. If no upload request appears, the file stayed home.
+
+## Free, No Account, Funded by Ads
+
+The business model hasn't changed. Every tool is free, with "no usage limits, no watermarks and no premium tier," according to the FAQ, and there's no sign-up anywhere on the site. Emojar says it is funded by advertising.
+
+That is a sharp contrast with the category leaders, which typically cap free use and sell subscriptions to unlock batch jobs and larger files. Processing in the browser changes the cost side of that equation. If the user's own device does the CPU work and there's no file storage to pay for, serving one more conversion costs the site little more than serving one more page. A free, ad-funded model gets much easier to sustain when there are no compute bills to cover.
+
+## Traffic Is the Real Strategy
+
+The pivot is also a search play. Emojar's sitemap now lists 325 tool and category pages next to its 3,790 emoji pages. Each tool comes with a written guide on the blog, which has added posts almost daily since the relaunch: picking a JPG, PNG or WebP format, how image compression's quality slider works, how strong a random password really is, or which MP3 bitrate to use.
+
+The emoji pages brought in people looking for one character. Queries like "HEIC to JPG," "merge PDF" and "compress image to 50 KB" are a much larger, more repeatable stream of searches. The site has been through search trouble before. In May, Emojar [documented](https://emojar.com/blog/seo-indexation-recovery) how its Google-indexed pages fell from about 12,000 to 126 because of www and non-www canonical conflicts and server errors, and how it fixed them. With hundreds of new pages going live, the next few months of Search Console data will show whether that lesson held.
+
+For now, the site's own self-description has shifted. In the homepage's structured data, Emojar now calls itself a maker of "free, privacy-friendly online tools that run entirely in the browser." The emojis come second.
+
+## Sources
+
+- [Emojar: Emojar Now Has 140+ Free Tools That Run in Your Browser](https://emojar.com/blog/emojar-free-online-tools-that-run-in-your-browser)
+- [Emojar: Online Tools directory](https://emojar.com/online-tool)
+- [Emojar: About](https://emojar.com/about)
+- [Emojar: FAQ](https://emojar.com/faq)
+- [Smallpdf: PDF statistics](https://smallpdf.com/pdf-statistics)
+- [Semrush: ilovepdf.com traffic overview](https://www.semrush.com/website/ilovepdf.com/overview/)
+- [Experian: What Are the Risks of Using Online File or PDF Converters?](https://www.experian.com/blogs/ask-experian/risks-of-using-online-file-pdf-converters/)
+- [Kaspersky: How to safely convert files](https://me-en.kaspersky.com/blog/how-to-convert-files-safely/23874/)
