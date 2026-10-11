@@ -1,87 +1,79 @@
 <!doctype html>
 <!--
-  WikiDigit cover template (1216x521, 21:9). Copy, then replace the #scene SVG with a
-  subject-specific illustration. Rules:
+  WikiDigit cover template (1216x521, 21:9). Copy it, set the palette, then replace the
+  #subject group with an illustration of this specific story. Rules:
+  - Run `node scripts/cover-style.mjs` first. It lists the palettes and compositions that are
+    still allowed (not used by the last few posts) and prints each palette's hex values.
+    Paste the chosen palette into the :root variables below. Never hand-pick "navy + blue glow"
+    out of habit: that is the "midnight" palette and it is only allowed when the script says so.
+  - Build the chosen composition (see scripts/cover-template/styles.json). The example below is
+    a "flat-poster" on the "paper" palette; delete it and draw your own.
   - No text, letters, numbers or logos (the card/hero already shows the title).
   - Keep the main subject inside the centre safe zone (x 236-980): cards crop to 16:9.
-  - Keep the bottom ~35% darker: the hero overlays the title there.
-  - Palette: navy #050b18 -> #0b1f3a, electric blue #3aa0ff / #7cc4ff, amber #E4A030,
-    rust #A85527, cream #FFF9EC for highlights, plus the category colour as an accent.
+  - Keep the bottom ~35% calm (few details). The hero overlays the title there with its own dark
+    gradient, so light palettes are fine, but busy detail under the title is not.
+  - Use the category colour as one accent if it fits (lib/categories.ts).
+  - After rendering: node scripts/cover-style.mjs --record <slug> --palette <p> --composition <c> --subject "..."
 -->
 <html>
 <head>
 <meta charset="utf-8">
 <style>
-  html, body { margin: 0; width: 1216px; height: 521px; overflow: hidden; background: #050b18; }
+  :root {
+    /* palette: paper (copy the six values of the palette you picked) */
+    --bg0: #f6efe3;
+    --bg1: #e3d6bf;
+    --ink: #1d1a16;
+    --accent: #A85527;
+    --accent2: #1d5fae;
+    --highlight: #ffffff;
+  }
+  html, body { margin: 0; width: 1216px; height: 521px; overflow: hidden; background: var(--bg1); }
   svg { display: block; }
+  .bg0 { stop-color: var(--bg0); } .bg1 { stop-color: var(--bg1); }
+  .ink { fill: var(--ink); } .accent { fill: var(--accent); } .accent2 { fill: var(--accent2); } .hi { fill: var(--highlight); }
+  .ink-line { stroke: var(--ink); fill: none; }
 </style>
 </head>
 <body>
 <svg id="scene" width="1216" height="521" viewBox="0 0 1216 521" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
-      <stop offset="0" stop-color="#12305a"/>
-      <stop offset="0.55" stop-color="#0a1a33"/>
-      <stop offset="1" stop-color="#03070f"/>
-    </radialGradient>
-    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3aa0ff" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#3aa0ff" stop-opacity="0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" class="bg0"/>
+      <stop offset="1" class="bg1"/>
     </linearGradient>
-    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#1d5fae"/>
-      <stop offset="1" stop-color="#7cc4ff"/>
-    </linearGradient>
-    <linearGradient id="barHot" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#A85527"/>
-      <stop offset="1" stop-color="#E4A030"/>
-    </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.18"/>
     </filter>
-    <filter id="soft"><feGaussianBlur stdDeviation="40"/></filter>
-    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0.55" stop-color="#03070f" stop-opacity="0"/>
-      <stop offset="1" stop-color="#03070f" stop-opacity="0.85"/>
-    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="30"/></filter>
+    <!-- subtle paper grain; drop it for glossy compositions -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
+    </filter>
   </defs>
 
   <rect width="1216" height="521" fill="url(#bg)"/>
-  <ellipse cx="608" cy="200" rx="360" ry="160" fill="#3aa0ff" opacity="0.18" filter="url(#soft)"/>
 
-  <!-- perspective floor grid -->
-  <g stroke="url(#floor)" stroke-width="1.2">
-    <line x1="608" y1="330" x2="-400" y2="521"/><line x1="608" y1="330" x2="0" y2="521"/>
-    <line x1="608" y1="330" x2="300" y2="521"/><line x1="608" y1="330" x2="608" y2="521"/>
-    <line x1="608" y1="330" x2="916" y2="521"/><line x1="608" y1="330" x2="1216" y2="521"/>
-    <line x1="608" y1="330" x2="1616" y2="521"/>
-  </g>
-  <g stroke="#3aa0ff" stroke-width="1">
-    <line x1="0" y1="350" x2="1216" y2="350" opacity="0.22"/><line x1="0" y1="380" x2="1216" y2="380" opacity="0.15"/>
-    <line x1="0" y1="425" x2="1216" y2="425" opacity="0.1"/><line x1="0" y1="490" x2="1216" y2="490" opacity="0.06"/>
-  </g>
-
-  <!-- example subject: rising bars with one breakout (replace per post) -->
-  <g filter="url(#glow)">
-    <rect x="420" y="250" width="44" height="80" rx="3" fill="url(#bar)" opacity="0.8"/>
-    <rect x="484" y="215" width="44" height="115" rx="3" fill="url(#bar)" opacity="0.85"/>
-    <rect x="548" y="230" width="44" height="100" rx="3" fill="url(#bar)" opacity="0.85"/>
-    <rect x="612" y="180" width="44" height="150" rx="3" fill="url(#bar)" opacity="0.9"/>
-    <rect x="676" y="95" width="44" height="235" rx="3" fill="url(#barHot)"/>
-    <rect x="740" y="140" width="44" height="190" rx="3" fill="url(#bar)" opacity="0.6"/>
-    <polyline points="442,240 506,205 570,220 634,170 698,80 762,130" fill="none" stroke="#FFF9EC" stroke-width="3" stroke-linejoin="round"/>
-    <circle cx="698" cy="80" r="7" fill="#E4A030"/>
+  <!-- example subject (flat-poster): a big sun disc, a rising stack of blocks, one block falling out.
+       Replace everything inside #subject with this story's objects. -->
+  <g id="subject">
+    <circle cx="700" cy="190" r="130" class="accent2" opacity="0.18"/>
+    <circle cx="700" cy="190" r="96" class="accent2"/>
+    <g filter="url(#shadow)">
+      <rect x="470" y="300" width="110" height="60" class="ink"/>
+      <rect x="470" y="236" width="110" height="60" class="ink"/>
+      <rect x="470" y="172" width="110" height="60" class="ink"/>
+      <rect x="600" y="300" width="110" height="60" class="ink"/>
+      <rect x="600" y="236" width="110" height="60" class="ink"/>
+      <rect x="730" y="300" width="110" height="60" class="ink"/>
+      <rect x="770" y="150" width="110" height="60" class="accent" transform="rotate(14 825 180)"/>
+    </g>
+    <path d="M300 372 H920" class="ink-line" stroke-width="4" stroke-linecap="round"/>
   </g>
 
-  <!-- floating particles -->
-  <g fill="#7cc4ff">
-    <circle cx="180" cy="90" r="2" opacity="0.6"/><circle cx="260" cy="160" r="1.5" opacity="0.5"/>
-    <circle cx="1010" cy="70" r="2" opacity="0.6"/><circle cx="1080" cy="180" r="1.5" opacity="0.4"/>
-    <circle cx="930" cy="120" r="1.2" opacity="0.5"/><circle cx="330" cy="60" r="1.2" opacity="0.4"/>
-  </g>
-
-  <rect width="1216" height="521" fill="url(#shade)"/>
+  <rect width="1216" height="521" filter="url(#grain)" opacity="0.6"/>
 </svg>
 </body>
 </html>
