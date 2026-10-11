@@ -91,12 +91,16 @@ Body (700–1,000 words):
 
 ## 5. Draw the cover image (1216×521)
 
-Draw it as code (SVG/HTML), not with a model:
-1. Copy `scripts/cover-template/template.html` to a temp folder.
-2. Replace the example subject with an illustration of **this specific story**, built from its concrete objects: a chip die, a robot arm, a courtroom, a rocket, a vault, a network graph, a bar chart that breaks out, and so on. Use real shapes, gradients, glow and depth. Not a generic abstract blob.
-3. Follow the template rules: no text, letters, numbers or logos; keep the subject in the centre safe zone (x 236–980) because cards crop to 16:9; keep the bottom third dark because the hero overlays the title there; use the navy/electric-blue/amber palette with the category colour as an accent.
-4. Render: `node scripts/render-cover.mjs <design.html> public/images/articles/<slug>.png`
-5. Open the PNG and look at it. If it's sparse, off-topic or broken, improve the design and render again (at most 3 rounds).
+Draw it as code (SVG/HTML), not with a model. Every cover must look different from the ones before it: a different palette, a different composition, and the objects of this story. Readers see the covers side by side on the home page, so "navy background, blue glow, perspective grid" every day reads as one image repeated.
+
+1. Run `node scripts/cover-style.mjs`. It prints the last six covers (from `content/cover-log.json`), the palettes and compositions that are still allowed, and three starting pairs. The rules it enforces: a palette may not repeat within the previous 4 covers, a composition may not repeat within the previous 3, and at least one cover in every four uses a light palette. The menu lives in `scripts/cover-template/styles.json` (12 palettes, 12 compositions). Pick the pair whose mood fits the story; don't default to `midnight` + `neon-scene` because the template used to look like that.
+2. Open the last four PNGs in `public/images/articles/` and look at them, so you know what "different" means today.
+3. Copy `scripts/cover-template/template.html` to a temp folder, paste the palette's six hex values into the `:root` variables, and replace the example subject with an illustration of **this specific story** in the chosen composition: a chip die, a robot arm, a courtroom, a rocket, a vault, a network graph, a bar chart that breaks out, and so on. Use real shapes with depth and light appropriate to the composition (flat shapes for a poster, outlines for a blueprint, layered shadows for paper cut-outs). Not a generic abstract blob, and not the same chart-with-glow every time.
+4. Follow the template rules: no text, letters, numbers or logos; keep the subject in the centre safe zone (x 236–980) because cards crop to 16:9; keep the bottom third calm because the hero overlays the title there (it adds its own dark gradient, so light palettes are fine); use the category colour as an accent where it fits.
+5. Render: `node scripts/render-cover.mjs <design.html> public/images/articles/<slug>.png`
+6. Open the PNG and look at it. If it's sparse, off-topic or broken, improve the design and render again (at most 3 rounds).
+7. Record what you used: `node scripts/cover-style.mjs --record <slug> --palette <name> --composition <name> --subject "<one line: what the picture shows>"`. The command refuses a palette or composition that is too recent.
+8. Run `node scripts/cover-style.mjs --analyze`. It measures the dominant hue and lightness of the last covers from the PNGs themselves and warns (exit code 2) when the new one has the same hue and similar lightness as the previous ones. If it warns, change the background or palette and render again. This catches a "paper" cover that was drawn mostly in blue anyway.
 
 ## 6. SEO and AEO pass
 
@@ -105,7 +109,7 @@ Draw it as code (SVG/HTML), not with a model:
 - Tags reuse existing tags where they fit (check other posts) so the tag pages build up.
 - Add a link to the new post from 1–2 of the most related existing posts: one natural sentence each, not a "related" dump. Keep these edits small.
 - The FAQ answers are self-contained and factual: they're what AI answer engines will quote.
-- Check: `npx eslint`, `npm run build`, and `node scripts/pick-topic.mjs` (no unknown categories). All must pass.
+- Check: `npx eslint`, `npm run build`, `node scripts/pick-topic.mjs` (no unknown categories) and `node scripts/cover-style.mjs --check <slug>` (the cover is recorded and doesn't repeat a recent palette or composition). All must pass.
 - Start the build (`npx next start -p <free port>`), open `/article/<slug>` and check that the cover, the FAQ section and the JSON-LD (`script[type="application/ld+json"]`) render. Then stop the server.
 
 ## 7. PR and notification
@@ -113,7 +117,7 @@ Draw it as code (SVG/HTML), not with a model:
 - Commit: `feat(blog): add post - <Title>`
 - Push the `post/<slug>` branch and open a PR to `main`:
   - Title: `feat(blog): add post - <Title>`
-  - Body: a summary, then the lines `Category: <topic>` (this line is required; step 1 reads it) and `Topic weights: <the pick-topic table as markdown, before this post>`, then sources, the SEO changes made, and a test plan.
+  - Body: a summary, then the lines `Category: <topic>` (this line is required; step 1 reads it) and `Topic weights: <the pick-topic table as markdown, before this post>` and `Cover: <palette> + <composition>`, then sources, the SEO changes made, and a test plan.
 - Send Sia one push notification: `New WikiDigit post ready to review: <Title> — <PR URL>`
 - Remove the worktree (`git worktree remove`). Leave the branch for the PR.
 
@@ -122,3 +126,4 @@ Draw it as code (SVG/HTML), not with a model:
 - If no story can be confirmed by two reputable sources, don't publish a weak post. Try the next-highest-deficit topic once. If that fails too, notify Sia that the run was skipped and why.
 - If lint or build fails and the fix isn't obvious, still don't open a PR: notify Sia with the error.
 - Never merge, force-push, change `main`, or edit posts beyond the small inbound-link edits in step 6.
+- Never skip the cover-style steps to save time. A post with a repeated-looking cover is worse than a post that took one more render.

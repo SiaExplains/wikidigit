@@ -1,0 +1,31 @@
+{
+  "$comment": "Cover palettes and compositions for scripts/cover-style.mjs. Each daily cover must use a palette not used by the previous 4 posts and a composition not used by the previous 3. 'light' palettes have a pale background; at least one in every four covers should be light.",
+  "palettes": [
+    { "name": "midnight", "light": false, "mood": "Night sky tech, electric glow", "bg0": "#12305a", "bg1": "#03070f", "ink": "#03070f", "accent": "#3aa0ff", "accent2": "#E4A030", "highlight": "#FFF9EC" },
+    { "name": "ember", "light": false, "mood": "Charcoal with fire, heat, warning", "bg0": "#3b1a12", "bg1": "#120806", "ink": "#0c0503", "accent": "#ff6a3d", "accent2": "#ffb347", "highlight": "#ffe9d6" },
+    { "name": "forest", "light": false, "mood": "Deep green, growth, money, calm", "bg0": "#0f3d2e", "bg1": "#04120d", "ink": "#030a07", "accent": "#34d399", "accent2": "#f2c14e", "highlight": "#e9fff4" },
+    { "name": "aubergine", "light": false, "mood": "Purple night, magenta neon, pop", "bg0": "#3b1660", "bg1": "#12061f", "ink": "#0b0414", "accent": "#ff4fa3", "accent2": "#c3a6ff", "highlight": "#fff0f7" },
+    { "name": "oxblood", "light": false, "mood": "Dark red and gold, courts, power, luxury", "bg0": "#5a1420", "bg1": "#1a050a", "ink": "#120307", "accent": "#d4af37", "accent2": "#ff8c7a", "highlight": "#f5ecd7" },
+    { "name": "teal-noir", "light": false, "mood": "Deep teal with coral, ocean, labs", "bg0": "#0a4a47", "bg1": "#02110f", "ink": "#010a09", "accent": "#ff7f6b", "accent2": "#ffd166", "highlight": "#e6fffb" },
+    { "name": "slate", "light": false, "mood": "Grey-blue industrial, lime signal", "bg0": "#374151", "bg1": "#111827", "ink": "#0b1020", "accent": "#a3e635", "accent2": "#fb923c", "highlight": "#f1f5f9" },
+    { "name": "blueprint", "light": false, "mood": "Cobalt drafting paper, white lines, yellow marks", "bg0": "#123c9b", "bg1": "#071a4a", "ink": "#04102e", "accent": "#e6f0ff", "accent2": "#ffd60a", "highlight": "#ffffff" },
+    { "name": "paper", "light": true, "mood": "Cream paper, ink drawing, rust and blue", "bg0": "#f6efe3", "bg1": "#e3d6bf", "ink": "#1d1a16", "accent": "#A85527", "accent2": "#1d5fae", "highlight": "#ffffff" },
+    { "name": "arctic", "light": true, "mood": "Pale ice, cold, clean, coral signal", "bg0": "#e9f1f8", "bg1": "#b8cbe0", "ink": "#0f1d2e", "accent": "#0ea5e9", "accent2": "#ff6b6b", "highlight": "#ffffff" },
+    { "name": "sand", "light": true, "mood": "Desert warm, sun, teal contrast", "bg0": "#efd9ad", "bg1": "#c48b4a", "ink": "#3a2410", "accent": "#0f766e", "accent2": "#d9480f", "highlight": "#fff6e5" },
+    { "name": "mint", "light": true, "mood": "Soft mint and lilac, friendly, consumer", "bg0": "#e6f7ef", "bg1": "#b9e4cf", "ink": "#12302a", "accent": "#7c3aed", "accent2": "#f59e0b", "highlight": "#ffffff" }
+  ],
+  "compositions": [
+    { "name": "neon-scene", "how": "Glowing objects on a dark stage with a perspective floor grid and soft blur halos." },
+    { "name": "isometric-diorama", "how": "A small 3D-ish scene on a 30-degree isometric grid: boxes, buildings, machines with flat shading and long shadows. No glow." },
+    { "name": "flat-poster", "how": "Three to five big flat shapes in solid colours, no gradients, hard edges, generous negative space. Swiss poster feel." },
+    { "name": "blueprint-linework", "how": "Thin outline drawing of the object with dashed construction lines, dimension ticks (no numbers) and a faint grid. One or two filled accents." },
+    { "name": "cross-section", "how": "The object cut open to show its insides: layers, chambers, components, with a clean cut face." },
+    { "name": "silhouette-horizon", "how": "Dark silhouettes (skyline, people, machines) against a large gradient sky with one big sun or moon disc." },
+    { "name": "macro-closeup", "how": "One object fills most of the frame, cropped at the edges, strong directional light, visible texture." },
+    { "name": "paper-cutout", "how": "Layered paper shapes stacked front to back with soft drop shadows between layers, like a diorama made of card." },
+    { "name": "collage-grid", "how": "A tiled grid or mosaic of many small related objects, with one tile broken, highlighted or missing." },
+    { "name": "split-frame", "how": "The canvas split in two halves (diagonal or vertical) showing two sides: before/after, two companies, old/new." },
+    { "name": "top-down-map", "how": "Bird's-eye view: a map, routes, pins, borders or a floor plan, with one route or region highlighted." },
+    { "name": "bauhaus-geometric", "how": "The subject built from circles, triangles and bars in a strict geometric arrangement, slight paper grain, no outlines." }
+  ]
+}

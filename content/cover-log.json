@@ -1,0 +1,234 @@
+[
+  {
+    "slug": "bun-1-2-built-in-postgres-s3-text-lockfile",
+    "date": "2025-05-05",
+    "image": "/images/articles/bun-1-2-built-in-postgres-s3.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "runway-ai-raises-308m-series-d",
+    "date": "2025-05-08",
+    "image": "/images/articles/runway-308m-series-d.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "claude-4-opus-redefines-ai-reasoning",
+    "date": "2025-05-22",
+    "image": "/images/articles/claude-opus-4-sonnet-4.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "emojar-emoji-tool-built-with-zero-lines-of-code",
+    "date": "2026-05-15",
+    "image": "/startups/emojar.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "anthropic-mythos-us-china-ai-guardrails",
+    "date": "2026-05-17",
+    "image": "/images/articles/anthropic-mythos-us-china-ai-guardrails.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "openai-vs-apple-chatgpt-siri-partnership",
+    "date": "2026-05-17",
+    "image": "/images/articles/openai-vs-apple-chatgpt-siri-partnership.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "musk-vs-altman-openai-trial-verdict",
+    "date": "2026-05-18",
+    "image": "/images/articles/musk-vs-altman-openai-trial-verdict.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "recursive-superintelligence-650m-self-improving-ai",
+    "date": "2026-05-18",
+    "image": "/images/articles/recursive-superintelligence-650m-self-improving-ai.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "spacexai-exodus-xai-talent-drain",
+    "date": "2026-05-18",
+    "image": "/images/articles/spacexai-exodus-xai-talent-drain.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "anthropic-acquires-stainless-sdk-war",
+    "date": "2026-05-19",
+    "image": "/images/articles/anthropic-acquires-stainless-sdk-war.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "decart-300m-world-models-nvidia-lock-in",
+    "date": "2026-05-19",
+    "image": "/images/articles/decart-300m-world-models-nvidia-lock-in.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "google-io-2026-gemini-agentic-ai",
+    "date": "2026-05-19",
+    "image": "/images/articles/google-io-2026-gemini-agentic-ai.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "meta-8000-layoffs-ai-capex",
+    "date": "2026-05-20",
+    "image": "/images/articles/meta-8000-layoffs-ai-capex.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "nvidia-h200-china-refuses-us-approved-chips",
+    "date": "2026-05-21",
+    "image": "/images/articles/nvidia-h200-china-refuses-us-approved-chips.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "openai-ipo-trillion-dollar-filing",
+    "date": "2026-06-10",
+    "image": "/images/articles/openai-ipo-trillion-dollar-filing.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "anthropic-fable5-us-export-ban-sk-telecom",
+    "date": "2026-06-19",
+    "image": "/images/articles/anthropic-fable5-us-export-ban-sk-telecom.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "oracle-21000-ai-layoffs-regulators",
+    "date": "2026-06-24",
+    "image": "/images/articles/oracle-21000-ai-layoffs-regulators.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "spacex-colossus-ai-compute-landlord",
+    "date": "2026-06-25",
+    "image": "/images/articles/spacex-colossus-ai-compute-landlord.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "chatgpt-below-50-ai-market-share-2026",
+    "date": "2026-06-28",
+    "image": "/images/articles/chatgpt-below-50-ai-market-share-2026.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "south-korea-samsung-sk-4755-trillion-won-chip-ai-plan",
+    "date": "2026-06-29",
+    "image": "/images/articles/south-korea-1-3-trillion-chip-ai-bet.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "qualcomm-tenstorrent-10-billion-deal-denied",
+    "date": "2026-07-01",
+    "image": "/images/articles/qualcomm-tenstorrent-10-billion-deal-denied.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "together-ai-800m-series-c-open-source",
+    "date": "2026-07-02",
+    "image": "/images/articles/together-ai-800m-series-c-open-source.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "fable-5-returns-safety-classifier-coding-drop",
+    "date": "2026-07-03",
+    "image": "/images/articles/fable-5-returns-safety-classifier-coding-drop.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "pentagon-anthropic-unsealed-emails-autonomous-weapons",
+    "date": "2026-07-04",
+    "image": "/images/articles/pentagon-anthropic-unsealed-emails-autonomous-weapons.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "openai-5-percent-government-stake",
+    "date": "2026-07-06",
+    "image": "/images/articles/openai-5-percent-government-stake.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "emojar-pivot-264-free-browser-tools",
+    "date": "2026-10-09",
+    "image": "/images/articles/emojar-pivot-264-free-browser-tools.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "spacex-8-billion-800mhz-spectrum-starlink-mobile",
+    "date": "2026-10-09",
+    "image": "/images/articles/spacex-8-billion-800mhz-spectrum-starlink-mobile.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "ai-10-minutes-persistence-study-berkeley",
+    "date": "2026-10-10",
+    "image": "/images/articles/ai-10-minutes-persistence-study-berkeley.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  },
+  {
+    "slug": "apple-iphone-18-pro-orders-cut-15-percent",
+    "date": "2026-10-11",
+    "image": "/images/articles/apple-iphone-18-pro-orders-cut-15-percent.png",
+    "palette": "midnight",
+    "composition": "neon-scene",
+    "subject": "backfilled: navy glow scene (pre cover-log)"
+  }
+]

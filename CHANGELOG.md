@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.1 — 2026-10-11
+
+### Changed
+- Daily-post covers must now differ from the previous ones. `scripts/cover-style.mjs` keeps a log of each cover's palette and composition (`content/cover-log.json`), suggests allowed pairs from a menu of 12 palettes (4 of them light) and 12 compositions (`scripts/cover-template/styles.json`), refuses a palette used in the previous 4 covers or a composition used in the previous 3, and measures the finished PNGs' hue and lightness to warn when a new cover still looks like the last ones. The cover template takes its palette from CSS variables instead of hard-coding navy and blue, and the playbook's cover step uses the script.
+
 ## 0.6.0 — 2026-10-09
 
 ### Added
