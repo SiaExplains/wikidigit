@@ -238,5 +238,13 @@
     "palette": "sand",
     "composition": "split-frame",
     "subject": "Diagonal split: a giant teal corporate card with rising coin stacks under a desert sun vs a small card flying into a classical bank"
+  },
+  {
+    "slug": "ai-chair44-3d-einstein-tile-monotile",
+    "date": "2026-10-13",
+    "image": "/images/articles/ai-chair44-3d-einstein-tile-monotile.png",
+    "palette": "arctic",
+    "composition": "isometric-diorama",
+    "subject": "Isometric superchair built from seven-cube chair tiles, one coral chair lifted out above its slot"
   }
 ]

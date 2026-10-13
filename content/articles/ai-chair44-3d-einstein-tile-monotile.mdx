@@ -1,0 +1,66 @@
+---
+title: "An AI Found a 3D 'Einstein' Tile. The Man Who Prompted It Can't Follow the Proof."
+slug: "ai-chair44-3d-einstein-tile-monotile"
+date: "2026-10-13"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Science"
+tags: ["openai", "anthropic", "ai", "mathematics", "geometry", "research"]
+description: "Chair44, a 3D shape that fills space but never repeats, was found by GPT-6 Astra for an Athens developer. Mathematicians back the shape but not the paper."
+coverImage: "/images/articles/ai-chair44-3d-einstein-tile-monotile.png"
+featured: false
+draft: false
+faq:
+  - question: "What is a 3D einstein tile?"
+    answer: "An einstein, or aperiodic monotile, is a single shape whose copies can fill space with no gaps or overlaps, but only in patterns that never repeat. The 2D version, the \"hat\", was announced in 2023. Chair44, posted to arXiv in September 2026, is claimed as the first strongly aperiodic monotile in three dimensions."
+  - question: "Who discovered the Chair44 monotile?"
+    answer: "Ioannis Tsiokos, a software developer in Athens who runs a lab called Automorph, posted the preprint on September 16, 2026. He says OpenAI's GPT-6 Astra searched for and found the shape and that he used Anthropic's Claude Fable 5.1 to write the paper. He told Quanta Magazine the tile was found by the AI, not him."
+  - question: "Has the Chair44 proof been verified?"
+    answer: "Not by peer review yet. Tsiokos's paper says its finite checks and main theorem are machine-checked in the Lean 4 proof assistant, with some compiler-dependent steps. Mathematicians Chaim Goodman-Strauss and Felix Flicker have since posted their own shorter, human-readable treatments of the shape, and computer scientist Craig Kaplan has described it as solving a previously open problem."
+  - question: "How is Chair44 different from earlier 3D aperiodic tiles?"
+    answer: "Earlier candidates such as the Schmitt-Conway-Danzer biprism and the 3D Socolar-Taylor tile allow screw motions or a periodic stacking direction, so they are only weakly aperiodic. Chair44 is claimed to force non-repeating tilings in every direction, which makes it strongly aperiodic."
+---
+
+A seven-cube shape called Chair44 may be the first single 3D tile that fills space without gaps but never in a repeating pattern, and the person who announced it says he didn't find it. Ioannis Tsiokos, a software developer in Athens, posted the claim to arXiv on September 16 and credits OpenAI's GPT-6 Astra with the discovery. As Scientific American reported on October 12, mathematicians broadly accept the shape, but they are openly unhappy with how the result was found and written up. Tsiokos himself told Quanta Magazine he understands only "the intuitive geometric argument" of the proof, not the mathematics behind it.
+
+## A Seven-Cube Chair With Bumps
+
+Start with a 2×2×2 block of eight small cubes and pull one out. What's left is the "chair", a seven-cube shape that mathematicians Lee and Moody had already generalized to every dimension. Copies of the chair can be packed into a bigger chair twice the size, and those into a bigger one again, forever. That hierarchy is non-repeating, but the plain chair can also be stacked periodically, so on its own it is not an einstein.
+
+Chair44 adds the missing constraint. According to Tsiokos's preprint, "A Strongly Aperiodic Monotile in Three Dimensions", the tile is the seven-cube chair with small square-pyramid features on its 24 exposed unit faces. Those bumps and dimples act as keys and locks. The paper claims that copies of Chair44, reflections allowed, fill all of 3D space, that every such filling has no translational period, and that every one contains a unique infinite hierarchy of nested supertiles.
+
+The 2D version of the problem was settled in 2023 with the "hat", found by amateur mathematician David Smith and proved aperiodic by Smith with Joseph Samuel Myers, Craig Kaplan and Chaim Goodman-Strauss in a paper later published in *Combinatorial Theory*.
+
+## Why This Is Different From Older 3D Candidates
+
+Three dimensions already had near-misses. Tsiokos's paper frames Chair44 as an answer to a question posed by Socolar and Taylor, and notes that the Schmitt-Conway-Danzer biprism and a 3D version of the Socolar-Taylor tile both permit screw motions or a periodic stacking direction. Kaplan told Scientific American that the biprism is only weakly aperiodic, while Chair44 is a strong example, and called it the solution to a problem that had been open until recently.
+
+The difference matters to tiling theorists: a weakly aperiodic tile can still repeat along some axis, so it doesn't fully answer the question of whether one shape can force disorder everywhere.
+
+## "Found by Astra, Not Me"
+
+The unusual part is the workflow. Tsiokos, who describes his company Automorph as an AI research lab, is the paper's only human author. He told Scientific American he used GPT-6 Astra to search for a 3D monotile and to check that Chair44 met the criteria, and used Anthropic's Claude Fable 5.1 to write the paper. Quanta reported that the original preprint ran to 61 pages.
+
+"The 3D Einstein was found by Astra, not me," Tsiokos told Quanta in an email.
+
+The paper's support is mostly machine-checked rather than hand-argued. Its abstract says the finite enumerations were run by two independent implementations and are kernel-checked in the Lean 4 proof assistant, with one caveat: each `native_decide` step relies on named compiler hooks, so the check is complete only modulo those hooks. The written proofs are labelled as exposition. That's a familiar trade-off in AI-assisted math, and it echoes the bigger question behind [the $650M bet that AI can improve itself](/article/recursive-superintelligence-650m-self-improving-ai): what counts as understanding when the system produces both the answer and the check?
+
+## Mathematicians Rewrote It in Eight Pages
+
+The tiling community responded within days. On September 21, Goodman-Strauss, a hat co-author, posted "Notes on a strongly aperiodic monotile in E³", an eight-page restatement showing that chairs can only assemble into larger supertiles of the same shape, which is what forces aperiodicity. He opened with "Hats off to Tsiokos for this discovery" but told Quanta the original paper and its formalization are not in a form that is readily usable, adding that the field must insist on a higher standard for scientific discourse. Scientific American quotes him saying the paper shows hallmarks of an LLM-driven research paper.
+
+Felix Flicker, a theoretical physicist at the University of Bristol, went in a practical direction. His six-page preprint asks how little decoration the chair actually needs and finds that matching rules built from three arrow colours, or even simpler square colours, force the same non-repeating structure, with chairs locking into "superchairs" twice their size. The aim is physical realizations: any material or system that encodes those rules would produce the same strongly aperiodic tilings. Flicker told Scientific American he used Claude for coding and discussion, and that while many mathematicians are unhappy with how the tile was found, he considers it an important result.
+
+## What Hasn't Happened Yet
+
+None of the three papers has been peer reviewed, and neither Quanta nor Scientific American says the result has been formally accepted. What exists is a machine-checked claim from a non-mathematician and two independent human write-ups by specialists who take the shape seriously.
+
+That's a different picture from the usual "AI solves math" headline. The model found a candidate and produced a formal check. Humans then had to translate it into something other humans could read. For anyone tracking how AI changes expert work, it lines up with [the Berkeley finding that leaning on AI for answers erodes independent problem-solving](/article/ai-10-minutes-persistence-study-berkeley): here the person who prompted the model got a result he says he can't fully follow, and the explaining fell to the experts.
+
+## Sources
+
+- [A Strongly Aperiodic Monotile in Three Dimensions (Tsiokos, arXiv:2609.19214)](https://arxiv.org/abs/2609.19214)
+- [Notes on a strongly aperiodic monotile in E³ (Goodman-Strauss, arXiv:2609.24779)](https://arxiv.org/abs/2609.24779)
+- [Matching Rules for a Three-Dimensional Strongly Aperiodic Monotile (Flicker, arXiv:2609.23783)](https://arxiv.org/abs/2609.23783)
+- [A unique shape, a 3D einstein tile, has been discovered (Scientific American)](https://www.scientificamerican.com/article/a-unique-shape-a-3d-einstein-tile-has-been-discovered/)
+- [Software developer finds first 3D 'einstein' tile (Quanta Magazine)](https://www.quantamagazine.org/update/167384/)
