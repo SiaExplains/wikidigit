@@ -246,5 +246,13 @@
     "palette": "arctic",
     "composition": "isometric-diorama",
     "subject": "Isometric superchair built from seven-cube chair tiles, one coral chair lifted out above its slot"
+  },
+  {
+    "slug": "cxmt-4f2-dram-kospi-samsung-sk-hynix-selloff",
+    "date": "2026-10-14",
+    "image": "/images/articles/cxmt-4f2-dram-kospi-samsung-sk-hynix-selloff.png",
+    "palette": "ember",
+    "composition": "cross-section",
+    "subject": "A DRAM chip cut open to show rows of glowing vertical memory-cell pillars, cracked through the middle with chips flying off"
   }
 ]
