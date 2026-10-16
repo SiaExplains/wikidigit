@@ -254,5 +254,13 @@
     "palette": "ember",
     "composition": "cross-section",
     "subject": "A DRAM chip cut open to show rows of glowing vertical memory-cell pillars, cracked through the middle with chips flying off"
+  },
+  {
+    "slug": "benchmark-vc-no-rivals-rule-factory-cognition",
+    "date": "2026-10-16",
+    "image": "/images/articles/benchmark-vc-no-rivals-rule-factory-cognition.png",
+    "palette": "aubergine",
+    "composition": "bauhaus-geometric",
+    "subject": "One cream investor disc tethered by two bars to rival magenta and lilac half-disc heads facing off over a lightning split"
   }
 ]
