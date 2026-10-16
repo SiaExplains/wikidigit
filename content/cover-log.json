@@ -254,5 +254,13 @@
     "palette": "ember",
     "composition": "cross-section",
     "subject": "A DRAM chip cut open to show rows of glowing vertical memory-cell pillars, cracked through the middle with chips flying off"
+  },
+  {
+    "slug": "agility-robotics-2-5b-spac-1-8m-revenue",
+    "date": "2026-10-15",
+    "image": "/images/articles/agility-robotics-2-5b-spac-1-8m-revenue.png",
+    "palette": "blueprint",
+    "composition": "blueprint-linework",
+    "subject": "Blueprint line drawing of a Digit-style humanoid carrying a yellow tote, towering over a tiny solid yellow robot on the ground line"
   }
 ]
