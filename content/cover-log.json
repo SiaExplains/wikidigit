@@ -262,5 +262,13 @@
     "palette": "blueprint",
     "composition": "blueprint-linework",
     "subject": "Blueprint line drawing of a Digit-style humanoid carrying a yellow tote, towering over a tiny solid yellow robot on the ground line"
+  },
+  {
+    "slug": "benchmark-vc-no-rivals-rule-factory-cognition",
+    "date": "2026-10-16",
+    "image": "/images/articles/benchmark-vc-no-rivals-rule-factory-cognition.png",
+    "palette": "aubergine",
+    "composition": "bauhaus-geometric",
+    "subject": "One cream investor disc tethered by two bars to rival magenta and lilac half-disc heads facing off over a lightning split"
   }
 ]
