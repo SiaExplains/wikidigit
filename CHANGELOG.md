@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0 — 2026-10-17
+
+### Added
+- Real cookie choices. The banner now offers Accept all, Reject all (just as prominent) and Customize, where analytics can be switched on or off on its own. **Cookie settings** in the footer reopens it on every page, so consent can be changed or withdrawn at any time; withdrawing also deletes Google Analytics cookies. A choice is asked again after 12 months, and choices made in the old banner carry over.
+- Google Consent Mode v2. Every page starts with ad storage, analytics storage, ad user data and ad personalisation denied, set in `<head>` before anything else runs, and the reader's choice updates them.
+- Google Analytics support behind `NEXT_PUBLIC_GA_ID`. The tag is only requested after the reader accepts analytics; without the variable nothing from Google loads at all.
+
+### Changed
+- The Privacy Policy explains how to change or withdraw consent through Cookie settings. The README lists what to set up in AdSense (Google's certified TCF consent message) before ads are switched on.
 ## 0.6.1 — 2026-10-11
 
 ### Changed

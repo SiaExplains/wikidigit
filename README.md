@@ -16,6 +16,18 @@ npm test         # email unit tests + SEO checks against the build output; run a
 
 `NEXT_PUBLIC_SITE_URL` sets the canonical site URL (`lib/site.ts`). It defaults to `https://www.wikidigit.com`, the host production serves; the apex domain redirects there.
 
+## Cookie consent and analytics
+
+`app/layout.tsx` sets Google Consent Mode v2 defaults in `<head>` before anything else loads: `ad_storage`, `analytics_storage`, `ad_user_data` and `ad_personalization` all start `denied` (`lib/consent.ts`). The banner (`components/ui/CookieConsent.tsx`) offers Accept all, Reject all and Customize, sends `gtag('consent', 'update', …)` on the reader's choice, and can be reopened from **Cookie settings** in the footer. A choice is kept for 12 months.
+
+Google Analytics only loads when `NEXT_PUBLIC_GA_ID` is set **and** the reader has accepted analytics. Without the variable, no Google script is ever requested.
+
+The banner covers analytics only, so all ad signals stay `denied`. Before turning on AdSense:
+
+1. In AdSense → Privacy & messaging, create and publish a European regulations (IAB TCF v2.2) message for the EEA, UK and Switzerland. That is Google's certified CMP and is required to serve ads there.
+2. Load the AdSense script only after the head consent defaults, and let the Google CMP set the ad signals. Keep this banner for analytics, or switch analytics to the Google CMP too so EEA readers see one message.
+3. Update the advertising wording in the Privacy Policy and `toGoogleConsent` in `lib/consent.ts`.
+
 ## Newsletter and contact form (Resend)
 
 Both forms are off until Resend is configured; until then the site shows a "newsletter coming soon" strip with RSS, and the contact page shows the email address only. To turn them on:

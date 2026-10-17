@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/ui/CookieConsent";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import { CONSENT_DEFAULT_SCRIPT } from "@/lib/consent";
 import { RSS_ALTERNATE, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
@@ -66,11 +68,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
+      <head>
+        {/* Consent Mode v2 defaults must run before any Google tag. */}
+        <script id="consent-default" dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
+      </head>
       <body className="min-h-screen flex flex-col bg-cream text-ink">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <CookieConsent />
+        <GoogleAnalytics />
       </body>
     </html>
   );
