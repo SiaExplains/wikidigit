@@ -270,5 +270,13 @@
     "palette": "aubergine",
     "composition": "bauhaus-geometric",
     "subject": "One cream investor disc tethered by two bars to rival magenta and lilac half-disc heads facing off over a lightning split"
+  },
+  {
+    "slug": "coreweave-ai-debt-selloff-nasdaq-worst-week",
+    "date": "2026-10-17",
+    "image": "/images/articles/coreweave-ai-debt-selloff-nasdaq-worst-week.png",
+    "palette": "paper",
+    "composition": "paper-cutout",
+    "subject": "A GPU server rack teetering on a tilting stack of paper IOUs, one rust sheet sliding out and loose notes flying off"
   }
 ]
