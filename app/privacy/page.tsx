@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           </p>
           <p>
             <strong>Legal basis:</strong> Consent (Art. 6(1)(a) GDPR). You can withdraw consent
-            at any time via the &ldquo;Essential only&rdquo; option in our cookie banner, or by
+            at any time via &ldquo;Cookie settings&rdquo; in the footer of every page, or by
             installing the{" "}
             <a
               href="https://tools.google.com/dlpage/gaoptout"
@@ -171,8 +171,10 @@ export default function PrivacyPage() {
             </table>
           </div>
           <p className="mt-4">
-            You can manage your cookie preferences at any time by clearing your browser cookies
-            and revisiting the Site, which will re-display our consent banner.
+            You can change or withdraw your choice at any time via &ldquo;Cookie settings&rdquo; in
+            the footer of every page. Analytics cookies are not set, and Google Analytics is not
+            loaded, until you consent. We use Google Consent Mode, which tells Google tags that
+            storage is denied unless you have allowed it. We ask again after 12 months.
           </p>
         </section>
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Rss } from "lucide-react";
 import { navCategories } from "@/lib/categories";
+import CookieSettingsButton from "@/components/ui/CookieSettingsButton";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -95,6 +96,9 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <CookieSettingsButton className="text-sm text-cream/60 hover:text-cream transition-colors" />
+              </li>
             </ul>
           </div>
         </div>
