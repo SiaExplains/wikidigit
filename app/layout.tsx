@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import CookieConsent from "@/components/ui/CookieConsent";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import { CONSENT_DEFAULT_SCRIPT } from "@/lib/consent";
-import { RSS_ALTERNATE, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { ADSENSE_PUBLISHER_ID, RSS_ALTERNATE, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,6 +60,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  // AdSense site verification only. The ad script itself is not loaded here: it
+  // has to wait for Google's consent message (see README).
+  other: { "google-adsense-account": ADSENSE_PUBLISHER_ID },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
