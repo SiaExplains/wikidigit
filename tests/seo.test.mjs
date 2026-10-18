@@ -122,3 +122,13 @@ test("inline images are not cropped to a fixed aspect ratio", () => {
   assert.match(img, /height:auto/);
   assert.doesNotMatch(html, /aspect-video[^"]*"[^>]*>\s*<img[^>]*emojar-pivot-264-free-browser-tools-site/);
 });
+
+test("AdSense verification: ads.txt line and account meta tag", () => {
+  const adsTxt = fs.readFileSync(path.join(process.cwd(), "public/ads.txt"), "utf8");
+  assert.match(adsTxt, /^google\.com, pub-4461604896559377, DIRECT, f08c47fec0942fa0$/m);
+  for (const rel of ["index.html", `article/${articleSlugs()[0]}.html`]) {
+    const html = read(rel);
+    assert.match(html, /<meta name="google-adsense-account" content="ca-pub-4461604896559377"\/>/, rel);
+    assert.doesNotMatch(html, /googlesyndication|adsbygoogle/, rel);
+  }
+});

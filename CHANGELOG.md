@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.0 — 2026-10-18
+
+### Added
+- AdSense site verification: `/ads.txt` lists Google as an authorised seller for our publisher ID, and every page carries the `google-adsense-account` meta tag. No ad script loads yet; that waits for Google's consent message.
+
 ## 0.7.0 — 2026-10-17
 
 ### Added

@@ -22,7 +22,7 @@ npm test         # email unit tests + SEO checks against the build output; run a
 
 Google Analytics only loads when `NEXT_PUBLIC_GA_ID` is set **and** the reader has accepted analytics. Without the variable, no Google script is ever requested.
 
-The banner covers analytics only, so all ad signals stay `denied`. Before turning on AdSense:
+Site ownership for AdSense is verified with `public/ads.txt` and the `google-adsense-account` meta tag (`ADSENSE_PUBLISHER_ID` in `lib/site.ts`); keep the two in sync. The banner covers analytics only, so all ad signals stay `denied`. Before turning on AdSense:
 
 1. In AdSense → Privacy & messaging, create and publish a European regulations (IAB TCF v2.2) message for the EEA, UK and Switzerland. That is Google's certified CMP and is required to serve ads there.
 2. Load the AdSense script only after the head consent defaults, and let the Google CMP set the ad signals. Keep this banner for analytics, or switch analytics to the Google CMP too so EEA readers see one message.

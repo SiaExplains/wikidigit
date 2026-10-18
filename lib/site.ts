@@ -11,6 +11,9 @@ export const SITE_DESCRIPTION =
 export const SITE_LOGO = `${SITE_URL}/icon-512.png`;
 export const CONTACT_EMAIL = "siaexplains@gmail.com";
 
+// Public AdSense publisher ID. It must match the line in public/ads.txt.
+export const ADSENSE_PUBLISHER_ID = "ca-pub-4461604896559377";
+
 // A page that sets its own `alternates` replaces the layout's, so pages that should
 // advertise the feed spread this in next to their canonical.
 export const RSS_ALTERNATE = {
