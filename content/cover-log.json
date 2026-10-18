@@ -278,5 +278,13 @@
     "palette": "paper",
     "composition": "paper-cutout",
     "subject": "A GPU server rack teetering on a tilting stack of paper IOUs, one rust sheet sliding out and loose notes flying off"
+  },
+  {
+    "slug": "ets-california-student-data-breach",
+    "date": "2026-10-18",
+    "image": "/images/articles/ets-california-student-data-breach.png",
+    "palette": "teal-noir",
+    "composition": "collage-grid",
+    "subject": "Grid of pale student record cards; a gold key pulls one coral card out of its slot, trailing copies"
   }
 ]

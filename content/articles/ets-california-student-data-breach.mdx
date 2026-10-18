@@ -1,0 +1,72 @@
+---
+title: "One Login Exposed Millions of California Students. ETS Spotted It After the Copying Stopped."
+slug: "ets-california-student-data-breach"
+date: "2026-10-18"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "Security"
+tags: ["ets", "california", "data-breach", "student-privacy", "education", "cybersecurity"]
+description: "A hacker used one compromised ETS login to copy California student records from May to September. ETS, the state's testing contractor, noticed a week later."
+coverImage: "/images/articles/ets-california-student-data-breach.png"
+featured: false
+draft: false
+faq:
+  - question: "What happened in the ETS California student data breach?"
+    answer: "An unauthorized party used a compromised login credential to access a secure file transfer (SFTP) site that the Educational Testing Service (ETS) used to exchange statewide assessment data with the California Department of Education. It copied files containing student information at various times between May 22 and September 18, 2026. ETS detected the activity on September 25 and the state announced it on October 16."
+  - question: "How many California students were affected by the ETS breach?"
+    answer: "The breach covers students enrolled in California public schools over the past three school years. Politico put the total at about 7 million; the California Department of Education says more than 5.7 million students were enrolled in the 2025-26 school year alone."
+  - question: "What student data was stolen in the ETS breach?"
+    answer: "Depending on the student, the copied files included names, dates of birth, addresses, schools, grade levels, Statewide Student Identifiers, demographic details, disability and program participation status, and assessment records. The state says Social Security numbers, financial account information, passwords and parent or guardian details were not involved."
+  - question: "What should California families do after the ETS breach?"
+    answer: "Read the ETS Notice of Data Breach on the California Department of Education website, which is available in 27 languages and explains how to enroll in two years of free Experian IdentityWorks identity protection. Officials also warn families to be wary of unexpected emails, calls or texts claiming to come from ETS, the state or a credit monitoring service."
+---
+
+A hacker used a single compromised login to copy files on millions of California public school students from the Educational Testing Service (ETS), the nonprofit that runs the state's standardized tests, the [California Department of Education said on October 16](https://www.cde.ca.gov/nr/ne/yr26/yr26rel45.asp). The intruder pulled data from an ETS file-transfer site at various times between May 22 and September 18, 2026. ETS didn't spot the activity until September 25, a week after the last recorded copying. The files cover students enrolled over the past three school years, a group [Politico put at about 7 million](https://www.politico.com/news/2026/10/16/hack-exposes-data-on-millions-of-california-students-01124018), and include names, birth dates, addresses and disability status. Getting it didn't take an exotic exploit. It took one working login.
+
+## How One Login Opened Four Months of Student Files
+
+ETS administers California's statewide assessments, including the CAASPP and ELPAC tests, [under contract with the state](https://www.yahoo.com/news/us/articles/hackers-steal-sensitive-personal-millions-234450597.html). To do that job, it ran a secure file transfer protocol (SFTP) site where it exchanged assessment data with the Department of Education. According to the [state's incident notice](https://www.cde.ca.gov/nr/in/ets-incident.asp), an unauthorized party used a compromised login credential to get into that site and copy files containing student information.
+
+The timeline is the uncomfortable part. Access started on May 22 and continued on and off until September 18, almost four months. ETS identified the unauthorized activity on September 25. It then disabled the account involved, took the SFTP site offline and brought in outside cybersecurity experts to investigate. The state hasn't said how the credential was compromised, whether it belonged to an ETS employee, a district user or a service account, or whether multi-factor authentication was in place.
+
+That pattern is familiar to anyone who follows breaches. While AI models are now [finding decades-old bugs in hardened code like OpenBSD](/article/anthropic-mythos-us-china-ai-guardrails), most large incidents still start with something far more ordinary: a valid username and password in the wrong hands, and no alarm that fires when that account behaves strangely for months.
+
+## What Was Taken, and What Wasn't
+
+The amount of data varies by student. According to the department, the copied files may include:
+
+- Names, dates of birth and home addresses
+- Schools and grade levels
+- Statewide Student Identifiers
+- Demographic details
+- Disability and program participation status
+- Assessment records
+
+The state says Social Security numbers, financial account information, passwords and parent or guardian information were not involved. Regular monitoring has [found no evidence so far](https://www.theepochtimes.com/us/hacker-accessed-data-on-millions-of-california-students-state-education-department-says-6105257) that the data has been posted publicly.
+
+That list is still serious. Unlike a credit card number, a child's date of birth, home address and disability status can't be reissued. Records like these are useful for targeted phishing and identity fraud years from now, when today's second graders open their first bank accounts.
+
+## Why the Number Is Fuzzy
+
+Coverage has used two different figures, and they measure different things. The Department of Education says more than 5.7 million students were enrolled in California in the 2025-26 school year, and that the copied files also cover students enrolled in the three previous school years. Politico's estimate of about 7 million reflects that wider window, since students graduate, move away and enter the system every year. The state has not published an official count of affected individuals, so treat 7 million as a reported estimate rather than a confirmed total.
+
+## ETS Pauses Work as the State Reviews Its Contractor
+
+The breach has already slowed down the state's testing machinery. In a letter to schools, the department said ETS halted normal enrollment data processing and paused certain testing activities while it assessed the security of its systems, according to the [California Post's reporting](https://www.yahoo.com/news/us/articles/hackers-steal-sensitive-personal-millions-234450597.html). ETS has since built a replacement file-transfer site with what it describes as stronger security controls, [Just the News reported](https://justthenews.com/politics-policy/education/hack-exposes-personal-information-millions-california-public-school).
+
+The department and the State Board of Education say they are reviewing the incident and ETS's compliance with applicable data security and contractual requirements. That review matters beyond California. Schools increasingly hand student data to outside vendors for testing, learning platforms and, more recently, [AI tutoring tools whose effects researchers are still measuring](/article/ai-10-minutes-persistence-study-berkeley). Every one of those vendors is another place where a single login can unlock millions of records.
+
+## What Families Should Do Now
+
+ETS started sending its Notice of Data Breach on October 16, and the department expects distribution to continue through early November. The [notice is posted in 27 languages](https://www.cde.ca.gov/nr/in/ets-notification.asp) on the department's website and offers two years of identity protection through Experian IdentityWorks.
+
+Officials also warned families to be cautious of unexpected emails, calls or texts about the incident, including messages from people claiming to represent ETS, the state or a credit monitoring service. A breach announcement is a gift to scammers: they now know which families to target and what story to tell. If a message about the ETS breach asks for a Social Security number, a payment or a password, treat it as a scam and go to the department's official notice instead.
+
+## Sources
+
+- [California Department of Education: ETS Data Security Incident (press release)](https://www.cde.ca.gov/nr/ne/yr26/yr26rel45.asp)
+- [California Department of Education: ETS Incident notice and FAQ](https://www.cde.ca.gov/nr/in/ets-incident.asp)
+- [California Department of Education: ETS Notification (27 languages)](https://www.cde.ca.gov/nr/in/ets-notification.asp)
+- [Politico: Hack exposes data on millions of California students](https://www.politico.com/news/2026/10/16/hack-exposes-data-on-millions-of-california-students-01124018)
+- [The Epoch Times: Hacker accessed data on millions of California students, state education department says](https://www.theepochtimes.com/us/hacker-accessed-data-on-millions-of-california-students-state-education-department-says-6105257)
+- [California Post via Yahoo News: Hackers steal sensitive personal info from millions of California students](https://www.yahoo.com/news/us/articles/hackers-steal-sensitive-personal-millions-234450597.html)
