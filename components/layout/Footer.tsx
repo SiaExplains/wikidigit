@@ -24,7 +24,7 @@ export default function Footer() {
             <div className="flex gap-3 mt-4">
               <a
                 href="/rss.xml"
-                className="flex items-center gap-1.5 text-sm text-cream/40 hover:text-amber transition-colors"
+                className="flex items-center gap-1.5 text-sm text-cream/60 hover:text-amber transition-colors"
               >
                 <Rss className="w-4 h-4" aria-hidden="true" />
                 RSS feed
@@ -34,7 +34,7 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/40 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Coverage
             </h3>
             <ul className="space-y-2">
@@ -53,7 +53,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/40 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Company
             </h3>
             <ul className="space-y-2">
@@ -78,7 +78,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/40 mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Legal
             </h3>
             <ul className="space-y-2">
@@ -104,10 +104,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-8 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-cream/30">
+          <p className="text-xs text-cream/60">
             © {currentYear} WikiDigit. All rights reserved.
           </p>
-          <p className="text-xs text-cream/20">
+          <p className="text-xs text-cream/60">
             Built with Next.js · Powered by curiosity
           </p>
         </div>

@@ -51,9 +51,13 @@ function SearchResults() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl font-bold text-ink mb-8">Search</h1>
 
-      <form onSubmit={handleSubmit} className="relative mb-10">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none" />
+      <form role="search" onSubmit={handleSubmit} className="relative mb-10">
+        <label htmlFor="search-page-input" className="sr-only">
+          Search articles
+        </label>
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none" aria-hidden="true" />
         <input
+          id="search-page-input"
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.1 — 2026-10-19
+
+### Fixed
+- Keyboard users can jump past the navigation with a "Skip to content" link, the first thing Tab reaches on every page.
+- The search and menu buttons now tell screen readers whether they are open, name the panel they control, and close with Escape, returning focus to the button.
+- Every search field has a proper label, and the search clear button is announced as "Clear search".
+- The cookie dialog is reachable before the navigation. Opening Cookie settings moves focus into it, Escape closes it without changing anything, and focus returns to where it came from.
+- Footer small print (column headings, RSS link, copyright) was too faint to read. It now meets the WCAG AA contrast ratio.
+- Links inside text on the Contact page are underlined, so they don't rely on colour alone.
+
 ## 0.8.0 — 2026-10-18
 
 ### Added

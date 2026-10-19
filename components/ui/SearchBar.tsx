@@ -27,9 +27,13 @@ export default function SearchBar({ onClose, autoFocus }: SearchBarProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative flex items-center w-full">
-      <Search className="absolute left-3 w-4 h-4 text-muted pointer-events-none" />
+    <form role="search" onSubmit={handleSubmit} className="relative flex items-center w-full">
+      <label htmlFor="searchbar-input" className="sr-only">
+        Search articles
+      </label>
+      <Search className="absolute left-3 w-4 h-4 text-muted pointer-events-none" aria-hidden="true" />
       <input
+        id="searchbar-input"
         ref={inputRef}
         type="search"
         value={query}
@@ -40,10 +44,14 @@ export default function SearchBar({ onClose, autoFocus }: SearchBarProps) {
       {query && (
         <button
           type="button"
-          onClick={() => setQuery("")}
+          onClick={() => {
+            setQuery("");
+            inputRef.current?.focus();
+          }}
+          aria-label="Clear search"
           className="absolute right-3 text-muted hover:text-ink"
         >
-          <X className="w-4 h-4" />
+          <X className="w-4 h-4" aria-hidden="true" />
         </button>
       )}
     </form>
