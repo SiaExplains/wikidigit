@@ -41,7 +41,7 @@ export default function ContactPage() {
       <h1 className="text-3xl font-bold text-ink mb-3">Contact Us</h1>
       <p className="text-muted mb-8">
         {formEnabled ? "Use the form below, or email us directly:" : "The fastest way to reach us is email:"}{" "}
-        <a href={`mailto:${CONTACT_EMAIL}`} className="text-rust font-medium hover:underline">
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-rust font-medium underline">
           {CONTACT_EMAIL}
         </a>
         . We read everything, but we can&apos;t reply to every message.
@@ -69,7 +69,7 @@ export default function ContactPage() {
 
       <p className="mt-8 text-sm text-muted">
         How we handle corrections is described in our{" "}
-        <Link href="/editorial-standards#corrections" className="text-rust hover:underline">
+        <Link href="/editorial-standards#corrections" className="text-rust underline">
           Editorial Standards
         </Link>
         .

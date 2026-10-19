@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
   OPEN_SETTINGS_EVENT,
@@ -23,21 +23,58 @@ export default function CookieConsent() {
   const [reopened, setReopened] = useState(false);
   const [customizing, setCustomizing] = useState(false);
   const [analytics, setAnalytics] = useState(false);
+  // Bumped on every open so focus moves into the dialog even if it was already customizing.
+  const [focusRequest, setFocusRequest] = useState(0);
+  const analyticsRef = useRef<HTMLInputElement>(null);
+  // Where focus was when the dialog was reopened (the footer button), to hand it back on close.
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     function open() {
+      returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setAnalytics(parseConsent(readStoredConsent())?.analytics ?? false);
       setCustomizing(true);
       setReopened(true);
+      setFocusRequest((n) => n + 1);
     }
     window.addEventListener(OPEN_SETTINGS_EVENT, open);
     return () => window.removeEventListener(OPEN_SETTINGS_EVENT, open);
   }, []);
 
-  function choose(allowAnalytics: boolean) {
-    saveConsent(allowAnalytics);
+  // On a first visit the banner doesn't steal focus; it only takes it when the reader
+  // asks for it (Cookie settings, or Customize).
+  useEffect(() => {
+    if (focusRequest > 0) analyticsRef.current?.focus();
+  }, [focusRequest]);
+
+  function close() {
     setReopened(false);
     setCustomizing(false);
+    // Focus was inside the dialog, which is about to unmount: hand it back to the
+    // Cookie settings button, or to the page content after a first-visit choice.
+    if (document.activeElement instanceof HTMLElement && document.activeElement.closest('[aria-labelledby="cookie-consent-title"]')) {
+      (returnFocusRef.current ?? document.getElementById("main-content"))?.focus();
+    }
+    returnFocusRef.current = null;
+  }
+
+  function choose(allowAnalytics: boolean) {
+    saveConsent(allowAnalytics);
+    close();
+  }
+
+  function customize() {
+    setCustomizing(true);
+    setFocusRequest((n) => n + 1);
+  }
+
+  // Escape dismisses a reopened dialog without changing the stored choice. A first-visit
+  // banner has no choice to fall back on, so it stays until the reader picks one.
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Escape" && consent !== null) {
+      e.stopPropagation();
+      close();
+    }
   }
 
   if (consent !== null && !reopened) return null;
@@ -50,8 +87,10 @@ export default function CookieConsent() {
   return (
     <div
       role="dialog"
-      aria-live="polite"
-      aria-label="Cookie settings"
+      aria-modal="false"
+      aria-labelledby="cookie-consent-title"
+      aria-describedby="cookie-consent-text"
+      onKeyDown={handleKeyDown}
       className="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-6"
     >
       <div className="max-w-4xl mx-auto bg-ink text-cream rounded-sm shadow-2xl border border-ink/20 px-6 py-5">
@@ -61,8 +100,10 @@ export default function CookieConsent() {
 
           {/* Text */}
           <div className="flex-1 text-sm leading-relaxed">
-            <p className="font-semibold mb-1">We use cookies</p>
-            <p className="text-cream/70">
+            <p id="cookie-consent-title" className="font-semibold mb-1">
+              We use cookies
+            </p>
+            <p id="cookie-consent-text" className="text-cream/70">
               WikiDigit uses essential storage to remember this choice. With your permission we
               also use Google Analytics to understand which articles people read. Nothing optional
               loads until you say yes, and you can change your mind any time under Cookie settings
@@ -77,13 +118,13 @@ export default function CookieConsent() {
           {/* Actions — rejecting is exactly as easy as accepting */}
           {!customizing && (
             <div className="flex flex-wrap gap-3 shrink-0">
-              <button onClick={() => setCustomizing(true)} className={buttonClass}>
+              <button type="button" onClick={customize} className={buttonClass}>
                 Customize
               </button>
-              <button onClick={() => choose(false)} className={primaryClass}>
+              <button type="button" onClick={() => choose(false)} className={primaryClass}>
                 Reject all
               </button>
-              <button onClick={() => choose(true)} className={primaryClass}>
+              <button type="button" onClick={() => choose(true)} className={primaryClass}>
                 Accept all
               </button>
             </div>
@@ -116,6 +157,7 @@ export default function CookieConsent() {
                   </span>
                 </label>
                 <input
+                  ref={analyticsRef}
                   id="consent-analytics"
                   type="checkbox"
                   checked={analytics}
@@ -125,10 +167,10 @@ export default function CookieConsent() {
               </li>
             </ul>
             <div className="flex flex-wrap justify-end gap-3 mt-5">
-              <button onClick={() => choose(false)} className={buttonClass}>
+              <button type="button" onClick={() => choose(false)} className={buttonClass}>
                 Reject all
               </button>
-              <button onClick={() => choose(analytics)} className={primaryClass}>
+              <button type="button" onClick={() => choose(analytics)} className={primaryClass}>
                 Save choices
               </button>
             </div>

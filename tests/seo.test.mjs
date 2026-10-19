@@ -65,7 +65,8 @@ test("every article has a www self-canonical and valid article + BreadcrumbList 
 test("table of contents links resolve to heading ids", () => {
   for (const slug of articleSlugs()) {
     const html = read(`article/${slug}.html`);
-    const ids = new Set([...html.matchAll(/<h[23] id="([^"]+)"/g)].map((m) => m[1]));
+    // Headings, plus <main> for the "Skip to content" link.
+    const ids = new Set([...html.matchAll(/<(?:h[23]|main) id="([^"]+)"/g)].map((m) => m[1]));
     for (const [, target] of html.matchAll(/href="#([^"]+)"/g)) {
       assert.ok(ids.has(target), `${slug}: TOC link #${target} has no matching heading`);
     }

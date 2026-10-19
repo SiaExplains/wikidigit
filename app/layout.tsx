@@ -76,10 +76,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script id="consent-default" dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
       </head>
       <body className="min-h-screen flex flex-col bg-cream text-ink">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-sm focus:bg-ink focus:text-cream focus:text-sm focus:font-semibold"
+        >
+          Skip to content
+        </a>
+        {/* Fixed to the bottom of the screen, but early in the DOM so keyboard users reach it first. */}
         <CookieConsent />
+        <Navbar />
+        <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </main>
+        <Footer />
         <GoogleAnalytics />
       </body>
     </html>
