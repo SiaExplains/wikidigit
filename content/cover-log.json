@@ -294,5 +294,13 @@
     "palette": "mint",
     "composition": "isometric-diorama",
     "subject": "Supplied photo, not drawn: Picstea's promotional graphic (logo, 'Online Photoshop' headline, editor with a cat photo). Image: Picstea. Palette/composition kept from the replaced drawn cover."
+  },
+  {
+    "slug": "ai-29-percent-us-stem-phd-dissertations",
+    "date": "2026-10-19",
+    "image": "/images/articles/ai-29-percent-us-stem-phd-dissertations.png",
+    "palette": "oxblood",
+    "composition": "cross-section",
+    "subject": "A hardbound dissertation sliced open: a gold circuit-board band runs through about 29% of its page block, with a mortarboard and tassel resting on top"
   }
 ]
