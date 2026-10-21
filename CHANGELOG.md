@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.3 — 2026-10-22
+
+### Changed
+- Documentation brought up to date with the Phase 1–3 work. The bootstrap spec now describes the www canonical host, indexation rules, RSS, structured data, article types and disclosures, related-article scoring, the sticky-TOC-only sidebar, production-hidden ad slots, the trust pages, the env-gated Resend newsletter and contact form, tests and CI, and the cover-style rules. The README covers article types, disclosures, sourcing and corrections. The daily-post playbook adds `npm test` to its checks and explains how to resolve `cover-log.json` conflicts. The original init prompt is marked as historical.
+
 ## 0.8.2 — 2026-10-22
 
 ### Fixed
