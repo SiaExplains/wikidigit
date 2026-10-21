@@ -2,7 +2,7 @@
 
 > **Purpose of this file.** This is a single, self-contained prompt for an AI coding agent (Claude Code or similar) to scaffold a **pixel-and-architecture faithful clone** of WikiDigit.com — a modern, editorial tech-news media site — from an empty directory. It was reverse-engineered from the live codebase, so it reflects the *actual* stack, versions, file layout, design tokens, and conventions in production, not an idealized plan. Follow it top to bottom.
 >
-> **Last brought in line with the code:** 2026-10-17 (site version 0.6.x). It covers the Phase 1–3 work from the 2026-10-09 audit: canonical host and indexation rules, RSS, structured data, honest trust pages, article types and disclosures, related-article scoring, and the env-gated Resend newsletter and contact form. When you change behaviour described here, update this file in the same PR.
+> **Last brought in line with the code:** 2026-10-22 (site version 0.8.x). It covers the Phase 1–3 work from the 2026-10-09 audit (canonical host and indexation rules, RSS, structured data, honest trust pages, article types and disclosures, related-article scoring, the env-gated Resend newsletter and contact form), plus Consent Mode v2 with consent-gated Google Analytics, AdSense site verification and the accessibility pass. When you change behaviour described here, update this file in the same PR.
 
 ---
 
@@ -65,7 +65,7 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
 
 ```
 /app
-  layout.tsx                 ← Root layout: fonts, metadata, Navbar + main + Footer + CookieConsent
+  layout.tsx                 ← Root layout: fonts, metadata, Consent Mode defaults in <head>, skip link, CookieConsent + Navbar + main + Footer + GoogleAnalytics
   page.tsx                   ← Home (+ NewsMediaOrganization/WebSite JSON-LD)
   globals.css                ← Tailwind import + @theme tokens + .prose-article styles
   manifest.ts                ← PWA web manifest (MetadataRoute.Manifest)
@@ -121,8 +121,10 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
     AuthorAvatar.tsx
     NewsletterStrip.tsx      ← Signup form when email is configured, else "coming soon" + RSS
     NewsletterForm.tsx       ← "use client": honeypot, start time, states
-    SearchBar.tsx
-    CookieConsent.tsx        ← "use client": useSyncExternalStore + localStorage
+    CookieConsent.tsx        ← "use client": consent banner/dialog (Accept all / Reject all / Customize)
+    CookieSettingsButton.tsx ← "use client": footer "Cookie settings" button that reopens the dialog
+  /analytics
+    GoogleAnalytics.tsx      ← "use client": loads gtag.js only with NEXT_PUBLIC_GA_ID and granted consent
   /mdx
     MDXComponents.tsx        ← Overrides for a/h2/h3/img/table/th/td/blockquote
 
@@ -143,7 +145,8 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
   wikidigit-init-prompt.md   ← The original scaffolding prompt (historical)
 
 /lib
-  site.ts                    ← SITE_URL, SITE_NAME, SITE_LOGO, CONTACT_EMAIL, RSS_ALTERNATE
+  site.ts                    ← SITE_URL, SITE_NAME, SITE_LOGO, CONTACT_EMAIL, RSS_ALTERNATE, ADSENSE_PUBLISHER_ID
+  consent.ts                 ← Stored consent (parse/save/expiry), Consent Mode mapping, the inline <head> default script
   mdx.ts                     ← Read/parse MDX, query helpers, related scoring, lastModifiedOf
   utils.ts                   ← formatDate, headingId, extractHeadings, cn, truncate, slugify
   categories.ts              ← Category definitions (+ intro), categorySlug, navCategories
@@ -163,9 +166,11 @@ Scaffold **directly in the repo root** — do not nest in a subfolder.
 /tests
   seo.test.mjs               ← Checks the built HTML, sitemap, robots and RSS
   email.test.ts              ← Token, validation, rate-limit and handler tests (fetch stubbed)
+  consent.test.ts            ← Consent parsing/migration/expiry, Consent Mode mapping, the head script in a sandbox
 
 /public
   /images/articles/*.png     ← Cover images (new covers 1216×521, 21:9; older ones 1216×640)
+  ads.txt                    ← Authorises Google AdSense for our publisher ID (must match ADSENSE_PUBLISHER_ID)
                              (no author photos yet: avatars fall back to initials)
   og-default.png             ← 1200×630 default OG image
   favicon-16x16.png favicon-32x32.png favicon-96x96.png
@@ -257,7 +262,7 @@ Rules: **no `#ffffff`** (use `cream`), **no `#000000`** (use `ink`). Tailwind ut
 ### Layout metrics
 - Global content max width: **`max-w-7xl` (1280px)**, horizontal padding `px-4 sm:px-6 lg:px-8`.
 - Article body column: **`max-w-[720px]`** for readability.
-- Article page is a two-column grid on `lg`: `lg:grid-cols-[1fr_280px]`. Only the TOC is sticky (inside the full-height aside); the Sidebar scrolls with the page. Never give a sidebar its own capped-height scroll area: it shows a second scrollbar.
+- Article page is a two-column grid on `lg`: `lg:grid-cols-[1fr_280px]`. Only the TOC is sticky (inside the full-height sidebar column); the Sidebar scrolls with the page. Never give a sidebar its own capped-height scroll area: it shows a second scrollbar.
 - Border radius is small and restrained: mostly `rounded-sm`.
 - Card images use `aspect-[16/9]` with `object-cover` and a subtle `group-hover:scale-105` transition.
 
@@ -381,7 +386,7 @@ Body is standard Markdown/MDX: `##`/`###` headings (these feed the TOC), `>` blo
 
 **Site constants (`lib/site.ts`):** `SITE_URL = (NEXT_PUBLIC_SITE_URL || "https://www.wikidigit.com")` with trailing slashes trimmed — production serves **www** and the apex 308-redirects there, so every absolute URL (canonicals, sitemap, robots, RSS, JSON-LD) must use it. Never inline the host anywhere else. Also `SITE_NAME`, `SITE_DESCRIPTION`, `SITE_LOGO` (`/icon-512.png`), `CONTACT_EMAIL`, and `RSS_ALTERNATE` (spread into a page's `alternates.types`, because a page that sets its own `alternates` replaces the layout's).
 
-**Root layout (`app/layout.tsx`):** load Geist + Geist Mono as CSS variables; `metadataBase: new URL(SITE_URL)`; title template `"%s | WikiDigit"`, default `"WikiDigit — Tech News for the Curious"`; `alternates.types` = RSS feed; full icon set + `manifest: "/manifest.webmanifest"`; OpenGraph (website, `/images/og-default.png` 1200×630) + Twitter `summary_large_image` (no `site`/`creator` handle until a real account exists); `robots` index/follow. Body: `min-h-screen flex flex-col bg-cream text-ink` wrapping `<Navbar/>`, `<main className="flex-1">{children}</main>`, `<Footer/>`, `<CookieConsent/>`.
+**Root layout (`app/layout.tsx`):** load Geist + Geist Mono as CSS variables; `metadataBase: new URL(SITE_URL)`; title template `"%s | WikiDigit"`, default `"WikiDigit — Tech News for the Curious"`; `alternates.types` = RSS feed; full icon set + `manifest: "/manifest.webmanifest"`; OpenGraph (website, `/images/og-default.png` 1200×630) + Twitter `summary_large_image` (no `site`/`creator` handle until a real account exists); `robots` index/follow. `other: { "google-adsense-account": ADSENSE_PUBLISHER_ID }` for AdSense verification (no ad script). `<head>` gets the inline `CONSENT_DEFAULT_SCRIPT` (`lib/consent.ts`) before anything else. Body: `min-h-screen flex flex-col bg-cream text-ink` wrapping a "Skip to content" link (first Tab stop), `<CookieConsent/>` (early in the DOM so keyboard users reach it before the nav; it is fixed to the bottom visually), `<Navbar/>`, `<main id="main-content" tabIndex={-1} className="flex-1">{children}</main>`, `<Footer/>`, `<GoogleAnalytics/>`.
 
 **Every page sets a self-canonical** (`alternates.canonical`, relative paths resolve against `metadataBase`).
 
@@ -402,15 +407,15 @@ Layout: top leaderboard ad, then the two-column grid. `<article className="max-w
 
 **Navbar (`"use client"`):** sticky `top-0 z-50`; adds `backdrop-blur-md` + shadow after `scrollY > 10`; logo `Wiki<span text-rust>Digit</span>`; desktop category links with active state via `usePathname().startsWith(href)`; search icon toggles an inline search form that navigates to `/search?q=`; mobile hamburger overlay. Closes menus on route change.
 
-**Footer:** four columns — Brand (logo, tagline, "RSS feed" link to `/rss.xml`; no social icons until real accounts exist, never `href="#"`), Coverage (categories), Company (About/Editorial Standards/Authors/Advertise/Contact), Legal (Privacy/Terms/Impressum) — plus `© {year} WikiDigit`.
+**Footer:** four columns — Brand (logo, tagline, "RSS feed" link to `/rss.xml`; no social icons until real accounts exist, never `href="#"`), Coverage (categories), Company (About/Editorial Standards/Authors/Advertise/Contact), Legal (Privacy/Terms/Impressum + a "Cookie settings" button) — plus `© {year} WikiDigit`. Column titles are `<h2>` (pages whose only other heading is the `<h1>` must not jump to `<h3>`); small print stays at `text-cream/60` or brighter for WCAG AA contrast.
 
-**CookieConsent (`"use client"`):** SSR-safe via `useSyncExternalStore` reading `localStorage["wd_cookie_consent"]`; fixed bottom banner offering "Essential only" / "Accept all"; hides once a value is stored; links to `/privacy`. It does not gate anything yet because no analytics or ad script is loaded; wire consent into any script before adding it (Phase 4).
+**Consent (`lib/consent.ts`, `CookieConsent`, `GoogleAnalytics`):** Google Consent Mode v2 starts with `ad_storage`, `analytics_storage`, `ad_user_data` and `ad_personalization` all `denied` in `<head>`; a returning reader's stored yes is re-applied there. The choice is stored as `{ v: 2, analytics, ts }` in `localStorage["wd_cookie_consent"]` (old `accepted`/`essential` values migrate) and expires after 12 months. The banner offers Accept all / Reject all (equal weight) / Customize (Analytics toggle) and calls `gtag('consent','update', …)`; withdrawing deletes `_ga*` cookies. The footer's Cookie settings button reopens it with focus inside; Escape closes a reopened dialog without changing the choice and focus returns to the button. A first-visit banner never steals focus. The banner covers analytics only: ad signals stay `denied` until AdSense goes live with Google's certified CMP. GA loads only when `NEXT_PUBLIC_GA_ID` is set and analytics is granted.
 
 **TableOfContents (`"use client"`):** `IntersectionObserver` (`rootMargin: "-80px 0px -60% 0px"`) highlights the active heading; indents `h3` entries. **MobileToc:** the same headings in a `<details>` for small screens.
 
 **Search:** `app/api/search/route.ts` is a `GET` that reads `?q=`, lowercases, and AND-matches every query word against a haystack of title+description+author+category+tags, returning `{ articles }` (max 20). `app/search/page.tsx` is a debounced client UI that calls it; `app/search/layout.tsx` holds its metadata (`noindex, follow`).
 
-**Sidebar:** sidebar ad → Recent Stories → Authors (avatar, name, post count, links to `/authors/[slug]`) → Archive (one link per month to `/archive/YYYY-MM` with its post count). Used on article, category, tag and archive pages; it scrolls with the page (not sticky).
+**Sidebar:** sidebar ad → Recent Stories → Authors (avatar, name, post count, links to `/authors/[slug]`) → Archive (one link per month to `/archive/YYYY-MM` with its post count). Used on article, category, tag and archive pages; it scrolls with the page (not sticky). It renders as `<section aria-label="More from WikiDigit">` and the page column around it is a plain `<div>`, never `<aside>`: a complementary landmark inside `<main>` fails axe.
 
 **Category pages:** H1 + `category.intro`; meta description = intro; `noindex, follow` while the category has no posts. **Tag pages:** `generateStaticParams` from `getAllTags()` with `dynamicParams = false` (unknown tags 404, and a known tag with no posts calls `notFound()`), `noindex, follow`, self-canonical. **Archive pages:** `dynamicParams = false`. **Author pages:** bio + social + their articles, `ProfilePage` JSON-LD with a `Person` main entity (`sameAs` from twitter/linkedin).
 
@@ -450,14 +455,14 @@ Layout: top leaderboard ad, then the two-column grid. `<article className="max-w
 
 ## 9. Legal / Compliance (for AdSense approval)
 
-Real pages: `/privacy` (describes actual data flows: server logs, Resend for the newsletter and contact form; it still mentions Google Analytics/AdSense, which aren't installed yet), `/terms`, `/impressum` (needs a full postal address and DDG citations; open task), `/editorial-standards`, plus the cookie-consent banner. Legal copy should be reviewed by counsel; never claim a compliance mechanism (e.g. a data-transfer framework) that hasn't been verified. AdSense in the EEA/UK also needs a Google-certified CMP (TCF v2.2) — the homemade banner is not enough.
+Real pages: `/privacy` (describes actual data flows: server logs, Resend for the newsletter and contact form; Google Analytics with consent and withdrawal via Cookie settings; its AdSense section still reads as if ads were live and needs rewriting when they are), `/terms`, `/impressum` (needs a full postal address and DDG citations; open task), `/editorial-standards`, plus the cookie-consent banner. Legal copy should be reviewed by counsel; never claim a compliance mechanism (e.g. a data-transfer framework) that hasn't been verified. AdSense in the EEA/UK also needs a Google-certified CMP (TCF v2.2) — the homemade banner is not enough.
 
 ---
 
 ## 10. Explicitly OUT OF SCOPE (do not build)
 
 - No database (Neon/Postgres/Supabase), no ORM — content stays in MDX files; newsletter subscribers live in Resend.
-- No ad network or analytics script yet (Phase 4: consent-gated analytics, then AdSense with a certified CMP).
+- No AdSense ad script until the site is approved and Google's certified consent message (IAB TCF v2.2) is published for the EEA/UK/CH. Verification is ads.txt + the meta tag only.
 - No auth / user accounts, no CMS, no comment system.
 - Deployment: Vercel deploys `main`, so merging a PR publishes.
 

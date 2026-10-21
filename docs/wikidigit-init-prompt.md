@@ -175,7 +175,6 @@ Elegant, editorial, minimal. Think premium publishing — not a startup landing 
     TagChip.tsx
     AuthorAvatar.tsx
     NewsletterStrip.tsx
-    SearchBar.tsx
   /mdx
     MDXComponents.tsx            ← Custom MDX component overrides
 
