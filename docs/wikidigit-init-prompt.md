@@ -1,3 +1,5 @@
+> **Historical document.** This is the original scaffolding prompt from May 2026. Several things it asks for were dropped or changed (Neon/Drizzle, real AdSense, placeholder "realistic" articles, a UI-only newsletter). For how the site actually works today, read [`../wikidigit-bootstrap-instruction.md`](../wikidigit-bootstrap-instruction.md) and [`daily-post-playbook.md`](daily-post-playbook.md).
+
 # WikiDigit.com — Tech News Media Platform
 ## Claude Code Project Prompt
 
@@ -173,7 +175,6 @@ Elegant, editorial, minimal. Think premium publishing — not a startup landing 
     TagChip.tsx
     AuthorAvatar.tsx
     NewsletterStrip.tsx
-    SearchBar.tsx
   /mdx
     MDXComponents.tsx            ← Custom MDX component overrides
 

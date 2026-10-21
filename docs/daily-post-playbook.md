@@ -109,7 +109,8 @@ Draw it as code (SVG/HTML), not with a model. Every cover must look different fr
 - Tags reuse existing tags where they fit (check other posts) so the tag pages build up.
 - Add a link to the new post from 1–2 of the most related existing posts: one natural sentence each, not a "related" dump. Keep these edits small.
 - The FAQ answers are self-contained and factual: they're what AI answer engines will quote.
-- Check: `npx eslint`, `npm run build`, `node scripts/pick-topic.mjs` (no unknown categories) and `node scripts/cover-style.mjs --check <slug>` (the cover is recorded and doesn't repeat a recent palette or composition). All must pass.
+- Check: `npx eslint`, `npm run build`, `npm test` (SEO checks on the build: canonical, JSON-LD, TOC anchors), `node scripts/pick-topic.mjs` (no unknown categories) and `node scripts/cover-style.mjs --check <slug>` (the cover is recorded and doesn't repeat a recent palette or composition). All must pass; CI runs the same checks on the PR.
+- If another post PR merged while you worked, `content/cover-log.json` will conflict. Merge `origin/main` into your branch, keep **both** entries in date order, re-run `node scripts/cover-style.mjs --check <slug>`, and push.
 - Start the build (`npx next start -p <free port>`), open `/article/<slug>` and check that the cover, the FAQ section and the JSON-LD (`script[type="application/ld+json"]`) render. Then stop the server.
 
 ## 7. PR and notification

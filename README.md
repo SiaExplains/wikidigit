@@ -1,6 +1,6 @@
 # WikiDigit
 
-Source for [wikidigit.com](https://wikidigit.com), an independent tech-news site covering AI, startups, business, tech, science, robotics, finance, security and developer tools.
+Source for [www.wikidigit.com](https://www.wikidigit.com), an independent tech-news site covering AI, startups, business, tech, science, robotics, finance, security and developer tools.
 
 Next.js 16 (App Router) + React 19 + Tailwind CSS v4. Articles are MDX files on disk; there is no database or CMS. The full architecture spec is in [`wikidigit-bootstrap-instruction.md`](wikidigit-bootstrap-instruction.md).
 
@@ -13,6 +13,8 @@ npm run lint
 npm run build
 npm test         # email unit tests + SEO checks against the build output; run after a build
 ```
+
+CI (`.github/workflows/ci.yml`) runs lint, typecheck, build and tests on every PR. Every change bumps `version` in `package.json` and adds a [`CHANGELOG.md`](CHANGELOG.md) entry.
 
 `NEXT_PUBLIC_SITE_URL` sets the canonical site URL (`lib/site.ts`). It defaults to `https://www.wikidigit.com`, the host production serves; the apex domain redirects there.
 
@@ -43,8 +45,11 @@ How it works: signup sends a confirmation email with a signed link valid for 48 
 ## Content
 
 - **Posts:** `content/articles/<slug>.mdx`. The frontmatter schema is in the bootstrap spec (§6). Optional `faq` entries render as a FAQ section with FAQPage JSON-LD.
+- **Article types:** optional `type` (news by default, or analysis, explainer, guide, opinion). Non-news types get a visible label and a matching schema.org type.
+- **Disclosures:** optional `disclosure` sentence, shown above the body, whenever a post covers something we're connected to (Emojar, FocusCrew).
+- **Sourcing and corrections:** every factual claim links a source; nothing is invented. When a fact was wrong, fix it, set `updated`, and add a dated correction note at the top. If a slug states something false, move the post and add a permanent redirect in `next.config.ts`. The public rules are on [`/editorial-standards`](https://www.wikidigit.com/editorial-standards).
 - **Covers:** `public/images/articles/<slug>.png`, drawn as HTML/SVG and rendered with
-  `node scripts/render-cover.mjs <design.html> <out.png>` (1216×521). Start from `scripts/cover-template/template.html`.
+  `node scripts/render-cover.mjs <design.html> <out.png>` (1216×521). Start from `scripts/cover-template/template.html`. `node scripts/cover-style.mjs` picks a palette and composition that differ from recent covers and logs them in `content/cover-log.json`; when two post PRs both touch that file, keep both entries in date order.
 - **Categories:** `lib/categories.ts`. The target share per category is in `content/topic-weights.json`, and `node scripts/pick-topic.mjs` shows which category is most under-covered.
 - **Authors:** `lib/authors.ts` (Siavash Ghanbari, Sheida Mohassesy). Each post's `authorSlug` must match an entry there.
 - **Dates:** `date` is the publish date. Add `updated` only after a substantive change; it becomes `dateModified` and an "Updated" line. Read time is computed from the body.
