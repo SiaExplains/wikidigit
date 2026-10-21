@@ -310,5 +310,13 @@
     "palette": "ember",
     "composition": "flat-poster",
     "subject": "Two empty director's chairs under a spotlight, a third tipping over, a clapperboard on the stage floor"
+  },
+  {
+    "slug": "tenstorrent-1-5-billion-series-e-keller-independent",
+    "date": "2026-10-21",
+    "image": "/images/articles/tenstorrent-1-5-billion-series-e-keller-independent.png",
+    "palette": "sand",
+    "composition": "paper-cutout",
+    "subject": "Layered-card AI chip on a desert dune, two open crane claws pulling back on either side"
   }
 ]
