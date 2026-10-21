@@ -51,9 +51,9 @@ export default async function TagPage({ params }: Props) {
             </div>
           )}
         </div>
-        <aside className="hidden lg:block">
+        <div className="hidden lg:block">
           <Sidebar recentArticles={recentArticles} showAd />
-        </aside>
+        </div>
       </div>
     </div>
   );

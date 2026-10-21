@@ -31,7 +31,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="text-sm">
+    <nav aria-label="On this page" className="text-sm">
       <p className="font-semibold text-ink text-xs uppercase tracking-wider mb-3">
         On This Page
       </p>

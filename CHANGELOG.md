@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.8.2 — 2026-10-22
+
+### Fixed
+- Screen readers no longer meet two nested, unnamed "complementary" regions on article, category, tag and archive pages. The sidebar is now one labelled section ("More from WikiDigit"), and article disclosures are marked as a note.
+- The main navigation and the article's "On this page" menu are named, so screen readers can tell the two apart.
+- The footer's column titles are level-2 headings, so pages like Contact no longer skip from the page title straight to level 3.
+
+### Changed
+- `scripts/cover-style.mjs --record <slug> --supplied` logs a supplied photo used as a cover. Supplied covers don't use up a palette or composition and aren't counted for the light-cover rule. The Picstea post's cover is now logged this way, so mint and isometric-diorama are free again for drawn covers.
+
+### Removed
+- The unused `SearchBar` component.
+
 ## 0.8.1 — 2026-10-19
 
 ### Fixed

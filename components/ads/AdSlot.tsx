@@ -25,8 +25,8 @@ export default function AdSlot({ size, position, className = "" }: AdSlotProps) 
       style={{ maxWidth: slot.w, height: slot.h }}
       data-ad-size={size}
       data-ad-position={position}
-      aria-label="Advertisement"
-      role="complementary"
+      // Dev-only stand-in for an ad; nothing here is content for assistive tech.
+      aria-hidden="true"
     >
       {/* AD SLOT */}
       <span className="text-xs text-amber/60 font-mono select-none">

@@ -90,9 +90,9 @@ export default async function CategoryPage({ params }: Props) {
           </div>
 
           {/* Sidebar */}
-          <aside className="hidden lg:block">
+          <div className="hidden lg:block">
             <Sidebar recentArticles={recentArticles} showAd />
-          </aside>
+          </div>
         </div>
       </div>
     </>

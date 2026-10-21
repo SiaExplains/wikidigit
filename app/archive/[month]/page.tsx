@@ -53,9 +53,9 @@ export default async function ArchivePage({ params }: Props) {
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
-        <aside className="hidden lg:block">
+        <div className="hidden lg:block">
           <Sidebar recentArticles={recentArticles} showAd />
-        </aside>
+        </div>
       </div>
     </div>
   );
