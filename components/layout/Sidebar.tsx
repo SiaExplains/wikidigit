@@ -19,7 +19,7 @@ export default function Sidebar({ recentArticles = [], showAd = true }: SidebarP
   const archiveMonths = getArchiveMonths();
 
   return (
-    <aside className="space-y-8">
+    <section aria-label="More from WikiDigit" className="space-y-8">
       {/* AD: sidebar */}
       {showAd && <AdSlot size="sidebar" position="sidebar-top" />}
 
@@ -91,6 +91,6 @@ export default function Sidebar({ recentArticles = [], showAd = true }: SidebarP
           </ul>
         </nav>
       )}
-    </aside>
+    </section>
   );
 }

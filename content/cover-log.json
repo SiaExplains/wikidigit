@@ -291,9 +291,10 @@
     "slug": "picstea-free-browser-photoshop-alternative-psd",
     "date": "2026-10-19",
     "image": "/images/articles/picstea-free-browser-photoshop-alternative-psd.png",
-    "palette": "mint",
-    "composition": "isometric-diorama",
-    "subject": "Supplied photo, not drawn: Picstea's promotional graphic (logo, 'Online Photoshop' headline, editor with a cat photo). Image: Picstea. Palette/composition kept from the replaced drawn cover."
+    "palette": "supplied",
+    "composition": "supplied",
+    "supplied": true,
+    "subject": "Supplied photo: Picstea's promotional graphic (logo, 'Online Photoshop' headline, editor with a cat photo). Image: Picstea."
   },
   {
     "slug": "ai-29-percent-us-stem-phd-dissertations",

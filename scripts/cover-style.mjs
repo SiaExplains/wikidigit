@@ -3,6 +3,8 @@
 //
 //   node scripts/cover-style.mjs                      show recent covers and suggest palette+composition pairs
 //   node scripts/cover-style.mjs --record <slug> --palette <name> --composition <name> [--subject "<text>"]
+//   node scripts/cover-style.mjs --record <slug> --supplied [--subject "<text>"]
+//                                                    log a supplied photo used as the cover (not drawn)
 //   node scripts/cover-style.mjs --check <slug>       fail if the cover repeats a recent palette/composition
 //   node scripts/cover-style.mjs --analyze            measure hue/lightness of the last covers with headless Chrome
 //
@@ -25,6 +27,12 @@ const LIGHT_EVERY = 4; // at least one light palette in every 4 covers
 const styles = JSON.parse(fs.readFileSync(STYLES, "utf8"));
 const paletteNames = styles.palettes.map((p) => p.name);
 const compositionNames = styles.compositions.map((c) => c.name);
+
+// A supplied photo isn't drawn from the menu, so it neither uses up a palette or
+// composition nor counts towards the light-cover rule.
+function drawn(log) {
+  return log.filter((e) => !e.supplied);
+}
 
 function readLog() {
   if (!fs.existsSync(LOG)) return [];
@@ -54,7 +62,8 @@ function previousEntries(log, slug) {
 }
 
 function violations(log, entry) {
-  const prev = previousEntries(log, entry.slug);
+  if (entry.supplied) return [];
+  const prev = drawn(previousEntries(log, entry.slug));
   const problems = [];
   if (!paletteNames.includes(entry.palette)) problems.push(`unknown palette "${entry.palette}"`);
   if (!compositionNames.includes(entry.composition)) problems.push(`unknown composition "${entry.composition}"`);
@@ -73,7 +82,8 @@ function isLight(name) {
   return styles.palettes.find((p) => p.name === name)?.light === true;
 }
 
-function allowed(log) {
+function allowed(fullLog) {
+  const log = drawn(fullLog);
   const recentPalettes = log.slice(-PALETTE_WINDOW).map((e) => e.palette);
   const recentCompositions = log.slice(-COMPOSITION_WINDOW).map((e) => e.composition);
   let palettes = styles.palettes.filter((p) => !recentPalettes.includes(p.name));
@@ -117,12 +127,17 @@ function record(args) {
   const slug = args.record;
   const fm = readFrontmatter(slug);
   if (!fm) fail(`No article content/articles/${slug}.mdx`);
-  if (!args.palette || !args.composition) fail("--record needs --palette and --composition");
-  const log = readLog().filter((e) => e.slug !== slug);
-  const entry = { slug, date: fm.date, image: fm.image, palette: args.palette, composition: args.composition, subject: args.subject || "" };
+  if (!args.supplied && (!args.palette || !args.composition)) fail("--record needs --palette and --composition, or --supplied");
+  const existing = readLog();
+  const log = existing.filter((e) => e.slug !== slug);
+  const entry = args.supplied
+    ? { slug, date: fm.date, image: fm.image, palette: "supplied", composition: "supplied", supplied: true, subject: args.subject || "" }
+    : { slug, date: fm.date, image: fm.image, palette: args.palette, composition: args.composition, subject: args.subject || "" };
   const problems = violations([...log, entry].sort((a, b) => a.date.localeCompare(b.date)), entry);
   if (problems.length) fail(`Not recorded:\n  - ${problems.join("\n  - ")}`);
-  writeLog([...log, entry]);
+  // Re-recording a slug replaces its entry in place, so same-day ordering doesn't shift.
+  const at = existing.findIndex((e) => e.slug === slug);
+  writeLog(at === -1 ? [...log, entry] : existing.map((e, i) => (i === at ? entry : e)));
   console.log(`Recorded ${slug}: ${entry.palette} + ${entry.composition}`);
 }
 

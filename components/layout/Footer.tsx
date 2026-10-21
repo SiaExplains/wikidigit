@@ -34,9 +34,9 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Coverage
-            </h3>
+            </h2>
             <ul className="space-y-2">
               {navCategories.map((cat) => (
                 <li key={cat.href}>
@@ -53,9 +53,9 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Company
-            </h3>
+            </h2>
             <ul className="space-y-2">
               {[
                 { label: "About", href: "/about" },
@@ -78,9 +78,9 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-cream/60 mb-4">
               Legal
-            </h3>
+            </h2>
             <ul className="space-y-2">
               {[
                 { label: "Privacy Policy", href: "/privacy" },
