@@ -319,5 +319,13 @@
     "palette": "sand",
     "composition": "paper-cutout",
     "subject": "Layered-card AI chip on a desert dune, two open crane claws pulling back on either side"
+  },
+  {
+    "slug": "flapping-airplanes-1-billion-6-billion-no-product",
+    "date": "2026-10-22",
+    "image": "/images/articles/flapping-airplanes-1-billion-6-billion-no-product.png",
+    "palette": "blueprint",
+    "composition": "blueprint-linework",
+    "subject": "Blueprint drawing of an ornithopter whose fuselage is a GPU chip with a single-trace yellow die, wings shown in up and dashed down strokes"
   }
 ]
