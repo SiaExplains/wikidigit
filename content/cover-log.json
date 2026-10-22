@@ -327,5 +327,14 @@
     "palette": "blueprint",
     "composition": "blueprint-linework",
     "subject": "Blueprint drawing of an ornithopter whose fuselage is a GPU chip with a single-trace yellow die, wings shown in up and dashed down strokes"
+  },
+  {
+    "slug": "goall-ai-services-offers-startup-ai-agency",
+    "date": "2026-10-22",
+    "image": "/images/articles/goall-ai-services-offers-startup-ai-agency.png",
+    "palette": "supplied",
+    "composition": "supplied",
+    "supplied": true,
+    "subject": "Supplied image: GoAll.ai's G.AI logo beside an isometric network of app, chart and code tiles. Image: GoAll.ai."
   }
 ]
