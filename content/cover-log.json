@@ -336,5 +336,13 @@
     "composition": "supplied",
     "supplied": true,
     "subject": "Supplied image: GoAll.ai's G.AI logo beside an isometric network of app, chart and code tiles. Image: GoAll.ai."
+  },
+  {
+    "slug": "meta-negative-free-cash-flow-nonvoting-class-c-stock",
+    "date": "2026-10-23",
+    "image": "/images/articles/meta-negative-free-cash-flow-nonvoting-class-c-stock.png",
+    "palette": "forest",
+    "composition": "split-frame",
+    "subject": "Diagonal split: gold coins draining into a glowing server rack on one side, a voting share certificate beside a nonvoting copy on the other"
   }
 ]
