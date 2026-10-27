@@ -19,6 +19,7 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
               src={article.coverImage}
               alt={article.title}
               fill
+              sizes="(min-width: 1280px) 1216px, 100vw"
               priority
               className="object-cover opacity-70 group-hover:scale-[1.02] transition-transform duration-500"
             />

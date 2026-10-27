@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <p className="text-xs text-muted uppercase tracking-wider mb-4">Legal</p>
       <h1 className="text-3xl font-bold text-ink mb-3">Privacy Policy</h1>
-      <p className="text-sm text-muted mb-10">Last updated: October 9, 2026</p>
+      <p className="text-sm text-muted mb-10">Last updated: October 27, 2026</p>
 
       <div className="prose-article space-y-10">
 
@@ -44,7 +44,8 @@ export default function PrivacyPage() {
 
           <h3>2.1 Server Logs</h3>
           <p>
-            When you visit this website, our web server automatically records standard log data,
+            This website is hosted by Vercel Inc. (USA). When you visit it, the hosting servers
+            automatically record standard log data,
             including your IP address, browser type and version, operating system, referring URL,
             pages visited, and date/time of access. These logs are retained for up to 30 days for
             security and operational purposes and are then deleted.
@@ -63,9 +64,10 @@ export default function PrivacyPage() {
             and stored on Google servers.
           </p>
           <p>
-            IP anonymisation is enabled; your IP address is truncated within the EU before
-            transmission. Google may transfer data to the USA under the EU–US Data Privacy
-            Framework.
+            We use Google Analytics 4, which does not log or store IP addresses; Google uses them
+            only briefly to derive an approximate location. Google Analytics only loads once
+            you have consented, and only if we have switched it on for the Site. Google may
+            transfer data to the USA under the EU–US Data Privacy Framework.
           </p>
           <p>
             <strong>Legal basis:</strong> Consent (Art. 6(1)(a) GDPR). You can withdraw consent
@@ -81,16 +83,18 @@ export default function PrivacyPage() {
             .
           </p>
 
-          <h3>2.3 Advertising (Google AdSense)</h3>
+          <h3>2.3 Advertising (Google AdSense) — not active yet</h3>
           <p>
-            With your consent, we display advertisements via Google AdSense (Google LLC). AdSense
-            uses cookies and similar technologies to show ads that are relevant to you based on
-            your prior browsing activity. Google and its partners may collect data about your
+            We do not show ads at the moment, and no advertising script is loaded on the Site. We
+            plan to show ads via Google AdSense (Google LLC). Before we do, we will update this
+            section and ask for your consent through Google&apos;s consent message. AdSense uses
+            cookies and similar technologies to show ads, which can be personalised based on your
+            prior browsing activity, and Google and its partners may collect data about your
             interactions with ads.
           </p>
           <p>
-            <strong>Legal basis:</strong> Consent (Art. 6(1)(a) GDPR). You can manage your ad
-            personalisation preferences at{" "}
+            <strong>Legal basis (once active):</strong> Consent (Art. 6(1)(a) GDPR). You can manage
+            your ad personalisation preferences at{" "}
             <a
               href="https://adssettings.google.com"
               target="_blank"
@@ -134,6 +138,12 @@ export default function PrivacyPage() {
             advertising (Art. 6(1)(b) GDPR). <strong>Retention:</strong> we delete the email once
             your enquiry is resolved, unless we have to keep it for legal reasons.
           </p>
+
+          <h3>2.6 Fonts</h3>
+          <p>
+            The fonts on this Site are served from our own domain. Your browser does not contact
+            Google Fonts or any other font service when you visit.
+          </p>
         </section>
 
         {/* 3 */}
@@ -164,7 +174,7 @@ export default function PrivacyPage() {
                 </tr>
                 <tr>
                   <td className="py-2 pr-4">Advertising</td>
-                  <td className="py-2 pr-4">Google AdSense — ad personalisation</td>
+                  <td className="py-2 pr-4">Google AdSense — ad personalisation (not active yet)</td>
                   <td className="py-2">Yes</td>
                 </tr>
               </tbody>
@@ -186,8 +196,9 @@ export default function PrivacyPage() {
           </p>
           <ul>
             <li>
-              <strong>Google LLC</strong> — for analytics and advertising as described above.
-              Google operates as a data processor under a Data Processing Agreement.
+              <strong>Google LLC</strong> — for analytics, and for advertising once it is active, as
+              described above. For Google Analytics, Google acts as our processor under its data
+              processing terms; for advertising, Google acts as an independent controller.
             </li>
             <li>
               <strong>Resend, Inc.</strong> — to send newsletter confirmation emails and
@@ -195,8 +206,8 @@ export default function PrivacyPage() {
               Resend acts as our data processor.
             </li>
             <li>
-              <strong>Hosting provider</strong> — server logs may be stored by our infrastructure
-              provider, subject to contractual data processing obligations.
+              <strong>Vercel Inc.</strong> — hosts the Site and processes server logs as our
+              processor under its data processing agreement.
             </li>
           </ul>
           <p>
@@ -216,6 +227,10 @@ export default function PrivacyPage() {
             Resend, Inc. is based in the United States, so newsletter and contact-form data is
             processed there. We rely on the safeguards Resend provides for transfers of personal
             data from the EEA to the United States, as set out in its data processing agreement.
+          </p>
+          <p>
+            Vercel Inc. is based in the United States, so server log data may be processed there,
+            under the safeguards set out in Vercel&apos;s data processing agreement.
           </p>
         </section>
 

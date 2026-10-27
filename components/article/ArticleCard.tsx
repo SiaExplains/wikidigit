@@ -23,6 +23,7 @@ export default function ArticleCard({ article, variant = "default" }: ArticleCar
               src={article.coverImage}
               alt={article.title}
               fill
+              sizes="128px"
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
@@ -69,6 +70,7 @@ export default function ArticleCard({ article, variant = "default" }: ArticleCar
             src={article.coverImage}
             alt={article.title}
             fill
+            sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (

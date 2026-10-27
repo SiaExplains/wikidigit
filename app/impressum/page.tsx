@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Impressum",
   description:
-    "Impressum (Legal Notice) for WikiDigit and Emojar — mandatory disclosure under German law (§ 5 TMG / § 18 MStV).",
+    "Impressum (Legal Notice) for WikiDigit and Emojar — mandatory disclosure under German law (§ 5 DDG / § 18 MStV).",
   robots: { index: true, follow: false },
   alternates: { canonical: "/impressum" },
 };
@@ -14,7 +14,7 @@ export default function ImpressumPage() {
       <p className="text-xs text-muted uppercase tracking-wider mb-4">Legal</p>
       <h1 className="text-3xl font-bold text-ink mb-3">Impressum</h1>
       <p className="text-sm text-muted mb-10">
-        Legal notice pursuant to § 5 TMG (Telemediengesetz) and § 18 MStV
+        Legal notice pursuant to § 5 DDG (Digitale-Dienste-Gesetz) and § 18 MStV
         (Medienstaatsvertrag) — Germany
       </p>
 
@@ -108,9 +108,9 @@ export default function ImpressumPage() {
             The contents of this website have been prepared with great care. However, we cannot
             guarantee the accuracy, completeness, or timeliness of the content. As a service
             provider, we are responsible for our own content on these pages in accordance with
-            general law (§ 7 Abs. 1 TMG). According to §§ 8 to 10 TMG, however, we are not
-            obligated to monitor transmitted or stored third-party information or to investigate
-            circumstances that indicate illegal activity.
+            general law. Under Article 8 of the Digital Services Act (Regulation (EU) 2022/2065),
+            however, we are not obligated to monitor transmitted or stored third-party information
+            or to actively investigate circumstances that indicate illegal activity.
           </p>
           <p>
             Obligations to remove or block the use of information under general law remain
