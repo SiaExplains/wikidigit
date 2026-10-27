@@ -7,6 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
+import { compressPngInPlace } from "./compress-images.mjs";
 
 const [input, output, width = "1216", height = "521"] = process.argv.slice(2);
 if (!input || !output) {
@@ -89,4 +90,6 @@ if (!fs.existsSync(shot) || fs.statSync(shot).size === 0) {
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.copyFileSync(shot, out);
 cleanup();
-console.log(`Rendered ${out} (${width}x${height})`);
+// Covers are drawn with flat colours, so a palette PNG is visually identical and far smaller.
+const { before, after } = await compressPngInPlace(out);
+console.log(`Rendered ${out} (${width}x${height}, ${Math.round(before / 1024)} KB -> ${Math.round(after / 1024)} KB)`);

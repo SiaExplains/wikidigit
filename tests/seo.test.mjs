@@ -133,3 +133,11 @@ test("AdSense verification: ads.txt line and account meta tag", () => {
     assert.doesNotMatch(html, /googlesyndication|adsbygoogle/, rel);
   }
 });
+
+test("404 page is branded and kept out of the index", () => {
+  const html = read("_not-found.html");
+  const robots = [...html.matchAll(/<meta name="robots" content="([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(robots.length > 0 && robots.every((r) => r.includes("noindex")), `robots: ${robots}`);
+  assert.match(html, /We couldn(?:&#x27;|')t find that page/);
+  assert.match(html, /action="\/search"/);
+});

@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.0 — 2026-10-27
+
+### Added
+- A WikiDigit 404 page with a search box and the latest stories, instead of the bare default. Broken pages show an error screen with a "Try again" button, and a fallback covers the case where the whole layout fails. Error pages are kept out of search results.
+- Security headers on every response: HSTS, `nosniff`, a strict referrer policy, no framing, a locked-down Permissions-Policy, and a Content-Security-Policy in report-only mode. The `X-Powered-By` header is gone.
+- Tables written in Markdown now render as real tables (remark-gfm).
+- The home page's structured data tells search engines how to search the site.
+- `scripts/compress-images.mjs` keeps article images at 200 KB or less, and `render-cover.mjs` compresses every new cover automatically.
+
+### Changed
+- Article images went from about 28 MB to 4.7 MB in total. Drawn covers are palette PNGs with the same URLs; twelve older photographic covers are now JPEGs, and their old `.png` URLs redirect permanently. Card and hero images tell the browser their display size, so phones download smaller versions.
+- The Impressum cites § 5 DDG instead of the replaced TMG, and the Digital Services Act for third-party content.
+- The Privacy Policy names Vercel as host, explains that Google Analytics 4 doesn't store IP addresses, says fonts are self-hosted, and marks AdSense as not active yet.
+
+### Removed
+- Leftover create-next-app SVGs from `public/`.
+
 ## 0.8.3 — 2026-10-22
 
 ### Changed
