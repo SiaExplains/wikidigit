@@ -11,7 +11,9 @@ export const authors: Author[] = [
   {
     name: "Sheida Mohassesy",
     slug: "sheida-mohassesy",
-    bio: "Writer at WikiDigit covering AI, startups, and the business of technology, with a focus on the people and decisions behind the headlines.",
+    bio: "Product designer and founder based in Berlin. Founded FocusCrew, a focus timer built around body doubling, and is co-CEO of the AI agency GoAll.ai, where she works on AI products and the automation behind them. Writes about AI, startups and the people building them.",
+    avatar: "/images/authors/sheida-mohassesy.jpg",
+    linkedin: "sheida-mohassesy",
   },
 ];
 
