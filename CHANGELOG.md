@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.1 — 2026-10-27
+
+### Changed
+- Sheida Mohassesy's author profile has her photo, a real bio and her LinkedIn link, replacing the placeholder. Bylines now show an author's photo wherever one exists, including on article pages.
+
 ## 0.9.0 — 2026-10-27
 
 ### Added
