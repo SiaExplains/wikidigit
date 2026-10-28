@@ -1,0 +1,68 @@
+---
+title: "GMO Refused an ¥8 Billion Ransom. Then It Asked Customers to Unplug Their PCs."
+slug: "gmo-8-billion-yen-ransom-unplug-pcs"
+date: "2026-10-28"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Security"
+tags: ["gmo-internet", "japan", "ransomware", "data-breach", "cybersecurity", "fintech"]
+description: "Hackers hit GMO Internet's Onamae.com Desktop Cloud and asked for about ¥8 billion. GMO refused, then told customers to unplug their PCs before a noon deadline."
+coverImage: "/images/articles/gmo-8-billion-yen-ransom-unplug-pcs.png"
+featured: false
+draft: false
+faq:
+  - question: "What happened to GMO's Onamae.com Desktop Cloud?"
+    answer: "An attacker got into Onamae.com Desktop Cloud, a hosted Windows desktop service run by Japan's GMO Internet. GMO found a malicious program on October 20, 2026, said it may have been installed on up to 26,739 servers, and shut down every plan starting October 21. The company says customer information was taken and some customers reported unauthorized trades in their brokerage and FX accounts."
+  - question: "How much ransom did the GMO attackers demand?"
+    answer: "GMO says an extortion email received on October 21 demanded about 8 billion yen, roughly $50 million. The company says it will not pay, because paying would not guarantee the data is deleted or stop it from being misused, and it has handed the evidence to police."
+  - question: "Why did GMO tell customers to unplug their PCs?"
+    answer: "The attacker threatened to publish customer data and launch a ransomware attack at 12:00 on October 27. That morning GMO asked Desktop Cloud customers to run a full virus scan, back up their data, disconnect from the network, shut down and unplug their PCs before noon. As of 13:55 that day, GMO said no ransomware attack had been confirmed."
+  - question: "What compensation is GMO offering Desktop Cloud customers?"
+    answer: "GMO will pay every current customer a 5,000 yen condolence payment and compensate realized losses from unauthorized trades it confirms were caused by the breach. It is offering a replacement desktop service free for six months and is considering extra payments for customers whose data appears in the leaked material."
+---
+
+Japan's GMO Internet asked customers of its Onamae.com Desktop Cloud service to back up their data, disconnect their PCs from the network, shut them down and unplug the cables before noon on Tuesday, October 27, because the hackers who broke into the service had promised to leak customer data and trigger ransomware at exactly that time. GMO had already refused the attackers' demand of about ¥8 billion (roughly $50 million). At 12:30 the company confirmed that material claiming to hold GMO and customer data had been published. As of 13:55 it said no ransomware attack had been confirmed, though its analysis of customer devices was still running.
+
+## How a Cloud Desktop Turned Into a Trading Problem
+
+Onamae.com Desktop Cloud is a hosted Windows desktop service. GMO, one of Japan's largest domain registrars, sells it under its Onamae.com brand. Some of the servers ran automated foreign-exchange trading, and GMO's notices tell customers who use tools like MetaTrader 4 and MetaTrader 5 to change their passwords.
+
+According to [GMO's fourth incident report](https://group.gmo/info/alert/20261024/), the company started investigating on October 19 after customer inquiries. It found a malicious program on October 20, suspended new sign-ups and the control panel, and began shutting down servers on every plan at 4:00 on October 21. [BleepingComputer reported](https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/) that GMO said the malware may have been installed on up to 26,739 customer servers.
+
+From October 21, customers reported unauthorized trading, and GMO says trading accounts at more than 70 domestic and foreign securities and FX firms were targeted with manipulated orders. GMO told customers to change their trading and tool passwords and to log out every active session. It says the original system will not be restored.
+
+## The ¥8 Billion Demand GMO Won't Pay
+
+The extortion email arrived on October 21, the same day the servers went dark, and asked for about ¥8 billion, according to [GMO's tenth update](http://group.gmo/info/alert/2026102703/). The attacker threatened to keep making unauthorized trades and to publish data from the service and from customer PCs connected to it. It also said it would run ransomware attacks and publish GMO's own system information.
+
+GMO's answer has stayed the same in every update. It will not pay, because paying would not guarantee that the stolen data gets deleted or that it won't be misused. The company consulted police on October 22 and gave them the evidence. On October 24 it asked government agencies to use active cyber defense measures against the attackers' infrastructure, and it describes the case as a first use of that framework.
+
+## Why GMO Told Customers to Pull the Plug
+
+The attacker set a deadline: customer information would be released and ransomware launched at 12:00 on October 27. GMO published its [eighth report](https://internet.gmo/en/news/article/254/) at 9:58 that morning with four requests. Run a full antivirus scan, back up your data, then disconnect from the network, power down and unplug the PC, and secure your accounts. It also warned customers to ignore messages offering to "recover your losses" for a fee.
+
+The worry was that malware planted during the intrusion might already be sitting on customer devices and could be triggered on schedule. GMO has been collecting customers' devices from across Japan since October 25, and its in-house white-hat team is examining them for malware, including ransomware. Trend Micro and several AI companies have offered help, and GMO says it is still working out what each of them will do.
+
+At 12:30, half an hour after the deadline, GMO confirmed that a person or group believed to be the attacker had published material claiming to contain information on the company and its customers. GMO says the material may contain inaccurate information and that it will contact customers individually if it confirms their data is in it. It warned people not to visit the leak site, saying anyone who accesses it has their own information taken by the attacker, and it is preparing legal action against people who spread the material.
+
+## What Customers Get, and What's Still Unknown
+
+GMO's [compensation plan](https://group.gmo/info/alert/20261024/) has three parts:
+
+- A ¥5,000 condolence payment to every current customer, whether or not they lost money.
+- Compensation for realized trading losses and fees from unauthorized trades that GMO confirms came from the breach. Market losses, lost profits and indirect damage are excluded, and any refund from a broker is deducted.
+- A replacement Windows desktop service on separate cloud infrastructure, free for six months, with no migration unless the customer agrees.
+
+After the leak, GMO said an emergency meeting is considering extra payments for customers whose information shows up in the published material. Claim procedures are due by November 6.
+
+Plenty is still unknown. GMO hasn't named the attacker, explained how it got in, or said how many customers' records are in the leak. That's common: in the [California ETS student data breach](/article/ets-california-student-data-breach), the state hadn't said how the stolen login was compromised when the breach was announced. Japanese coverage has also carried claims from people calling themselves the attackers, including a separate $1 million figure, that GMO hasn't confirmed. With AI models now [finding old bugs in hardened operating systems](/article/anthropic-mythos-us-china-ai-guardrails), I'd expect more attacks on services like this one, where one intrusion reached up to 26,739 servers and some of them were running trading software.
+
+Customers also don't know yet whether the ransomware threat was real. GMO says it will keep checking the devices it collected and will contact anyone whose data it finds in the leak.
+
+## Sources
+
+- [GMO Internet Group: fourth report on the Onamae.com Desktop Cloud attack (Oct 24)](https://group.gmo/info/alert/20261024/)
+- [GMO Internet Group: tenth report, published material and ransomware status (Oct 27)](http://group.gmo/info/alert/2026102703/)
+- [GMO Internet: eighth report and customer instructions (Oct 27)](https://internet.gmo/en/news/article/254/)
+- [BleepingComputer: Japan's GMO urges customers to shut down PCs amid ransomware threat](https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/)
+- [BleepingComputer: Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected](https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/)
