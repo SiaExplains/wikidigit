@@ -1,0 +1,83 @@
+---
+title: "FocusCrew Lets ChatGPT and Claude Build Your Flashcards. One Prompt, 50 Cards."
+slug: "focuscrew-chatgpt-claude-ai-flashcards"
+date: "2026-10-29"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "AI"
+type: "explainer"
+disclosure: "FocusCrew was founded and is run by Sheida Mohassesy, who also writes for WikiDigit."
+tags: ["focuscrew", "flashcards", "chatgpt", "claude", "mcp", "education", "ai"]
+description: "FocusCrew's connector lets ChatGPT or Claude write a whole flashcard deck from one prompt, like 50 phrasal verbs. How it works, and what the free plan allows."
+coverImage: "/images/articles/focuscrew-chatgpt-claude-ai-flashcards.png"
+featured: false
+draft: false
+faq:
+  - question: "How do I make flashcards with ChatGPT or Claude in FocusCrew?"
+    answer: "Add FocusCrew as a custom connector at https://www.focus-crew.com/api/mcp, sign in once and press Allow. Then ask the assistant something like \"create 50 flashcards in a new deck called 50 English Phrasal Verbs\". It creates the deck and adds the cards to your FocusCrew account."
+  - question: "Is FocusCrew's AI connector free?"
+    answer: "Yes, on every plan. The Free plan includes one API key and 200 requests a day, with up to 3 decks and 200 cards. Pro (€3.99 a month for founding members) and Max (€5.99) raise the limit to 20,000 requests a day, and Max has no deck or card limits."
+  - question: "Which AI assistants work with FocusCrew?"
+    answer: "Claude on the web and the desktop app, Claude Code, and ChatGPT sign in with a popup. Cursor and other MCP clients connect with an API key sent as a header. Any client that speaks MCP over HTTP can use it."
+  - question: "Can I study the AI-made flashcards in Anki?"
+    answer: "Yes. A FocusCrew deck has an Export for Anki button, and FocusCrew supports the five Anki card types. You can also study in FocusCrew itself, which brings each card back just before you would forget it."
+---
+
+_Everything below comes from FocusCrew's own docs, changelog and pricing page, read on October 29, 2026, and from screenshots Siavash took of his own account._
+
+FocusCrew, a Berlin-made focus timer and planner, now lets ChatGPT and Claude write whole flashcard decks for you. Connect FocusCrew to the assistant once, then type something like "create 50 flashcards in a new deck called 50 English Phrasal Verbs." The assistant makes the deck, writes every card's front and back, and saves them to your account, ready to study. FocusCrew added flashcards on October 24 and opened the connector to Free accounts two days later.
+
+## How a single prompt becomes a deck
+
+FocusCrew runs an MCP server. MCP (Model Context Protocol) is the open standard that lets AI assistants call tools in other apps. The server gives an assistant 25 tools. Five are for flashcards: `list_decks`, `create_deck`, `update_deck`, `due_flashcards` and `add_flashcard`.
+
+Ask for 50 phrasal verbs and the assistant chains those calls. It runs `create_deck` once with the name you gave, then `add_flashcard` once per card, writing a front ("give up") and a back ("to stop trying; to quit") for each. The language model writes the cards; FocusCrew stores them and schedules the reviews. A card can be a plain front and back or a cloze card using Anki's `{{c1::…}}` syntax.
+
+![FocusCrew's deck page for 50 English Phrasal Verbs, with cards such as set up, give up and run into](/images/articles/focuscrew-chatgpt-claude-ai-flashcards-deck.png)
+*A deck written by an assistant from one prompt, in FocusCrew. Screenshot: Siavash Ghanbari.*
+
+It works the other way too. With `due_flashcards` an assistant can read the cards you have due today and quiz you in the chat. With `update_deck` it can change how many new cards a deck introduces each day.
+
+## Setting it up in Claude and ChatGPT
+
+The server lives at `https://www.focus-crew.com/api/mcp`. [FocusCrew's docs](https://www.focus-crew.com/docs/mcp) walk through each app.
+
+- **Claude (web or desktop):** Customize → Connectors → Add custom connector. Name it FocusCrew, paste the URL and pick "Sign in now". A FocusCrew popup asks you to press Allow.
+- **ChatGPT:** Settings → Apps & Connectors. Turn on Developer mode under Advanced settings, then create a custom MCP server with the same URL and OAuth. Leave the client ID and secret empty.
+- **Claude Code:** `claude mcp add --transport http focuscrew https://www.focus-crew.com/api/mcp`, then sign in from `/mcp`.
+- **Cursor and scripts:** make an API key in Settings → Integrations and send it as a Bearer header.
+
+![FocusCrew's Connect an AI assistant documentation page](/images/articles/focuscrew-chatgpt-claude-ai-flashcards-site.png)
+*FocusCrew's connector docs on October 29, 2026. Screenshot: WikiDigit.*
+
+There's no key to copy for Claude or ChatGPT. The sign-in renews itself for up to 90 days, and Settings → Integrations → Connected apps lists each assistant with a Disconnect button that ends access on the next call. FocusCrew says its server tells assistants to read before they write and to ask before deleting anything.
+
+![FocusCrew listed as a custom connector in Claude's settings](/images/articles/focuscrew-chatgpt-claude-ai-flashcards-claude.png)
+*FocusCrew as a custom connector in Claude. Screenshot: Siavash Ghanbari.*
+
+![FocusCrew in ChatGPT's Plugins settings, next to Gmail and Sites](/images/articles/focuscrew-chatgpt-claude-ai-flashcards-chatgpt.png)
+*FocusCrew in ChatGPT's Plugins settings. Screenshot: Siavash Ghanbari.*
+
+## What the free plan lets you build
+
+FocusCrew's flashcards came out on October 24, 2026, in web version 0.169.0. They support the five Anki card types, spaced review that brings a card back just before you would forget it, and import and export with Anki. Pro and Max users could connect an assistant from October 26 (version 0.176.0). Version 0.177.0 opened it to Free the same day, and 0.178.0 let assistants create and rename decks.
+
+The limits matter for a 50-card prompt. A Free account gets one key, 200 requests a day and 20 a minute, with room for 3 decks and 200 cards. Each card is one `add_flashcard` call, so a 50-card deck takes about 51 requests: well inside the daily allowance, but more than the per-minute one. The [rate-limit docs](https://www.focus-crew.com/docs/limits) say the assistant gets a 429 error naming how long to wait. Pro, €3.99 a month for founding members and €5.99 from January 1, 2027, allows 120 requests a minute, 20,000 a day and 20 decks. Max, €5.99 for founding members, has no deck or card limits.
+
+![FocusCrew's Flashcards page with a 1-day learning streak and the 50 English Phrasal Verbs deck](/images/articles/focuscrew-chatgpt-claude-ai-flashcards-decks.png)
+*The deck on FocusCrew's Flashcards page, with its New, Learning and Due counts. Screenshot: Siavash Ghanbari.*
+
+## Why it's worth trying, and what to check
+
+Writing cards is the tedious part of spaced repetition, and it's the part language models are good at. A list of 50 phrasal verbs with short definitions is a low-risk job for ChatGPT or Claude. For a medical or legal deck, read the cards before you study them, because a wrong card you memorize is worse than no card.
+
+There's also a case for keeping the model out of the study itself. A Berkeley-led study found that [about ten minutes of AI help made people quit sooner](/article/ai-10-minutes-persistence-study-berkeley) once the chatbot was gone. In this setup the assistant writes the deck and you do the remembering, and since October 28 FocusCrew counts each review as focus time and gives it XP. The connector also doesn't tie you to one chatbot, which matters now that [ChatGPT no longer holds a majority of the AI market](/article/chatgpt-below-50-ai-market-share-2026).
+
+## Sources
+
+- [FocusCrew docs: Connect an AI assistant](https://www.focus-crew.com/docs/mcp)
+- [FocusCrew docs: MCP tools](https://www.focus-crew.com/docs/tools)
+- [FocusCrew docs: Limits, errors and safety](https://www.focus-crew.com/docs/limits)
+- [FocusCrew: What's new](https://www.focus-crew.com/updates)
+- [FocusCrew pricing](https://www.focus-crew.com/pricing)
+- [Model Context Protocol](https://modelcontextprotocol.io)
