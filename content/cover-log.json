@@ -384,5 +384,13 @@
     "palette": "ember",
     "composition": "macro-closeup",
     "subject": "A plug pulled out of a wall socket with sparks, a clock at noon behind it"
+  },
+  {
+    "slug": "focuscrew-chatgpt-claude-ai-flashcards",
+    "date": "2026-10-29",
+    "image": "/images/articles/focuscrew-chatgpt-claude-ai-flashcards.png",
+    "palette": "mint",
+    "composition": "paper-cutout",
+    "subject": "A purple chat bubble sends paper flashcards flying into a stacked deck with a check badge"
   }
 ]
