@@ -1,0 +1,62 @@
+---
+title: "Agents Now Draft 40% of GitHub's Pull Requests. Theirs Get Merged More Often."
+slug: "github-octoverse-agents-40-percent-pull-requests"
+date: "2026-10-30"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Dev Tools"
+tags: ["github", "github-copilot", "coding-agents", "octoverse", "microsoft", "developer-tools", "ai"]
+description: "GitHub's Octoverse 2026 says coding agents drafted over 40% of pull requests by September, up from 17% in March, and 90% of those merged within two weeks."
+coverImage: "/images/articles/github-octoverse-agents-40-percent-pull-requests.png"
+featured: false
+draft: false
+faq:
+  - question: "What share of GitHub pull requests are started by AI agents?"
+    answer: "According to GitHub's Octoverse 2026 report, more than 40% of pull requests in September 2026 had a first draft from a coding agent GitHub could detect, up from 17% in March 2026. GitHub says the real share is probably higher because it cannot detect every agent."
+  - question: "Do agent-written pull requests get merged?"
+    answer: "Yes, slightly more often than the rest. GitHub says 90% of agent-involved pull requests in September 2026 were merged within two weeks, compared with about 86% for pull requests with no detected agent involvement. In February 2026 the agent figure was 83%."
+  - question: "What is GitHub Copilot Fusion?"
+    answer: "Copilot Fusion is a multi-model routing system that became generally available on October 28, 2026. Instead of picking a model, developers pick an effort level (Standard, High or Max) and Copilot decides which model or combination of models handles the task. It is available on all Copilot plans in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs."
+  - question: "How is Copilot Fusion billed?"
+    answer: "Users pay for each model Fusion calls at that model's standard rate. For a limited time, paid Copilot plans get a 30% discount on model costs when using Fusion, according to GitHub's changelog."
+---
+
+More than 40% of pull requests on GitHub in September 2026 started with a first draft from an AI coding agent, up from 17% in March, according to the [Octoverse 2026 report](https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/) GitHub published on October 28 at its Universe conference in San Francisco. GitHub also found that these agent-started pull requests merge a little more often than the rest. On the same day it shipped Copilot Fusion, a system that picks AI models for developers so they no longer have to choose one themselves.
+
+## The numbers behind the 40%
+
+GitHub counts a pull request as agent-started when its "first draft came from a coding agent that we can detect." Under that definition, agents opened 110 million pull requests in September alone. That is about six times March's volume. GitHub says the figure is a floor, since some agents don't leave a trace it can identify.
+
+In September, 90% of agent-involved pull requests were merged within two weeks. Pull requests with no detected agent involvement held at about 86%, the same rate as in February, while the agent figure rose from 83% over that period. Agent pull requests also tend to be wider in scope: 87% touch multiple files, against 79% for the rest.
+
+A higher merge rate doesn't by itself mean the code is better. Developers may only hand agents tasks they expect to land, or review that work more lightly. The Octoverse report doesn't say which, but it does show maintainers accepting agent drafts at least as readily as everything else.
+
+## A year of activity that outran the last two
+
+The rest of the report shows the same jump in volume. Across the 12 months to September 30, developers pushed code 17.9 billion times, more than in 2024 (5.2 billion) and 2025 (6.7 billion) combined. Commits reached 34.3 billion, merged pull requests 1.3 billion (about 3.5 million a day), and GitHub Actions ran 45.4 billion jobs. Dependabot alone merged more than 30 million pull requests.
+
+Simon Willison, who attended Universe on a free ticket through GitHub's Stars program, [called the charts](https://simonwillison.net/2026/Oct/28/github-octoverse-2026/) "a pretty stark representation of the impact of agentic engineering on GitHub." GitHub now counts more than 225 million developers. The United States has 38.3 million and India 32 million, and each added over 10 million this year. TypeScript is still the most-used language, and Rust doubled in a year, the fastest growth among the top languages.
+
+## Copilot Fusion takes the model picker away
+
+Octoverse found that 61% of Copilot users who chose a model in September used more than one, up from 50% four months earlier, and that no single model handled more than 25% of requests. [Copilot Fusion](https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion), generally available since October 28, replaces that manual choice. Developers pick an effort level (Standard, High or Max), and Fusion routes the work. It can send a task to one model, run a cascade where a cheaper model drafts and a quality check escalates to a stronger one, or run a critique loop where a second model reviews the first model's draft before it is revised.
+
+GitHub's headline claim is that Fusion Max scored 60 on the Artificial Analysis Coding Agent Index, within two points of Claude Code running Opus 5.5 Max, at about half the average API cost per task, half the tokens and about 40% less time per task. Microsoft CEO Satya Nadella [described it on LinkedIn](https://thenextweb.com/news/github-universe-copilot-fusion-octoverse-agents) as "frontier-level quality 40% faster" at up to 77% lower cost. Both sets of figures come from Microsoft and GitHub themselves.
+
+Fusion runs on every Copilot plan in VS Code, the GitHub Copilot app, Copilot CLI and JetBrains IDEs. Users pay for each model it calls at that model's standard rate, with a limited-time 30% discount on paid plans. Fusion only uses models an enterprise has enabled, and admins can exclude a model from Fusion without disabling it for everyone else. GitHub's agents now sit in the same market as standalone coding-agent startups such as Cognition and Factory, whose rivalry [spilled into public this fall](/article/benchmark-vc-no-rivals-rule-factory-cognition).
+
+## What else GitHub shipped at Universe
+
+Microsoft's CoreAI chief Jay Parikh, who wrote GitHub's keynote post, also announced Copilot projects in the GitHub Copilot app, which [runs agent work across several repositories](https://thenextweb.com/news/github-universe-copilot-fusion-octoverse-agents) in parallel managed sessions. Sessions can move between the app, VS Code, the command line and the web. Copilot automations can now propose changes to themselves based on their results, and a new Copilot code review Max tier posted what GitHub says is the highest F1 score on ReviewBench for high-severity issues.
+
+Pricing changed as well. From October 28, GitHub Enterprise customers can use every Copilot feature without buying a separate subscription and pay for the AI credits they consume. The offer goes through sales for now, with self-serve "coming soon," and existing Copilot Business and Enterprise customers can switch or keep their current plans.
+
+To handle the load, Parikh said GitHub added 4 million CPU cores, 160 PB of high-speed storage and 50 Tb/s of network capacity this year, and is moving to a multi-region Azure deployment expected to finish early next year. Octoverse measures how much code agents produce and how much of it lands. It doesn't measure what the shift does to the people reviewing it, and a Berkeley-led study this month found that [about 10 minutes of AI help left people quicker to give up](/article/ai-10-minutes-persistence-study-berkeley) once the tool was taken away.
+
+## Sources
+
+- [GitHub Blog: Octoverse 2026, commits and pushes reach new highs as developers build with agents](https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/)
+- [GitHub Changelog: Route and orchestrate models with GitHub Copilot Fusion](https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion)
+- [TNW: GitHub launches Copilot Fusion as agents start 40% of pull requests](https://thenextweb.com/news/github-universe-copilot-fusion-octoverse-agents)
+- [The Stack: GitHub developers pushed more code in 2026 than in the last two years combined](https://www.thestack.technology/github-developers-pushed-more-code-in-2026-than-in-the-last-two-years-combined/)
+- [Simon Willison: GitHub Octoverse 2026](https://simonwillison.net/2026/Oct/28/github-octoverse-2026/)
