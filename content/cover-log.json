@@ -408,5 +408,13 @@
     "palette": "sand",
     "composition": "isometric-diorama",
     "subject": "Isometric diorama of a git main rail and two merging branches lined with orange and teal commit cubes, a robot arm placing a teal cube"
+  },
+  {
+    "slug": "marvell-lumentum-115-billion-all-stock-deal",
+    "date": "2026-11-02",
+    "image": "/images/articles/marvell-lumentum-115-billion-all-stock-deal.png",
+    "palette": "aubergine",
+    "composition": "cross-section",
+    "subject": "Cut-open co-packaged optics module: a silicon die and a pink laser diode on a layered substrate, beaming into an optical fiber end"
   }
 ]
