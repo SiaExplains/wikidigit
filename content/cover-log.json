@@ -408,5 +408,13 @@
     "palette": "sand",
     "composition": "isometric-diorama",
     "subject": "Isometric diorama of a git main rail and two merging branches lined with orange and teal commit cubes, a robot arm placing a teal cube"
+  },
+  {
+    "slug": "hubble-dwarf-galaxies-missing-oxygen-11-percent",
+    "date": "2026-11-03",
+    "image": "/images/articles/hubble-dwarf-galaxies-missing-oxygen-11-percent.png",
+    "palette": "aubergine",
+    "composition": "macro-closeup",
+    "subject": "Close-up of a magenta dwarf galaxy as supernova winds blow most of its oxygen atoms out into space, a few left behind"
   }
 ]
