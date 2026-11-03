@@ -424,5 +424,13 @@
     "palette": "aubergine",
     "composition": "cross-section",
     "subject": "Cut-open co-packaged optics module: a silicon die and a pink laser diode on a layered substrate, beaming into an optical fiber end"
+  },
+  {
+    "slug": "hubble-dwarf-galaxies-missing-oxygen-11-percent",
+    "date": "2026-11-03",
+    "image": "/images/articles/hubble-dwarf-galaxies-missing-oxygen-11-percent.png",
+    "palette": "aubergine",
+    "composition": "macro-closeup",
+    "subject": "Close-up of a magenta dwarf galaxy as supernova winds blow most of its oxygen atoms out into space, a few left behind"
   }
 ]
