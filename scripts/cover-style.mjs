@@ -9,6 +9,7 @@
 //   node scripts/cover-style.mjs --analyze            measure hue/lightness of the last covers with headless Chrome
 //
 // Data: scripts/cover-template/styles.json (menu) and content/cover-log.json (what each post used).
+// The suggestion and --record also count covers in open post/* branches (run `git fetch` first).
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -38,6 +39,43 @@ function readLog() {
   if (!fs.existsSync(LOG)) return [];
   const log = JSON.parse(fs.readFileSync(LOG, "utf8"));
   return log.sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// Covers recorded on post/* branches that aren't merged into main yet. Each daily run branches
+// from origin/main, so without these a run can't see the covers of posts still waiting in a PR
+// and picks the same palette again. Only used for picking, never written to the log.
+function pendingEntries(log) {
+  const git = (...cmd) => execFileSync("git", ["-C", ROOT, ...cmd], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+  let refs = [];
+  try {
+    refs = git("branch", "-r", "--no-merged", "origin/main", "--list", "origin/post/*", "--format=%(refname:short)").split("\n").filter(Boolean);
+  } catch {
+    return [];
+  }
+  const current = (() => {
+    try { return git("rev-parse", "--abbrev-ref", "HEAD").trim(); } catch { return ""; }
+  })();
+  const seen = new Set(log.map((e) => e.slug));
+  const out = [];
+  for (const ref of refs) {
+    if (ref === `origin/${current}`) continue;
+    let branchLog;
+    try {
+      branchLog = JSON.parse(git("show", `${ref}:content/cover-log.json`));
+    } catch {
+      continue;
+    }
+    for (const e of branchLog) {
+      if (seen.has(e.slug)) continue;
+      seen.add(e.slug);
+      out.push({ ...e, pending: ref });
+    }
+  }
+  return out;
+}
+
+function withPending(log) {
+  return [...log, ...pendingEntries(log)].sort((a, b) => a.date.localeCompare(b.date));
 }
 
 function writeLog(log) {
@@ -107,9 +145,9 @@ function printPalette(p) {
 }
 
 function suggest() {
-  const log = readLog();
-  console.log(`Last ${Math.min(6, log.length)} covers:`);
-  console.table(log.slice(-6).map(({ slug, date, palette, composition }) => ({ slug, date, palette, composition })));
+  const log = withPending(readLog());
+  console.log(`Last ${Math.min(6, log.length)} covers (pending = in an open PR, not on main yet):`);
+  console.table(log.slice(-6).map(({ slug, date, palette, composition, pending }) => ({ slug, date, palette, composition, pending: pending || "" })));
   const { palettes, compositions, needLight } = allowed(log);
   if (needLight) console.log(`The last ${LIGHT_EVERY - 1} covers were all dark, so this one must use a light palette.\n`);
   console.log("Allowed palettes:");
@@ -133,7 +171,9 @@ function record(args) {
   const entry = args.supplied
     ? { slug, date: fm.date, image: fm.image, palette: "supplied", composition: "supplied", supplied: true, subject: args.subject || "" }
     : { slug, date: fm.date, image: fm.image, palette: args.palette, composition: args.composition, subject: args.subject || "" };
-  const problems = violations([...log, entry].sort((a, b) => a.date.localeCompare(b.date)), entry);
+  // Covers waiting in other PRs were drawn before this one, so they count as previous covers.
+  const prior = [...log, ...pendingEntries(existing)].sort((a, b) => a.date.localeCompare(b.date));
+  const problems = violations([...prior, entry], entry);
   if (problems.length) fail(`Not recorded:\n  - ${problems.join("\n  - ")}`);
   // Re-recording a slug replaces its entry in place, so same-day ordering doesn't shift.
   const at = existing.findIndex((e) => e.slug === slug);
