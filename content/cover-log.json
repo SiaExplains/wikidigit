@@ -432,5 +432,13 @@
     "palette": "aubergine",
     "composition": "macro-closeup",
     "subject": "Close-up of a magenta dwarf galaxy as supernova winds blow most of its oxygen atoms out into space, a few left behind"
+  },
+  {
+    "slug": "musk-224-million-texas-data-center-halt",
+    "date": "2026-11-04",
+    "image": "/images/articles/musk-224-million-texas-data-center-halt.png",
+    "palette": "paper",
+    "composition": "top-down-map",
+    "subject": "Map of Texas dotted with data center blocks and crossed-out new plots, with a dotted route from Boca Chica up to a satellite"
   }
 ]
