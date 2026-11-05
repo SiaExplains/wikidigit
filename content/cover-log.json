@@ -440,5 +440,13 @@
     "palette": "paper",
     "composition": "top-down-map",
     "subject": "Map of Texas dotted with data center blocks and crossed-out new plots, with a dotted route from Boca Chica up to a satellite"
+  },
+  {
+    "slug": "sequoia-10-billion-closes-london-arc-scouts",
+    "date": "2026-11-05",
+    "image": "/images/articles/sequoia-10-billion-closes-london-arc-scouts.png",
+    "palette": "forest",
+    "composition": "paper-cutout",
+    "subject": "Paper-cut giant sequoia with sawn-off limbs: a clock tower, a row of saplings and a lone seedling on the fallen limbs, gold coins at its roots"
   }
 ]
