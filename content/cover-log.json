@@ -448,5 +448,13 @@
     "palette": "forest",
     "composition": "paper-cutout",
     "subject": "Paper-cut giant sequoia with sawn-off limbs: a clock tower, a row of saplings and a lone seedling on the fallen limbs, gold coins at its roots"
+  },
+  {
+    "slug": "china-blocks-softbank-abb-robotics-5-4-billion",
+    "date": "2026-11-06",
+    "image": "/images/articles/china-blocks-softbank-abb-robotics-5-4-billion.png",
+    "palette": "oxblood",
+    "composition": "split-frame",
+    "subject": "Gold factory robot arm in a red factory, severed at a diagonal seam, its data blocks stopping at the cut before a neural network on a cream ground"
   }
 ]
