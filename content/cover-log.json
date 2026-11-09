@@ -464,5 +464,13 @@
     "palette": "ember",
     "composition": "flat-poster",
     "subject": "Flat bank facade and a coin stack joined by a pipe that is cut in the middle, in front of a large orange sun disc"
+  },
+  {
+    "slug": "chainalysis-breach-all-users-live-tokens-exposed",
+    "date": "2026-11-09",
+    "image": "/images/articles/chainalysis-breach-all-users-live-tokens-exposed.png",
+    "palette": "arctic",
+    "composition": "collage-grid",
+    "subject": "Grid of white tiles each holding a key, one key hooked and lifted out of its empty slot on a line"
   }
 ]

@@ -1,0 +1,59 @@
+---
+title: "Chainalysis Found No Sign Tokens Were Taken. Five Days Later, Every User's Was."
+slug: "chainalysis-breach-all-users-live-tokens-exposed"
+date: "2026-11-09"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Security"
+tags: ["chainalysis", "data-breach", "cybersecurity", "crypto", "agentic-ai", "law-enforcement"]
+description: "Chainalysis first said its agentic-AI breach hit only basic identity data. Its November 4 update said every user's password hash and live token was exposed."
+coverImage: "/images/articles/chainalysis-breach-all-users-live-tokens-exposed.png"
+featured: false
+draft: false
+faq:
+  - question: "What data was exposed in the Chainalysis breach?"
+    answer: "Chainalysis first said attackers accessed user IDs, full names, email addresses and organization role labels. In an update late on November 4, 2026, it said names, usernames, password hashes and live tokens for all users had also been exposed."
+  - question: "How did attackers get into Chainalysis?"
+    answer: "Chainalysis said an external actor used \"offensive agentic techniques\" to gain unauthorized access to its systems and internal tools, and later described an \"on-path attack\" (attacker-in-the-middle). It has not named the attacker or explained the technical details."
+  - question: "Was law enforcement investigation data accessed?"
+    answer: "Chainalysis says it has no evidence that investigations data was accessed or that its attribution data was manipulated. Its Reactor platform, which is used by international law enforcement customers, was among the products it took offline."
+  - question: "What should Chainalysis users do?"
+    answer: "Chainalysis says every user must reset their password and rotate API keys. To regain access, customers send trusted IP addresses to support@chainalysis.com or their account manager for allowlisting, and should change the password on any other site where they reused it."
+---
+
+Chainalysis, the blockchain intelligence firm that police and regulators use to trace crypto crime, said late on Wednesday, November 4, that attackers had exposed the names, usernames, password hashes and live tokens of all its users. Five days earlier, its first disclosure had said only "non-sensitive" identity data was taken and that it had no evidence session tokens were accessed. Chainalysis says the intruder used "offensive agentic techniques," and Reactor, the investigation platform its law enforcement customers rely on, is now offline.
+
+## From Email Addresses to Every User's Live Token
+
+Chainalysis first disclosed the intrusion on October 30. It said an external actor had used offensive agentic techniques to get into its systems and internal tools. The data it listed then was user IDs, full names, email addresses and organization role labels. According to Infosecurity Magazine, the company also said it had no evidence that clear-text passwords, MFA secrets or user session tokens were accessed. It said investigation content such as graphs, notes, cases and transaction query results looked untouched as well.
+
+On Monday, November 2, the company discovered that more customer information had been exposed, according to BleepingComputer. Its update on Wednesday night said names, usernames, password hashes and live tokens for all users had been exposed. Chainalysis now calls the incident an "ongoing multifront cyberattack" and has described the credential exposure as an "on-path attack," the attacker-in-the-middle technique where someone sits between a user and a service and reads the traffic. It hasn't said how that worked.
+
+Live tokens are active authentication credentials, so whoever holds one may be able to act as a logged-in user without knowing the password. Chainalysis also hasn't said which algorithm it used to hash passwords, The Register notes, so nobody outside the company can judge how hard those hashes would be to crack.
+
+## Reactor, KYT and the Products That Went Dark
+
+After seeing further "abnormal activity," Chainalysis locked accounts and took a long list of services offline: the login portal, Reactor, Data Solutions, the KYT (know your transaction) interface and API, and its address screening products. KYT and Address Screening are anti-money-laundering tools for screening crypto transactions, the same kind of controls at stake when Treasury [moved to cut off MEXC over $16 billion in alleged illicit flows](/article/mexc-1-billion-iran-fincen-treasury-cutoff). The Register reported on November 5 that Chainalysis planned to bring KYT and Address Screening back that day.
+
+Reactor matters most to police. The Register describes it as the blockchain investigation platform used by international law enforcement customers, and Chainalysis has worked on cases like the LockBit takedown. The company's line has stayed the same through every update: "At this time we continue to have no evidence that any investigations data has been accessed." It also says it has found no sign that attackers reached its investigative graph data or altered its attribution repositories, the records that link wallet addresses to real-world entities. Chainalysis has not said how many users were affected.
+
+## An Attacker Chainalysis Says Used AI Agents
+
+The phrase "offensive agentic techniques" comes from Chainalysis itself, and the company hasn't explained it further. It hasn't named the attacker, the vulnerabilities used, or which internal tools were reached. The Register reports that Chainalysis implied an AI agent was involved and compared the intrusion to attacks that hit "many other tech platforms in recent weeks." Chainalysis also said the incident is unrelated to the Binance heist the week before.
+
+On defense, Chainalysis says it is working with outside security experts and, per Infosecurity Magazine, is using large language models to review its own platform's security.
+
+Chainalysis's October 30 description of the breach lasted five days before the company replaced it. Other recent incidents also grew after the first notice: [ETS only spotted the theft of California student files a week after the copying stopped](/article/ets-california-student-data-breach), and [GMO ended up asking customers to unplug their PCs after refusing an ¥8 billion ransom](/article/gmo-8-billion-yen-ransom-unplug-pcs).
+
+## What Customers Have to Do Now
+
+To get back in, customers must send trusted IP addresses to support@chainalysis.com or their account team, and Chainalysis adds those addresses to an allowlist. Once access is restored, every user has to reset their password and rotate their API keys. Some users were emailed and told to change the same password on any other site where they had reused it. In its first notice, the company told customers to watch for "unexpected password reset requests or authentication prompts" and to turn on two-factor authentication if they hadn't.
+
+Chainalysis says its investigation is ongoing. It hasn't given a date for bringing Reactor and Data Solutions back, which leaves the police teams that use Reactor to trace stolen crypto without it in the meantime.
+
+## Sources
+
+- [Chainalysis says breach exposed credentials for all customers, BleepingComputer](https://www.bleepingcomputer.com/news/security/chainalysis-says-breach-exposed-credentials-for-all-customers/)
+- [October crypto-tracker hack: Access cracked, law enforcement tokens packed, The Register](https://www.theregister.com/cyber-crime/2026/11/05/october-crypto-tracker-hack-access-cracked-law-enforcement-tokens-packed/5307852)
+- [Chainalysis Warns Customers After "Offensive Agentic" Security Incident, Infosecurity Magazine](https://www.infosecurity-magazine.com/news/chainalysis-customers-offensive/)
+- [Chainalysis discloses data breach from offensive agentic techniques, BleepingComputer](https://www.bleepingcomputer.com/news/security/chainalysis-discloses-data-breach-from-offensive-agentic-techniques/)
