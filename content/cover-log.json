@@ -472,5 +472,13 @@
     "palette": "arctic",
     "composition": "collage-grid",
     "subject": "Grid of white tiles each holding a key, one key hooked and lifted out of its empty slot on a line"
+  },
+  {
+    "slug": "nominal-3-billion-valuation-anduril-hardware-ai",
+    "date": "2026-11-10",
+    "image": "/images/articles/nominal-3-billion-valuation-anduril-hardware-ai.png",
+    "palette": "blueprint",
+    "composition": "blueprint-linework",
+    "subject": "Blueprint plan view of an uncrewed jet with yellow sensor points wired to a rising data trace and a tripling bar chart"
   }
 ]
