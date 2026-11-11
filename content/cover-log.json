@@ -480,5 +480,13 @@
     "palette": "blueprint",
     "composition": "blueprint-linework",
     "subject": "Blueprint plan view of an uncrewed jet with yellow sensor points wired to a rising data trace and a tripling bar chart"
+  },
+  {
+    "slug": "boeing-5-percent-job-cuts-612-billion-backlog",
+    "date": "2026-11-11",
+    "image": "/images/articles/boeing-5-percent-job-cuts-612-billion-backlog.png",
+    "palette": "sand",
+    "composition": "silhouette-horizon",
+    "subject": "Three 737-style jets on jacks under a gantry crane at sunset, the last one waiting for the teal tail fin hanging from the hook"
   }
 ]
