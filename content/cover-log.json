@@ -496,5 +496,13 @@
     "palette": "mint",
     "composition": "isometric-diorama",
     "subject": "Isometric community hall with a purple roof, boarded and padlocked door, archive boxes stacked outside, speech bubbles drifting away and fading"
+  },
+  {
+    "slug": "von-foerster-doomsday-2026-birth-rate-halved",
+    "date": "2026-11-13",
+    "image": "/images/articles/von-foerster-doomsday-2026-birth-rate-halved.png",
+    "palette": "aubergine",
+    "composition": "bauhaus-geometric",
+    "subject": "Columns of stacked discs climbing hyperbolically into a white wall, a calendar sheet, and a gold dotted path that flattens and passes the wall"
   }
 ]
