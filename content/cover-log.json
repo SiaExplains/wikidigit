@@ -520,5 +520,13 @@
     "palette": "teal-noir",
     "composition": "cross-section",
     "subject": "A lone researcher at a laptop beside a cut-open tower whose floors are full of small coral agent robots building it"
+  },
+  {
+    "slug": "nvidia-huang-resigns-kress-earnings-five-days",
+    "date": "2026-11-16",
+    "image": "/images/articles/nvidia-huang-resigns-kress-earnings-five-days.png",
+    "palette": "paper",
+    "composition": "split-frame",
+    "subject": "Split frame: empty office chair with a black leather jacket draped over it on cream, a microphone facing a blue GPU chip on pale blue"
   }
 ]
