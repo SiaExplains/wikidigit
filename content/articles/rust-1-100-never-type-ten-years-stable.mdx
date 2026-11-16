@@ -1,0 +1,73 @@
+---
+title: "Rust's Never Type Failed Five Times in 10 Years. Rust 1.100 Finally Ships It."
+slug: "rust-1-100-never-type-ten-years-stable"
+date: "2026-11-14"
+author: "Siavash Ghanbari"
+authorSlug: "siavash-ghanbari"
+category: "Dev Tools"
+tags: ["rust", "cargo", "programming-languages", "developer-tools", "supply-chain"]
+description: "Rust 1.100, out November 12, stabilizes the never type after 10 years and five failed attempts, and adds a stable Allocator API and Cargo dependency cooldowns."
+coverImage: "/images/articles/rust-1-100-never-type-ten-years-stable.png"
+featured: false
+draft: false
+faq:
+  - question: "What is the never type in Rust?"
+    answer: "The never type, written `!`, is the type of a computation that never finishes, such as a function that always panics or loops forever. Rust has long allowed it in return types like `-> !`. From Rust 1.100, released November 12, 2026, it can be named in any type position, for example `Result<T, !>`."
+  - question: "Will Rust 1.100 break my code?"
+    answer: "Probably not. On the 2015, 2018 and 2021 editions, the never type fallback changes from `()` to `!`, matching the 2024 edition. The Rust team says this should be largely unnoticeable but can affect rare cases, and recommends updating dependencies first if a build breaks. LWN reported that a crater run found 3,300 affected crates, of which only seven were fully broken."
+  - question: "What is the Cargo min-publish-age setting?"
+    answer: "It is an opt-in dependency cooldown in `.cargo/config.toml`, for example `global-min-publish-age = \"3 days\"`. Cargo then skips crate versions published more recently than that window and reports what it held back. The Rust team says cooldowns reduce the risk from some supply chain attacks but are not a complete defense."
+  - question: "How do I upgrade to Rust 1.100?"
+    answer: "If you installed Rust with rustup, run `rustup update stable`. The release also stabilizes the core Allocator API, adds `core::mem::DropGuard`, and makes Cargo warn about unused dependencies by default."
+---
+
+The Rust project released Rust 1.100.0 on November 12, 2026, and with it made the never type (`!`) stable, a feature the team says took "10 years and 5 failed stabilization attempts" to land. The same release stabilizes the core of the Allocator API, makes Cargo warn about unused dependencies by default, and adds an opt-in "cooldown" that keeps freshly published crates out of your builds for a set period.
+
+## What the never type actually is
+
+`!` is the type of an expression that never produces a value: a function that always panics, a loop with no exit, a call to `std::process::exit`. Rust programmers have been able to write `-> !` as a return type for years, and the compiler has used the type internally for a long time. What they couldn't do on stable Rust was name it anywhere else.
+
+Rust 1.100 lifts that limit. You can now write `Result<T, !>` for an operation that can't fail, and the type system knows the error branch is impossible. The standard library's `Infallible`, the enum people used as a stand-in for exactly that purpose, becomes an alias for `!`, so older APIs built on `Infallible` work with the never type without changes.
+
+The release post credits a talk by the contributor known as waffle for explaining why this was hard. LWN [reported in September](https://lwn.net/Articles/1091015/) that waffle did the stabilization work in pull request #155499, merged on August 24, after more than two years of effort.
+
+## Why it took 10 years
+
+The blocker was a small breaking change. When type inference can't settle on a type, the compiler picks a fallback. Before the 2024 edition that fallback was the unit type `()`; in the 2024 edition it became `!`. Making the never type stable meant applying the new fallback to the 2015, 2018 and 2021 editions too, and some code that compiled under the old rule, such as a `foo()?` call whose generic return type had been quietly inferred as `()`, could stop compiling.
+
+LWN reported that a crater run in April, which builds the public crate ecosystem against a compiler change, found 3,300 affected crates. Only seven were fully broken. Most failed because they depended on old library versions that had since been fixed, and maintainers backported fixes that cleared 1,553 of the failing crates. Some declined because the affected versions were already end of life.
+
+The Rust team's own wording is that the change "should be largely unnoticeable, but can affect code in some rare cases," and the compiler may now flag more code as unreachable. Future-compatibility warnings went out ahead of the release. If your build breaks after upgrading, the team's advice is to update dependencies first. LWN listed two other options: stay on Rust 1.99 for now, or add explicit type annotations.
+
+## Allocators, DropGuard and a new way to make zero-sized types
+
+The release also stabilizes the core of the Allocator API, tracked in rust-lang/rust#32838. That means the `Allocator` trait along with `Global` and `System`, plus constructors such as `Box::new_in` and `Vec::with_capacity_in`, so `Vec` and `Box` can now use a custom allocator on stable Rust. The release post calls this the base of the Allocators 1.0 project goal and says more collections and pointer types will follow.
+
+Two smaller additions are worth knowing:
+
+- `core::mem::DropGuard` wraps a value and runs a closure when it is dropped, which makes rollback on an early return or panic easy to write. `DropGuard::dismiss` hands the value back without running the closure.
+- `std::mem::conjure_zst` is now the recommended way to create a value of a zero-sized type. It is `unsafe` because some APIs rely on such types being impossible to construct; the post uses PyO3's `Python<'py>` GIL token as the example.
+
+The list of stabilized APIs also includes `bool::toggle`, `Vec::from_fn`, `Box::map`, `Rc::map`, `Arc::map`, and `trim_prefix` and `trim_suffix` on strings and slices.
+
+## Cargo adds a cooldown against fresh malicious crates
+
+For most teams the Cargo changes may matter more day to day. The first is a new `global-min-publish-age` setting in `.cargo/config.toml`. Set it to something like `"3 days"` and Cargo's resolver skips any crate version published more recently than that, then reports what it held back. You can override it for one update with `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow`.
+
+The Rust team is careful about the limits: versions without a `pubtime` field in the index are never held back, `cargo install` ignores the setting, and the post says cooldowns "reduce the risk from some supply chain attacks but are not a complete defense on their own." It lists crates.io quarantine and automated detection as planned follow-up work. JavaScript runtimes have been changing their lockfile and install story too, as we covered with [Bun 1.2's text-based lockfile](/article/bun-1-2-built-in-postgres-s3-text-lockfile).
+
+Cargo also now warns about unused dependencies through the `cargo::unused_dependencies` lint, which defaults to `warn`. It only fires when every target that could use a dependency has been built, so `cargo check --bin foo` won't flag your `[dependencies]`, and it doesn't check `dev-dependencies` yet. Finally, the `build-dir` layout now applies the build-configuration hash consistently, which fixes extra or missed rebuilds when a build directory is shared across git worktrees. Build scripts and tests that worked around the old layout may break; the post points to cargo#17287.
+
+## Rust's 100th stable release lands while the language is growing fast
+
+Rust 1.100 is the language's 100th stable version, as [Linuxiac noted](https://linuxiac.com/rust-1-100-stabilizes-never-type-after-a-decade-of-development/). It arrives a few weeks after GitHub's [Octoverse 2026 report said Rust usage doubled in a year](/article/github-octoverse-agents-40-percent-pull-requests), the fastest growth among the top languages. The never type shows how much work an edition-crossing breaking change takes at that scale: a crater run over the public crate ecosystem and more than 1,500 crates fixed by backports before `!` could ship.
+
+Existing users can upgrade with `rustup update stable`.
+
+## Sources
+
+- [Announcing Rust 1.100.0](https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/) (Rust Blog, November 12, 2026)
+- [Release Rust 1.100.0](https://github.com/rust-lang/rust/releases/tag/1.100.0) (rust-lang/rust on GitHub)
+- [Stabilizing Rust's never type](https://lwn.net/Articles/1091015/) (LWN.net, September 8, 2026)
+- [Rust 1.100 Stabilizes Never Type After a Decade of Development](https://linuxiac.com/rust-1-100-stabilizes-never-type-after-a-decade-of-development/) (Linuxiac, November 12, 2026)
+- [Rust 1.100 Released With The "Never" Type Finally Stable](https://www.phoronix.com/news/Rust-1.100-Released) (Phoronix)
