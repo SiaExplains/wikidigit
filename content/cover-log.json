@@ -504,5 +504,13 @@
     "palette": "aubergine",
     "composition": "bauhaus-geometric",
     "subject": "Columns of stacked discs climbing hyperbolically into a white wall, a calendar sheet, and a gold dotted path that flattens and passes the wall"
+  },
+  {
+    "slug": "mirendil-1-billion-series-a-one-researcher-model",
+    "date": "2026-11-16",
+    "image": "/images/articles/mirendil-1-billion-series-a-one-researcher-model.png",
+    "palette": "teal-noir",
+    "composition": "cross-section",
+    "subject": "A lone researcher at a laptop beside a cut-open tower whose floors are full of small coral agent robots building it"
   }
 ]
