@@ -512,5 +512,13 @@
     "palette": "oxblood",
     "composition": "collage-grid",
     "subject": "Grid of six tiles: five cracked, split gears and one whole gold gear meshing with a coral gear in a highlighted tile"
+  },
+  {
+    "slug": "mirendil-1-billion-series-a-one-researcher-model",
+    "date": "2026-11-16",
+    "image": "/images/articles/mirendil-1-billion-series-a-one-researcher-model.png",
+    "palette": "teal-noir",
+    "composition": "cross-section",
+    "subject": "A lone researcher at a laptop beside a cut-open tower whose floors are full of small coral agent robots building it"
   }
 ]
