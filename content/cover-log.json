@@ -504,5 +504,13 @@
     "palette": "aubergine",
     "composition": "bauhaus-geometric",
     "subject": "Columns of stacked discs climbing hyperbolically into a white wall, a calendar sheet, and a gold dotted path that flattens and passes the wall"
+  },
+  {
+    "slug": "rust-1-100-never-type-ten-years-stable",
+    "date": "2026-11-14",
+    "image": "/images/articles/rust-1-100-never-type-ten-years-stable.png",
+    "palette": "oxblood",
+    "composition": "collage-grid",
+    "subject": "Grid of six tiles: five cracked, split gears and one whole gold gear meshing with a coral gear in a highlighted tile"
   }
 ]
