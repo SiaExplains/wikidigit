@@ -528,5 +528,13 @@
     "palette": "paper",
     "composition": "split-frame",
     "subject": "Split frame: empty office chair with a black leather jacket draped over it on cream, a microphone facing a blue GPU chip on pale blue"
+  },
+  {
+    "slug": "chase-software-bug-outage-zelle-not-systemic",
+    "date": "2026-11-17",
+    "image": "/images/articles/chase-software-bug-outage-zelle-not-systemic.png",
+    "palette": "ember",
+    "composition": "top-down-map",
+    "subject": "Top-down map: a cracked central bank roof with payment packets queued on every road to five surrounding banks"
   }
 ]
