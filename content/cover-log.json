@@ -536,5 +536,13 @@
     "palette": "ember",
     "composition": "top-down-map",
     "subject": "Top-down map: a cracked central bank roof with payment packets queued on every road to five surrounding banks"
+  },
+  {
+    "slug": "voyager-1-one-light-day-earth-silent-two-days",
+    "date": "2026-11-18",
+    "image": "/images/articles/voyager-1-one-light-day-earth-silent-two-days.png",
+    "palette": "blueprint",
+    "composition": "blueprint-linework",
+    "subject": "Blueprint line drawing of Voyager 1 with dish facing a small yellow Earth, a broken dashed signal path, and a light-day arc"
   }
 ]
