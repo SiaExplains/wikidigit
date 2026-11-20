@@ -552,5 +552,13 @@
     "palette": "arctic",
     "composition": "cross-section",
     "subject": "A cut-open pill capsule with an AI-designed molecule inside, a tall coin stack on the left and an empty trial vial on the right"
+  },
+  {
+    "slug": "anthropic-ipo-79-billion-record-nasdaq-falls",
+    "date": "2026-11-20",
+    "image": "/images/articles/anthropic-ipo-79-billion-record-nasdaq-falls.png",
+    "palette": "forest",
+    "composition": "split-frame",
+    "subject": "Split frame: one giant gold candlestick rising on a green half, a row of hollow candlesticks falling on the dark half"
   }
 ]
