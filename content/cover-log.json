@@ -576,5 +576,13 @@
     "palette": "ember",
     "composition": "isometric-diorama",
     "subject": "Isometric staircase of shrinking gold coin stacks, coins tumbling off the last step and one pale coin bouncing back up"
+  },
+  {
+    "slug": "dragos-2-million-canary-prompts-ai-providers-breached",
+    "date": "2026-11-23",
+    "image": "/images/articles/dragos-2-million-canary-prompts-ai-providers-breached.png",
+    "palette": "aubergine",
+    "composition": "collage-grid",
+    "subject": "Grid of AI prompt chat bubbles each holding a small key; three cracked magenta bubbles leak glowing keys upward"
   }
 ]

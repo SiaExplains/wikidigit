@@ -1,0 +1,61 @@
+---
+title: "Dragos Hid Fake Keys in 2 Million AI Prompts. Three Hacked Providers Never Noticed."
+slug: "dragos-2-million-canary-prompts-ai-providers-breached"
+date: "2026-11-23"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Security"
+tags: ["dragos", "openrouter", "together-ai", "cybersecurity", "data-breach", "ai-infrastructure"]
+description: "Dragos planted fake keys in about 2 million AI prompts and caught data leaking from at least three providers. None of them knew until Dragos told them."
+coverImage: "/images/articles/dragos-2-million-canary-prompts-ai-providers-breached.png"
+featured: false
+draft: false
+faq:
+  - question: "What did Dragos find in its AI prompt canary test?"
+    answer: "Between July and November 2026, Dragos sent about two million prompts containing unique URLs and fake credentials to widely used AI services. It found evidence that data from at least three AI providers was exposed, with some bait AWS keys used for tens of thousands of API calls, and says none of the three providers knew about the breach until Dragos notified them."
+  - question: "Which AI providers did OpenRouter remove?"
+    answer: "OpenRouter has not named them. On November 22, 2026 it said it off-boarded three providers, removed 125 endpoints from Zero Data Retention eligibility and notified potentially affected customers. It separately lists security notices from Atlas Cloud, Novita, Phala and Together AI."
+  - question: "Was OpenRouter itself hacked?"
+    answer: "No. OpenRouter says the findings did not show any breach or unauthorized access of OpenRouter. The problems were at inference providers that serve models behind its router."
+  - question: "What should I do if I sent secrets through an AI API?"
+    answer: "Phala tells affected users to treat request contents as exposed. If a prompt contained API keys, tokens or passwords and went to an affected provider or route, rotate those credentials and check the accounts they protect for activity you don't recognize."
+---
+
+Security firm Dragos said on November 19 that it planted unique fake credentials and URLs in about two million AI prompts over five months, and found evidence that data from at least three AI inference providers had been exposed. Three days later, on November 22, the model router OpenRouter off-boarded three providers and pulled 125 endpoints from its Zero Data Retention program. According to Dragos, "none of the three providers knew about their breach until we notified them."
+
+## Two Million Prompts Full of Bait
+
+The research was led by HD Moore, Dragos's chief research officer. From July through November 2026, the team sent prompts containing canary credentials (fake keys that alert their owner when someone uses them) and one-off links to widely used AI services. Then they watched for anyone using those secrets after inference.
+
+The earliest breach Dragos found dates to mid-July. The largest involved "a couple hundred" of its AWS keys, each sent once to a single provider in late October. Some of those keys were stolen from requests the provider rejected before any model ran. The bait keys were used for tens of thousands of AWS API calls. One key seeded on October 21 was first used the next day and was still in use three weeks later. On November 1, the same attacker started using ARTEX, an LLM-driven penetration-testing framework, which showed up under the user agents artex-agent and artex-judge-r121.
+
+Dragos also found that several resellers on an inference marketplace could view and keep customer prompts through ordinary logging, with no exploit needed. The Hacker News, summarizing the report, says one Chinese AI lab fetched secret links from more than half of the seeded prompts sent to it between July and October. In another case, a seeded link turned up in a post on the workplace chat app Feishu 24 days after the prompt was sent, and was then opened from devices in Beijing and Shanghai. "A privacy flag doesn't help when the attacker is already inside," Moore said.
+
+## OpenRouter Cuts Three Providers, Names None
+
+OpenRouter routes API calls to many model hosts, so its customers' prompts reach whichever provider serves a given endpoint. In its November 22 post, the company said it had off-boarded three providers "based on the results of our investigations," removed 125 endpoints from ZDR eligibility, and notified all potentially affected customers. The 125 include providers the researchers flagged plus others removed as a precaution. "These findings did not show any breach or unauthorized access of OpenRouter," the company wrote.
+
+It did not say which three providers it removed. Its post keeps a live list of provider security notices from Atlas Cloud, Novita, Phala and Together AI, and adds that "not all affected providers have posted publicly." The Hacker News notes that neither Dragos nor OpenRouter has said whether Dragos's three breached providers and OpenRouter's three removals are the same companies. Endpoints only get ZDR eligibility back after OpenRouter receives "appropriate assurances and validation," and the company says it is turning the researchers' testing method into ongoing checks.
+
+## Together AI's Coding Agent Leaked the Key
+
+Two of the notices explain how prompts got out. Together AI, which [raised an $800 million Series C in July](/article/together-ai-800m-series-c-open-source), published one on November 21 signed by CEO Vipul Ved Prakash. The company kept samples of prompts sent to its serverless service for routine software testing, stored in a private Hugging Face repository. The samples came from MiniMax M3, GLM-5.2 and Kimi K2.6 requests, mostly on June 24, July 4, July 8 and July 14.
+
+While working on Together's public GitHub repository xorl, an AI coding agent committed a credential for that private repository. Automated scanning caught it and the commit was reverted, but an unauthorized party used the credential while it was exposed. That party searched the samples for other service credentials and tested them. Five of those were Dragos canaries. Together says it worked with an external forensic firm and law enforcement, that it has found no evidence of further prompt leakage, and that its review of the affected prompts "is ongoing." It now uses scoped or short-lived credentials, checks every pull request for credentials, has tightened its rules for AI coding agents and makes ZDR the default for new accounts. AI agents keep turning up in breach reports this month: [Chainalysis said its attacker used "offensive agentic techniques"](/article/chainalysis-breach-all-users-live-tokens-exposed), though in Together's case the agent was its own.
+
+## Phala's Server Missed Its Hardening
+
+Phala's preliminary report, dated November 10, describes a more conventional intrusion. An attacker chained a legacy internet-facing service with internal management interfaces that "relied on loopback access for trust and did not independently authenticate callers," then took over a new GPU server that was serving production traffic without Phala's full security hardening. Anyone whose DeepSeek V4 Flash 0731 requests were routed by OpenRouter between October 21 at 00:00 UTC and November 8 at 05:35 UTC should "treat request contents as exposed," Phala says. Of the canaries Dragos sent to Phala between July 1 and November 7, only those from October 21 and 22 were misused.
+
+## What API Users Should Do Now
+
+If a prompt sent to an affected provider or route contained an API key, token or password, rotate it, then check the account it protects. Zero Data Retention describes what a provider stores, and it does nothing once an attacker controls the server handling the request, which is Moore's point about privacy flags. Keeping live secrets out of prompts avoids the problem entirely.
+
+## Sources
+
+- [Dragos: Three breaches, endless leaks: Your AI supply chain needs canaries](https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens)
+- [OpenRouter: Data processing incidents on inference providers](https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/)
+- [Together AI: Security event, prompt leakage for requests in June and July of 2026](https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026)
+- [Phala: November preliminary incident report](https://phala.com/posts/phala-november-preliminary-incident-report)
+- [The Hacker News: OpenRouter drops 3 providers after researchers catch months of prompt theft](https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html)
+- [Notebookcheck: OpenRouter cuts three AI providers](https://www.notebookcheck.net/OpenRouter-cuts-three-AI-providers-Who-needs-to-rotate-API-keys-now.1457670.0.html)
