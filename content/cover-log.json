@@ -592,5 +592,13 @@
     "palette": "mint",
     "composition": "paper-cutout",
     "subject": "A violet crane claw grips a chip on stacked paper discs while two pale empty claws hang open on either side"
+  },
+  {
+    "slug": "ladybird-alpha-hackers-no-outside-patches",
+    "date": "2026-11-25",
+    "image": "/images/articles/ladybird-alpha-hackers-no-outside-patches.png",
+    "palette": "teal-noir",
+    "composition": "bauhaus-geometric",
+    "subject": "A geometric coral ladybird inside a browser window while two yellow plus-marked patches are stopped outside the frame"
   }
 ]
