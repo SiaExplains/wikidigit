@@ -1,0 +1,75 @@
+---
+title: "Ladybird Wants Hackers to Break Its New Browser. It Won't Take Their Patches."
+slug: "ladybird-alpha-hackers-no-outside-patches"
+date: "2026-11-25"
+author: "Sheida Mohassesy"
+authorSlug: "sheida-mohassesy"
+category: "Dev Tools"
+tags: ["ladybird", "web-browsers", "open-source", "coding-agents", "rust", "developer-tools", "cybersecurity"]
+description: "Ladybird, a browser with an engine built from scratch, is in alpha for macOS and Linux. It asks hackers to attack it but no longer accepts outside code changes."
+coverImage: "/images/articles/ladybird-alpha-hackers-no-outside-patches.png"
+featured: false
+draft: false
+faq:
+  - question: "What is the Ladybird browser?"
+    answer: "Ladybird is a free, open-source web browser with its own engine, built from scratch instead of forked from Chromium, WebKit or Gecko. It is developed by the Ladybird Browser Initiative, a 501(c)(3) nonprofit funded by donations and sponsorships."
+  - question: "Can I download Ladybird on Windows?"
+    answer: "No. The first alpha, released on November 23, 2026, is for macOS and Linux only. The project says full Windows support is planned for a later stage, and that mobile platforms are not a current focus."
+  - question: "Is Ladybird safe to use?"
+    answer: "The project makes no security promises for the alpha and says it isn't ready to replace your everyday browser. Developer Simon Willison has ruled out using it to sign into GitHub, Gmail or other sensitive accounts."
+  - question: "Can I contribute code to Ladybird?"
+    answer: "Not as an outside contributor. Since June 5, 2026, only project maintainers can introduce code changes. The project still takes bug reports, test reductions, website testing, security reports and technical feedback, and the source stays public under an open-source license."
+---
+
+Ladybird, a web browser with an engine built from scratch, released its first alpha for macOS and Linux on November 23, 2026, and its founder asked security researchers to attack it. If they find a hole, they can report it, but they can't send the fix: the open-source project stopped accepting outside code in June. Founder Andreas Kling [wrote in the announcement](https://ladybird.org/posts/alpha/) that the team makes "no promises about security today" and that getting hacked repeatedly is part of building a browser.
+
+## What shipped on November 23
+
+Version 2026.47.7 is the first Ladybird release people can install without compiling it themselves. macOS users get a disk image. Linux users get a Flatpak, Ubuntu and Fedora packages, or a standalone archive. There is no Windows version, and the project says mobile isn't a current focus.
+
+HTML, CSS, layout, JavaScript and WebAssembly are all the project's own code, according to the [release notes](https://github.com/LadybirdBrowser/ladybird/releases/tag/2026.47.7). Ladybird does use third-party libraries for things like image formats, encryption and graphics, including some that other browsers use. It supports WebDriver for automated testing and the Firefox DevTools protocol, and Kling asked site owners to test their pages and report what breaks.
+
+Updates are already arriving. [Version 2026.47.8](https://github.com/LadybirdBrowser/ladybird/releases/tag/2026.47.8), published on the morning of November 25, restored sound on macOS, stopped Gmail's search box from collapsing and fixed several crashes.
+
+Jon Henshaw of Coywolf [found](https://coywolf.com/news/browsers/ladybird-releases-its-first-alpha-browser-for-macos-and-linux/) that the alpha renders pages nearly as well as Chrome and Safari, but it has no extensions, no installable web apps and lacks some newer APIs. Henshaw says the roadmap expects a beta in 2027 and a stable release in 2028.
+
+## Why the code door closed in June
+
+On June 5, Kling [announced](https://ladybird.org/posts/changing-how-we-develop-ladybird/) that only maintainers could introduce changes. The project closed every open public pull request and said it would not take patches through issues, comments, email or forks either.
+
+Kling pointed to AI tools. A large patch used to take real effort, Kling wrote, so it was a reasonable sign of good faith, but "that assumption no longer holds." The post also cites patient campaigns that earned maintainers' trust in open source and then abused it. A browser runs untrusted input from the whole internet, so one well-hidden vulnerability would be enough.
+
+Across GitHub as a whole, [agents drafted more than 40% of pull requests in September](/article/github-octoverse-agents-40-percent-pull-requests), and those were merged slightly more often than the rest.
+
+The code remains public under the BSD 2-Clause license, and the project still wants bug reports, reductions, website testing and security reports. Its [security policy](https://github.com/LadybirdBrowser/ladybird/blob/master/SECURITY.md) asks for vulnerabilities to be reported privately, gives accepted reports a CVE identifier and credit, and offers no bug bounty.
+
+## Inside the project, AI agents write plenty of code
+
+The same June post says the team uses AI tools every day. In February, Kling [ported parts of LibJS](https://ladybird.org/posts/adopting-rust/), the project's JavaScript engine, from C++ to Rust with Claude Code and Codex. It came to about 25,000 lines in roughly two weeks, with no regressions across 52,898 test262 tests and 12,461 Ladybird tests. Kling described it as human-directed work, done through hundreds of small prompts. The language Ladybird chose as its C++ successor had its own milestone this month, when [Rust 1.100 made the never type stable](/article/rust-1-100-never-type-ten-years-stable).
+
+In October, Ladybird [passed Safari Technology Preview](https://ladybird.org/newsletter/2026-10-31) on Web Platform Tests, the shared suite that measures how well browsers follow web standards. It ended the month at 2,184,722 passing subtests, up 75,650. Most of the gain came in five days, after the team pointed AI coding agents at the suite and asked them to fill in what was missing. That is the project's own count, and passing more subtests doesn't mean a site will work.
+
+Kling's June post addresses this directly: whether code was typed by hand is "beside the point," it says, and what matters is who is responsible for it once it's in the browser.
+
+## The security backlog came before the alpha
+
+In September, Trail of Bits engineers [spent a week on Ladybird](https://ladybird.org/newsletter/2026-09-30) in a program sponsored by OpenAI, using a swarm of OpenAI models to look for flaws. They built a few full exploit chains and left the team with what it called "a considerable security backlog." Neither the alpha announcement nor the release notes says how much of that list has been cleared.
+
+Some of the fixes are described in the same update. A compromised page could previously have asked the browser to read or overwrite any site's protected cookies; the browser now shuts down a page process that tries. The release notes say documents from different sites run in separate sandboxed processes.
+
+Developer Simon Willison, who installed the alpha on launch day, [called it very impressive](https://simonwillison.net/2026/Nov/23/ladybird/) and said most sites he tried worked. But Willison won't use it to sign into GitHub, Gmail or other sensitive accounts, because browsers are so hard to secure.
+
+## A small team against three engines
+
+Chrome had 68.79% of the browser market in October and Safari 16.59%, according to [Statcounter](https://gs.statcounter.com/browser-market-share). Firefox, which runs on Mozilla's Gecko, had 2.57%. Ladybird says it has a small full-time engineering team, takes no search-engine deals, and lives on donations. Sponsors get no board seats and no say in the roadmap.
+
+Every fix to the upstream code now has to come from a maintainer. Testers can report a broken site from inside the browser, and after a crash they can read the crash report before deciding whether to send it.
+
+## Sources
+
+- [Ladybird is now in alpha](https://ladybird.org/posts/alpha/) (Ladybird, November 23, 2026)
+- [Ladybird alpha release notes](https://github.com/LadybirdBrowser/ladybird/releases/tag/2026.47.7) (GitHub, November 23, 2026)
+- [Changing How We Develop Ladybird](https://ladybird.org/posts/changing-how-we-develop-ladybird/) (Ladybird, June 5, 2026)
+- [This Month in Ladybird, October 2026](https://ladybird.org/newsletter/2026-10-31) (Ladybird)
+- [Ladybird releases its first alpha browser for macOS and Linux](https://coywolf.com/news/browsers/ladybird-releases-its-first-alpha-browser-for-macos-and-linux/) (Coywolf, November 24, 2026)
+- [Ladybird's first alpha release](https://simonwillison.net/2026/Nov/23/ladybird/) (Simon Willison, November 23, 2026)
