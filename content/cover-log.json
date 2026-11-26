@@ -600,5 +600,13 @@
     "palette": "teal-noir",
     "composition": "bauhaus-geometric",
     "subject": "A geometric coral ladybird inside a browser window while two yellow plus-marked patches are stopped outside the frame"
+  },
+  {
+    "slug": "spacex-starmind-1-million-satellites-fcc",
+    "date": "2026-11-26",
+    "image": "/images/articles/spacex-starmind-1-million-satellites-fcc.png",
+    "palette": "slate",
+    "composition": "silhouette-horizon",
+    "subject": "Observatory dome silhouetted against a full moon while trains of satellites and solar-winged orbital data center modules stream across the night sky"
   }
 ]
