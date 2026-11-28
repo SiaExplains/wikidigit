@@ -608,5 +608,13 @@
     "palette": "slate",
     "composition": "silhouette-horizon",
     "subject": "Observatory dome silhouetted against a full moon while trains of satellites and solar-winged orbital data center modules stream across the night sky"
+  },
+  {
+    "slug": "jwst-calibration-star-hd-158485-hidden-binary",
+    "date": "2026-11-28",
+    "image": "/images/articles/jwst-calibration-star-hd-158485-hidden-binary.png",
+    "palette": "paper",
+    "composition": "blueprint-linework",
+    "subject": "Ink outline of Webb's 18-segment hexagonal mirror with dashed sight lines to a star that is two stars on a dashed elliptical orbit"
   }
 ]
